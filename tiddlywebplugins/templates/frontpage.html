@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Welcome To Tank{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/frontpage.css">
+{% endblock %}
+{% block body %}
+<header>
+I am the header.
+</header>
+
+<main>
+<div class="hero">
+<h1>TANK</h1>
+<h2>For Your Tiddlers</h2>
+<p>An indexed store and API for your bits of stuff on the web.
+We call them tiddlers. Do with them what you will.
+</p>
+</div>
+{% if user=='GUEST' %}
+<div class="notify regisign">
+    <a href="/_oauth/callback?server_name=github">Sign Up or In with GitHub</a>
+</div>
+{% else %}
+<div class="notify">
+    <p>Welcome Back {{user}}.</p>
+    <p>Would you like to go to your <a
+        href="/dash">dashboard</a>?</p>
+</div>
+{% endif %}
+</main>
+
+<footer>
+I am the footer.
+</footer>
+{% endblock %}

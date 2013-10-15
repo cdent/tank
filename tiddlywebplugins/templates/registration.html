@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Register For Tank{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/registration.css">
+{% endblock %}
+{% block body %}
+<header>
+I am the header.
+</header>
+
+<main>
+<form method="POST" action="/register">
+    Username: <input name="login" value="{{login}}"><br>
+    Name: <input name="name" value="{{name}}"><br>
+    Email: <input name="email" value="{{email}}"><br>
+    <input type="hidden" name="redirect" value="/dash">
+    <textarea rows=4 cols=30 placeholder="Anything
+        else"></textarea><br>
+    <input type="submit" value="submit">
+</form>
+</main>
+
+<footer>
+I am the footer.
+</footer>
+{% endblock %}
