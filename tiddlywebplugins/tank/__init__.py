@@ -9,6 +9,7 @@ from tiddlywebplugins.utils import replace_handler
 
 from .config import config as tank_config
 from .home import home, dash
+from .register import register
 
 def establish_web(config):
     oauth_init(config)
@@ -16,6 +17,7 @@ def establish_web(config):
     selector = config['selector']
     replace_handler(selector, '/', dict(GET=home))
     selector.add('/dash', GET=dash)
+    selector.add('/register', POST=register)
 
 def init(config):
     merge_config(config, tank_config, reconfig=True)
