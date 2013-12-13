@@ -6,6 +6,7 @@ wrapped extractor exists in the user store.
 import logging
 
 from tiddlyweb.model.user import User
+from tiddlyweb.store import StoreError
 from tiddlyweb.web.extractors import ExtractorInterface
 
 
