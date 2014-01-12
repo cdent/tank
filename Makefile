@@ -4,7 +4,7 @@
 .PHONY: test dist release pypi clean
 
 test:
-	py.test -x test
+	py.test -x --tb=short test
 
 dist: test
 	python setup.py sdist

@@ -4,5 +4,5 @@ def test_compile():
     try:
         import tiddlywebplugins.tank
         assert True
-    except ImportError, exc:
+    except ImportError as exc:
         assert False, exc
