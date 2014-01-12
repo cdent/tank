@@ -15,7 +15,7 @@ from time import time
 
 from tiddlyweb.model.user import User
 from tiddlyweb.store import StoreError
-from tiddlyweb.web.util import make_cookie, server_host_url
+from tiddlyweb.web.util import make_cookie, server_base_url
 
 
 DEFAULT_ROLE = 'MEMBER'
@@ -33,6 +33,7 @@ def register(environ, start_response):
         name = query['name'][0]
         email = query['email'][0]
         extra = query['extra'][0]
+        redirect = query['redirect'][0]
     except (KeyError, ValueError) as exc:
         raise HTTP400('Incomplete form submission: %s' % exc)
 
@@ -53,7 +54,7 @@ def register(environ, start_response):
 
     store.put(user)
 
-    redirect_uri = '%sdash' % server_host_url(environ)
+    redirect_uri = '%s%s' % (server_base_url(environ), redirect)
     secret = config['secret']
     cookie_age = config.get('cookie_age', None)
     cookie_header_string = make_cookie('tiddlyweb_user', user.usersign,
@@ -61,5 +62,5 @@ def register(environ, start_response):
     start_response('303 See Other', 
             [('Set-Cookie', cookie_header_string),
                 ('Content-Type', 'text/plain'),
-                ('Location', redirect_uri)])
+                ('Location', str(redirect_uri))])
     return [redirect_uri]
