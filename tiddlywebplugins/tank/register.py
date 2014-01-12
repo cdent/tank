@@ -17,6 +17,8 @@ from tiddlyweb.model.user import User
 from tiddlyweb.store import StoreError
 from tiddlyweb.web.util import make_cookie, server_base_url
 
+from .wiki import create_wiki
+
 
 DEFAULT_ROLE = 'MEMBER'
 
@@ -53,6 +55,11 @@ def register(environ, start_response):
     })
 
     store.put(user)
+
+    create_wiki(environ, '_%s-data' % username, mode='private',
+            username=username)
+    create_wiki(environ, '%s-notebook' % username, mode='private',
+            username=username)
 
     redirect_uri = '%s%s' % (server_base_url(environ), redirect)
     secret = config['secret']

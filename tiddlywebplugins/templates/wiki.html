@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}{{ tiddler.title }} in {{ bag.name }}{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/wiki.css">
+{% endblock %}
+{% block body %}
+<header>
+I am the header.
+</header>
+
+<main>
+<h1>{{ tiddler.title }}</h1>
+<div class="output">
+{{ html }}
+</div>
+</main>
+
+<footer>
+I am the footer.
+</footer>
+{% endblock %}

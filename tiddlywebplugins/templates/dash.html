@@ -9,7 +9,15 @@ I am the header.
 </header>
 
 <main>
-<h1>Hi {{user}}</h1>
+<h1 class="greeting">Hi {{user}}</h1>
+<div class="tanks">
+    <h2>Your tanks</h2>
+    <ul>
+        {% for bag in bags|sort %}
+        <li><a href="/tanks/{{ bag|e }}">{{ bag }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
 </main>
 
 <footer>
