@@ -5,14 +5,35 @@
 {% endblock %}
 {% block body %}
 <header>
-I am the header.
+    <span class="wikititle">{{ tiddler.title }}</span>
+    {% if edit %}
+    <a class="wikititle"
+        href="/edit?bag={{ bag.name|e }};tiddler={{ tiddler.title|e }}">Edit</a>
+    {% endif %}
+    {# temporarily disable while there is no delete
+    {% if delete %}
+    <a class="wikititle"
+        href="/delete?bag={{ bag.name|e }};tiddler={{ tiddler.title|e }}">Delete</a>
+    {% endif %}
+    #}
+    {% if tiddler.title != "index" %}
+    <a class="wikititle" href="/tanks/{{ bag.name|e }}">TankTop</a>
+    {% endif %}
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
 </header>
 
 <main>
-<h1>{{ tiddler.title }}</h1>
 <div class="output">
 {{ html }}
 </div>
+<ul class="tags">
+    {% for tag in tiddler.tags %}
+    <li><a href="/search?q=bag:{{ tiddler.bag|e }}%20tag:{{ tag|e }}">{{ tag }}</a>
+    {% endfor %}
+</ul>
+
 </main>
 
 <footer>

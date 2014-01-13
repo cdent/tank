@@ -10,7 +10,7 @@ from tiddlywebplugins.utils import replace_handler
 from .config import config as tank_config
 from .home import home, dash
 from .register import register
-from .wiki import wiki_page
+from .wiki import wiki_page, editor, edit
 
 def establish_web(config):
     oauth_init(config)
@@ -21,6 +21,7 @@ def establish_web(config):
     selector.add('/register', POST=register)
     selector.add('/tanks/{bag_name:segment}[/{tiddler_name:segment}]',
             GET=wiki_page)
+    selector.add('/edit', GET=editor, POST=edit)
 
 def init(config):
     merge_config(config, tank_config, reconfig=True)

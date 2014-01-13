@@ -1,0 +1,10 @@
+
+.editor textarea, 
+.editor input {
+    display: block;
+}
+
+.editor textarea,
+.editor input {
+    width: 40em;
+}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}{{ tiddler.title }} in {{ tiddler.bag }}{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/wiki.css">
+    <link rel="stylesheet" href="/bags/tank/tiddlers/edit.css">
+{% endblock %}
+{% block body %}
+<header>
+    <span class="wikititle">{{ tiddler.title }}</span>
+    {% if tiddler.title != "index" %}
+    <a class="wikititle" href="/tanks/{{ tiddler.bag|e }}">TankTop</a>
+    {% endif %}
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
+</header>
+
+<main>
+<div class="editor">
+<form action="/edit" method="POST">
+<input type="hidden" name="title" value="{{ tiddler.title }}">
+<input type="hidden" name="bag" value="{{ tiddler.bag }}">
+<textarea name="text" rows="24" cols="80" placeholder="enter markdown text here">{{ tiddler.text }}</textarea>
+<input name="tags" value="{{ tiddler.tags|join(', ') }}" size="80">
+<button type="submit">Submit</button>
+<button type="reset">Reset</button>
+<a href="/tanks/{{ tiddler.bag |e }}/{{ tiddler.title |e }}">Cancel</a>
+</form>
+</div>
+</main>
+
+<footer>
+I am the footer.
+</footer>
+{% endblock %}
