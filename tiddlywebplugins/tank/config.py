@@ -10,4 +10,5 @@ config = {
     'wikitext.type_render_map' :{
         'text/x-markdown': 'tiddlywebplugins.markdown'
     },
+    'markdown.wiki_link_base': '',
 }

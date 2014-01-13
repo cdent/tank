@@ -2,11 +2,13 @@
 Wiki things.
 """
 
+from httpexceptor import HTTP404, HTTP302
+
 from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.policy import Policy
 from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.store import NoBagError, NoTiddlerError
-from tiddlyweb.web.util import get_route_value
+from tiddlyweb.web.util import get_route_value, encode_name, server_base_url
 from tiddlyweb.wikitext import render_wikitext
 
 from tiddlywebplugins.templates import get_template
@@ -80,23 +82,38 @@ def create_wiki(environ, name, mode='private', username=None):
     return bag
 
 
+def tank_uri(environ, tank_name):
+    """
+    Create a redirect URI for a given tank.
+    """
+    return server_base_url(environ) + '/tanks/%s' % encode_name(tank_name)
+
+
+def tank_page_uri(environ, tank_name, tiddler_title):
+    """
+    Create a redirect URI for a given page/tiddler within a tank.
+    """
+    return tank_uri(environ, tank_name) + '/%s' % encode_name(tiddler_title)
+
+
 def wiki_page(environ, start_response):
     """
     Present a single tiddler from a given tank.
     """
-    tank_name = get_route_value(environ, 'bag_name')
-    try:
-        tiddler_name = get_route_value(environ, 'tiddler')
-    except KeyError:
-        tiddler_name = 'index'
-
     store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
+    tank_name = get_route_value(environ, 'bag_name')
 
     try:
         bag = store.get(Bag(tank_name))
     except NoBagError:
         raise HTTP404('no tank found for %s' % tank_name)
+
+    try:
+        tiddler_name = get_route_value(environ, 'tiddler_name')
+    except (KeyError, AttributeError):
+        raise HTTP302(tank_page_uri(environ, tank_name, 'index'))
+
 
     # let permissions problems raise
     bag.policy.allows(usersign, 'read')
@@ -122,4 +139,3 @@ def wiki_page(environ, start_response):
         })
     else:
         return tiddler_get(environ, start_response)
-

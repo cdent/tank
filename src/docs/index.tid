@@ -1,0 +1,13 @@
+modifier: cdent
+type: text/x-markdown
+
+# About Tank
+
+Tank is a service for creating, keeping, managing and sharing content
+of all sorts online in an environment that encourages linking between
+things to build hypertextual webs of information.
+
+Tank is built on TiddlyWeb, a robust HTTP [[API]] for [[tiddlers|tiddler]]. 
+Because of this, your content can be of any sort and be accessed in many
+different ways. See examples of [[Content Types]] and access
+[[Representations]].
