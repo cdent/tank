@@ -9,3 +9,33 @@
     font-weight: bold;
     color: red;
 }
+
+body {
+    background-color: #efefef;
+    margin: auto;
+    width: 90%;
+}
+
+main, header, footer {
+    padding: 1em;
+}
+
+main {
+    color: #222222;
+}
+
+header {
+    color: #efefef;
+    background-color: #222222;
+    height: 50px;
+    width: 100%;
+}
+
+footer {
+    color: #efefef;
+    background-color: #222222;
+    height: 200px;
+    width: 100%;
+    clear: both;
+}
+
