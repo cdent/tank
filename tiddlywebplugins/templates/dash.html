@@ -14,7 +14,8 @@
     <h2>Your tanks</h2>
     <ul>
         {% for bag in bags|sort %}
-        <li><a href="/tanks/{{ bag|e }}">{{ bag }}</a></li>
+        <li><a href="/tanks/{{ bag.name|e }}">{{ bag.name }}</a>
+        <span class="description">{{ bag.desc }}</span></li>
         {% endfor %}
     </ul>
 </div>

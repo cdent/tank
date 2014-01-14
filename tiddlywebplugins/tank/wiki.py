@@ -55,7 +55,7 @@ WIKI_MODES = {
 
 
 
-def create_wiki(environ, name, mode='private', username=None):
+def create_wiki(environ, name, mode='private', username=None, desc=''):
     """
     Create a wiki with the name, name.
 
@@ -78,6 +78,7 @@ def create_wiki(environ, name, mode='private', username=None):
         bag.policy = WIKI_MODES[mode](username)
     except KeyError:
         bag.policy = WIKI_MODES['private'](username)
+    bag.desc = desc
     store.put(bag)
 
     return bag

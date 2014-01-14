@@ -43,7 +43,7 @@ def dash(environ, start_response):
         return bag.policy.owner == username and not bag.name.startswith('_')
 
     # XXX should add in metadata here about which are private
-    kept_bags = (bag.name for bag in store.list_bags() if load_and_test_bag(bag))
+    kept_bags = (bag for bag in store.list_bags() if load_and_test_bag(bag))
 
     dash_template = get_template(environ, DASH_TEMPLATE)
     start_response('200 OK', [

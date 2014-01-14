@@ -57,9 +57,11 @@ def register(environ, start_response):
     store.put(user)
 
     create_wiki(environ, '_%s-data' % username, mode='private',
-            username=username)
+            username=username, desc='Data Files')
     create_wiki(environ, '%s-notebook' % username, mode='private',
-            username=username)
+            username=username, desc='Private Notebook')
+    create_wiki(environ, '%s' % username, mode='protected',
+            username=username, desc='Share Stuff')
 
     redirect_uri = '%s%s' % (server_base_url(environ), redirect)
     secret = config['secret']
