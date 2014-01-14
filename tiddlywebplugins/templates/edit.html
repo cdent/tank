@@ -21,7 +21,7 @@
 <input type="hidden" name="title" value="{{ tiddler.title }}">
 <input type="hidden" name="bag" value="{{ tiddler.bag }}">
 <textarea name="text" rows="24" cols="80" placeholder="enter markdown text here">{{ tiddler.text }}</textarea>
-<input name="tags" value="{{ tiddler.tags|join(', ') }}" size="80">
+<input placeholder="tags" name="tags" value="{{ tiddler.tags|join(', ') }}" size="80">
 <button type="submit">Submit</button>
 <button type="reset">Reset</button>
 <a href="/tanks/{{ tiddler.bag |e }}/{{ tiddler.title |e }}">Cancel</a>
@@ -29,7 +29,4 @@
 </div>
 </main>
 
-<footer>
-I am the footer.
-</footer>
 {% endblock %}

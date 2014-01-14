@@ -34,8 +34,48 @@ header {
 footer {
     color: #efefef;
     background-color: #222222;
-    height: 200px;
+    height: 75px;
     width: 100%;
     clear: both;
+    bottom: 0;
 }
 
+footer .logo {
+    float: right;
+    padding-right: 1em;
+}
+
+footer img {
+    width: 48px;
+}
+
+footer ul,
+footer li {
+    display: inline;
+}
+
+footer a {
+    font-size: 125%;
+    color: #efefef;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+
+.wikititle {
+    font-weight: bold;
+    font-size: 150%;
+}
+
+a.wikititle {
+    margin-left: 2em;
+    color: #efefef;
+    text-decoration: none;
+}
+
+a.wikititle:hover {
+    text-decoration: underline;
+}
