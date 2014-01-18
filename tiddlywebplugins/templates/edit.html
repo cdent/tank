@@ -25,7 +25,7 @@
 <input type="hidden" name="bag" value="{{ tiddler.bag }}">
 <textarea name="text" rows="24" cols="80" placeholder="enter markdown text here">{{ tiddler.text }}</textarea>
 <input placeholder="tags" name="tags" value="{{ tiddler.tags|join(', ') }}" size="80">
-<button type="submit">Submit</button>
+<button type="submit">Save</button>
 <button type="reset">Reset</button>
 <a href="/tanks/{{ tiddler.bag |e }}/{{ tiddler.title |e }}">Cancel</a>
 </form>
