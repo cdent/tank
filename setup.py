@@ -26,6 +26,7 @@ setup(
         'tiddlywebplugins.oauth',
         'tiddlywebplugins.utils',
         'tiddlywebplugins.templates',
+        'tiddlywebplugins.markdown',
         'httpexceptor'
         ],
     zip_safe = False

@@ -176,7 +176,7 @@ def editor(environ, start_response):
     })
 
 
-def tank_uri(environ, tank_name):
+def tank_uri(environ, tank_name, slash=False):
     """
     Create a redirect URI for a given tank.
     """
@@ -188,6 +188,26 @@ def tank_page_uri(environ, tank_name, tiddler_title):
     Create a redirect URI for a given page/tiddler within a tank.
     """
     return tank_uri(environ, tank_name) + '/%s' % encode_name(tiddler_title)
+
+
+def tank_tiddler_uri(environ, tiddler):
+    """
+    Create a uri for a given tank page based on a tiddler object.
+    """
+    return tank_page_uri(environ, tiddler.bag, tiddler.title)
+
+
+def tank_tiddler_resolver(environ, target, tiddler):
+    """
+    Modifier a tiddler object to add a bag of the tank named by target.
+
+    Check permissions and let Store and Permission errors raise.
+    """
+    store = environ['tiddlyweb.store']
+    bag = Bag(target)
+    bag = store.get(bag)
+    bag.policy.allows(environ['tiddlyweb.usersign'], 'read')
+    tiddler.bag = target
 
 
 def wiki_page(environ, start_response):
