@@ -1,0 +1,41 @@
+modifier: cdent
+type: text/x-markdown
+
+When a new tiddler is created in a tank, by default the syntax of its text
+is [Markdown](http://daringfireball.net/projects/markdown/basics). In addition
+to the basic forms for making headers, paragraphs, lists and links the
+Markdown used also has support for some additional features:
+
+* [fenced
+  code](http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html)
+* [definition
+  lists](http://pythonhosted.org/Markdown/extensions/definition_lists.html)
+* [foootnotes](http://pythonhosted.org/Markdown/extensions/footnotes.html)
+* [header
+  ids](http://pythonhosted.org/Markdown/extensions/header_id.html)
+* Wiki links and transclusions, described below.
+
+Links between tiddlers in a single tank and between tiddlers in different
+tanks are possible. There are three styles of links:
+
+* Wiki links that use `CamelCase` (links to a tiddler named `CamelCase`)
+* Free links that use a `[[bracket syntax]]` (links to a tiddler named
+  `bracket syntax`)
+* Labelled links: `[[label|target]]` (links to a tiddler named
+  `target` with a link title of `label`)
+
+Each of these links styles can have `@<name of tank>` appended to link to
+the named tiddler in the named tank. For example `CowHouse@foobar` would
+link to the tiddler named `CowHouse` in the tank named `foobar`.
+
+Tiddlers may also be transcluded into another. This means that one tiddler
+sucks in and presents the content of another tiddler within itself. The basic
+syntax is, on a line by itself:
+
+```
+{{tiddler title}}
+```
+
+As above, an `@<name of tank>` can be appended (outside the `}}`) to transclude
+from a different tank. If the current user cannot read from the other tank
+the transclusion will not happen.

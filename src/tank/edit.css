@@ -8,3 +8,8 @@
 .editor input {
     width: 40em;
 }
+
+.info {
+    float: right;
+    width: 25%;
+}

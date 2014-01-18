@@ -6,7 +6,7 @@
 {% endblock %}
 {% block body %}
 <header>
-    <span class="wikititle">{{ tiddler.title }}</span>
+    <a class="wikititle" href="/tanks/{{tiddler.bag|e }}/{{ tiddler.title|e }}">{{ tiddler.title }}</a>
     {% if tiddler.title != "index" %}
     <a class="wikititle" href="/tanks/{{ tiddler.bag|e }}">TankTop</a>
     {% endif %}
@@ -16,6 +16,9 @@
 </header>
 
 <main>
+<div class="info">
+    <a href="/tanks/docs/makrdown">Markdown Help</a>
+</div>
 <div class="editor">
 <form action="/edit" method="POST">
 <input type="hidden" name="title" value="{{ tiddler.title }}">
