@@ -23,8 +23,12 @@ class Challenger(ChallengerInterface):
         """
         Respond to a ``GET`` with a link.
         """
+        try:
+            redirect = environ['tiddlyweb.query']['tiddlyweb_redirect'][0]
+        except KeyError:
+            redirect = None
         template = get_template(environ, 'challenger.html')
         start_response('200 OK', [('Content-Type',
             'text/html; charset=UTF-8')])
 
-        return template.generate()
+        return template.generate({'redirect': redirect})

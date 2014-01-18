@@ -25,3 +25,5 @@ tank-like thing. At the moment simply experimenting with:
   to do in repo development against assets
 
 The goal is to discover issues throughout the entire plugin stack.
+
+A [demo site](https://tank.peermore.com/) is available for testing.
