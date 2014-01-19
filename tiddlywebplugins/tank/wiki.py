@@ -9,9 +9,13 @@ from tiddlyweb.model.policy import Policy, PermissionsError
 from tiddlyweb.model.tiddler import Tiddler, current_timestring
 from tiddlyweb.store import NoBagError, NoTiddlerError
 from tiddlyweb.web.util import get_route_value, encode_name, server_base_url
+from tiddlyweb.web.validator import validate_bag, InvalidBagError
 from tiddlyweb.wikitext import render_wikitext
 
+from tiddlywebplugins.utils import require_role
 from tiddlywebplugins.templates import get_template
+
+from .home import dash
 
 WIKI_TEMPLATE = 'wiki.html'
 EDIT_TEMPLATE = 'edit.html'
@@ -55,7 +59,8 @@ WIKI_MODES = {
 
 
 
-def create_wiki(environ, name, mode='private', username=None, desc=''):
+def create_wiki(environ, name, mode='private', username=None, desc='',
+        validate=True):
     """
     Create a wiki with the name, name.
 
@@ -79,9 +84,40 @@ def create_wiki(environ, name, mode='private', username=None, desc=''):
     except KeyError:
         bag.policy = WIKI_MODES['private'](username)
     bag.desc = desc
+    if validate:
+        validate_bag(bag, environ)
     store.put(bag)
 
     return bag
+
+
+@require_role('MEMBER')
+def forge(environ, start_response):
+    """
+    Handle a post to create a new tank.
+    """
+    query = environ['tiddlyweb.query']
+    store = environ['tiddlyweb.store']
+    usersign = environ['tiddlyweb.usersign']
+
+    try:
+        tank_name = query['name'][0]
+        tank_policy = query['policy_type'][0]
+    except KeyError:
+        raise HTTP400('tank_name and tank_policy required')
+
+    tank_desc = query.get('desc', [None])[0]
+
+    try:
+        create_wiki(environ, tank_name, mode=tank_policy,
+                username=usersign['name'], desc=tank_desc)
+    except InvalidBagError as exc:
+        return dash(environ, start_response, message='Over quota!')
+
+    uri = tank_uri(environ, tank_name)
+    start_response('303 See Other', [
+        ('Location', str(uri))])
+    return []
 
 
 def edit(environ, start_response):

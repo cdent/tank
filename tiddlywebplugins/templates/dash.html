@@ -10,6 +10,25 @@
 
 <main>
 <h1 class="greeting">Hi {{user}}</h1>
+<div class="commands">
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+    <div class="command">
+        Create new tank: <a href="/tanks/docs/tank">
+            <i class="fa fa-question-circle"></i></a>
+    <form method="POST" action="/forge">
+        <input name="name" placeholder="tank name">
+        <select name="policy_type">
+            <option value="private" selected>Private<option>
+            <option value="protected">Protected</option>
+            <option value="public">Public</option>
+        </select><br>
+        <input name="desc" placeholder="optional description">
+        <input name="Create" type="submit" value="Create">
+    </form>
+    </div>
+</div>
 <div class="tanks">
     <h2>Your tanks</h2>
     <ul>

@@ -28,7 +28,7 @@ def home(environ, start_response):
 
 
 @require_any_user()
-def dash(environ, start_response):
+def dash(environ, start_response, message=None):
     """
     Display info for the current user.
     """
@@ -49,4 +49,8 @@ def dash(environ, start_response):
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
-    return dash_template.generate({'user': username, 'bags': kept_bags})
+    return dash_template.generate({
+        'user': username,
+        'bags': kept_bags,
+        'message': message
+    })

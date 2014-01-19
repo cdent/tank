@@ -1,0 +1,26 @@
+modifier: cdent
+type: text/x-markdown
+
+# Creating a new Tank
+
+By default ever user can have a maximum of five tanks.
+[[Subscribers|subscribe]] may have more.
+
+When creating a new tank they can be given one of three predefined
+policies for controlling access or a custom policy[^custom].
+
+Private
+:   Only the owner of the tank can read, create, edit or delete tiddlers
+    in the tank. This is best for private notes.
+
+Protected
+:   Anyone can read tiddlers in the tank, but only the owner can create,
+    edit or delete. This is best for things you want to share with others
+    but don't want them to edit.
+
+Public
+:   Anyone can read, create, edit or delete tiddlers in the tank. This is
+    akin to an old-school public wiki.
+
+[^custom]: Custom policies are coming soon. Once they are available it will
+be possible to control access for individual users.
