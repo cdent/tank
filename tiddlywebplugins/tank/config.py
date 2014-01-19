@@ -17,4 +17,5 @@ config = {
     'markdown.interlinker': tank_uri,
     'markdown.transclude_url': tank_tiddler_uri,
     'markdown.target_resolver': tank_tiddler_resolver,
+    'markdown.extensions': (['markdown_checklist.extension'], {}),
 }

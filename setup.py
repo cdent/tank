@@ -27,6 +27,7 @@ setup(
         'tiddlywebplugins.utils',
         'tiddlywebplugins.templates',
         'tiddlywebplugins.markdown',
+        'markdown-checklist',
         'httpexceptor'
         ],
     zip_safe = False
