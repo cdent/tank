@@ -7,6 +7,7 @@
 {% endblock %}
 {% block body %}
 <header>
+{% include 'logout.html' %}
     <span class="wikititle">{{ tiddler.title }}</span>
     {% if edit %}
     <a class="wikititle"

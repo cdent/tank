@@ -79,3 +79,7 @@ a.wikititle {
 a.wikititle:hover {
     text-decoration: underline;
 }
+
+.right {
+    float: right;
+}

@@ -5,6 +5,7 @@ Stubbing in the stubs.
 from tiddlyweb.util import merge_config
 from tiddlyweb.web.validator import BAG_VALIDATORS, InvalidBagError
 
+from tiddlywebplugins.logout import init as logout_init
 from tiddlywebplugins.oauth import init as oauth_init
 from tiddlywebplugins.utils import replace_handler
 
@@ -18,6 +19,7 @@ SUBSCRIBER = 'SUBSCRIBER'
 
 
 def establish_web(config):
+    logout_init(config)
     oauth_init(config)
     selector = config['selector']
     replace_handler(selector, '/', dict(GET=home))
