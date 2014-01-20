@@ -28,6 +28,11 @@
 </header>
 
 <main>
+<div class="commands">
+    {% if message %}
+    <div class="message">{{ message }}</div>
+    {% endif %}
+</div>
 <div class="output">
 {{ html }}
 </div>

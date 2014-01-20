@@ -83,3 +83,14 @@ a.wikititle:hover {
 .right {
     float: right;
 }
+
+.commands {
+    width: 30%;
+    float: right;
+}
+
+.message {
+    font-size: 125%;
+    color: red;
+    padding-bottom: 1em;
+}

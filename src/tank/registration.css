@@ -7,3 +7,7 @@ main {
 input, textarea {
     width: 30em;
 }
+
+input[type="checkbox"] {
+    width: 2em;
+}

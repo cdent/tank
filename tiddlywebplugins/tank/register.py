@@ -39,6 +39,8 @@ def register(environ, start_response):
     except (KeyError, ValueError) as exc:
         raise HTTP400('Incomplete form submission: %s' % exc)
 
+    announcements = query.get('announcements', [None])[0]
+
     user = User(username)
     try:
         store.get(user)
@@ -51,7 +53,8 @@ def register(environ, start_response):
         'registered': time(),
         'name': name,
         'email': email,
-        'extra': extra
+        'extra': extra,
+        'announcements': announcements is not None
     })
 
     store.put(user)
