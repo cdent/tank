@@ -5,14 +5,23 @@ If GUEST, shiny make you want it.
 If logged in, your home page/dashboard.
 """
 
+from hashlib import md5
+
 from tiddlywebplugins.templates import get_template
 from tiddlywebplugins.utils import require_any_user
 
 
+GRAVATAR = 'https://www.gravatar.com/avatar/%s'
 DASH_TEMPLATE = 'dash.html'
 FRONTPAGE_TEMPLATE = 'frontpage.html'
 #FRONTPAGE_CACHE_TIME = 300  # XXX caching a bit too aggressive
 
+def gravatar(environ):
+    """
+    Generate a gravatar link.
+    """
+    email = environ.get('tank.user_info', {}).get('email', '')
+    return GRAVATAR % md5(email.lower()).hexdigest()
 
 def home(environ, start_response):
     """
@@ -50,6 +59,7 @@ def dash(environ, start_response, message=None):
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
     return dash_template.generate({
+        'gravatar': gravatar(environ),
         'user': username,
         'bags': kept_bags,
         'message': message

@@ -95,7 +95,13 @@ a.wikititle:hover {
     padding-bottom: 1em;
 }
 
-@media all and (max-width: 62em) {
+.sm-gravatar {
+    width: 2em;
+    display: inline;
+    vertical-align: middle;
+}
+
+@media screen and (max-width: 62em) {
     .commands {
         float: none;
     }

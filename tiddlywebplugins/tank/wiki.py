@@ -15,7 +15,7 @@ from tiddlyweb.wikitext import render_wikitext
 from tiddlywebplugins.utils import require_role
 from tiddlywebplugins.templates import get_template
 
-from .home import dash
+from .home import dash, gravatar
 
 WIKI_TEMPLATE = 'wiki.html'
 EDIT_TEMPLATE = 'edit.html'
@@ -301,6 +301,7 @@ def wiki_page(environ, start_response):
             ('Content-Type', 'text/html; charset=UTF-8'),
             ('Cache-Control', 'no-cache')])
         return wiki_template.generate({
+            'gravatar': gravatar(environ),
             'user': usersign['name'],
             'tiddler': tiddler,
             'html': html,

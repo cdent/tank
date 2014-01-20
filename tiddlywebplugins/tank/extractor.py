@@ -4,6 +4,7 @@ wrapped extractor exists in the user store.
 """
 
 import logging
+import simplejson
 
 from tiddlyweb.model.user import User
 from tiddlyweb.store import StoreError
@@ -37,7 +38,9 @@ class Extractor(ExtractorInterface):
             LOGGER.debug('UserExtract:%s found %s', wrapped_extractor,
                     extracted_user)
             try:
-                store.get(User(extracted_user['name']))
+                user = store.get(User(extracted_user['name']))
+                environ['tank.user'] = user
+                environ['tank.user_info'] = simplejson.loads(user.note)
                 return extracted_user
             except StoreError:
                 pass
