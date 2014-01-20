@@ -85,7 +85,7 @@ a.wikititle:hover {
 }
 
 .commands {
-    width: 30%;
+    max-width: 20em;
     float: right;
 }
 
@@ -93,4 +93,10 @@ a.wikititle:hover {
     font-size: 125%;
     color: red;
     padding-bottom: 1em;
+}
+
+@media all and (max-width: 62em) {
+    .commands {
+        float: none;
+    }
 }
