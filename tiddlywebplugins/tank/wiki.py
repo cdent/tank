@@ -70,6 +70,7 @@ def recent_changes(environ, start_response):
 
     try:
         bag = store.get(Bag(tank_name))
+        bag.policy.allows(usersign, 'read')
     except NoBagError:
         raise HTTP404('no tank found for %s' % tank_name)
 
