@@ -29,6 +29,7 @@ setup(
         'tiddlywebplugins.markdown',
         'tiddlywebplugins.whoosher',
         'tiddlywebplugins.logout',
+        'tiddlywebplugins.relativetime',
         'markdown-checklist',
         'httpexceptor'
         ],

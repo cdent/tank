@@ -9,6 +9,13 @@
 <header>
 {% include 'logout.html' %}
     <span class="wikititle">{{ tiddler.title }}</span>
+    {% if tiddler.title != "index" %}
+    <a class="wikititle" href="/tanks/{{ bag.name|e }}">TankTop</a>
+    {% endif %}
+    <a class="wikititle" href="RecentChanges">Changes</a>
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
     {% if edit %}
     <a class="wikititle"
         href="/edit?bag={{ bag.name|e }};tiddler={{ tiddler.title|e }}">Edit</a>
@@ -19,12 +26,6 @@
         href="/delete?bag={{ bag.name|e }};tiddler={{ tiddler.title|e }}">Delete</a>
     {% endif %}
     #}
-    {% if tiddler.title != "index" %}
-    <a class="wikititle" href="/tanks/{{ bag.name|e }}">TankTop</a>
-    {% endif %}
-    {% if user != "GUEST" %}
-    <a class="wikititle" href="/dash">Dash</a>
-    {% endif %}
 </header>
 
 <main>

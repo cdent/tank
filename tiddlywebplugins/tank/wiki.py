@@ -8,6 +8,7 @@ from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.policy import Policy, PermissionsError
 from tiddlyweb.model.tiddler import Tiddler, current_timestring
 from tiddlyweb.store import NoBagError, NoTiddlerError
+from tiddlyweb.control import filter_tiddlers
 from tiddlyweb.web.util import get_route_value, encode_name, server_base_url
 from tiddlyweb.web.validator import validate_bag, InvalidBagError
 from tiddlyweb.wikitext import render_wikitext
@@ -19,7 +20,7 @@ from .home import dash, gravatar
 
 WIKI_TEMPLATE = 'wiki.html'
 EDIT_TEMPLATE = 'edit.html'
-
+CHANGES_TEMPLATE = 'changes.html'
 
 def private_policy(username):
     return Policy(owner=username,
@@ -57,6 +58,40 @@ WIKI_MODES = {
     'public': public_policy,
 }
 
+
+def recent_changes(environ, start_response):
+    """
+    List recent changes for the named tank.
+    """
+    tank_name = get_route_value(environ, 'bag_name')
+    store = environ['tiddlyweb.store']
+    usersign = environ['tiddlyweb.usersign']
+    days = environ['tiddlyweb.query'].get('d', [7])[0]
+
+    try:
+        bag = store.get(Bag(tank_name))
+    except NoBagError:
+        raise HTTP404('no tank found for %s' % tank_name)
+
+    tiddlers = filter_tiddlers(store.list_bag_tiddlers(bag),
+        'select=modified:>%sd;sort=-modified' % days, environ)
+
+    changes_template = get_template(environ, CHANGES_TEMPLATE)
+    start_response('200 OK', [
+        ('Content-Type', 'text/html; charset=UTF-8'),
+        ('Cache-Control', 'no-cache')])
+    return changes_template.generate({
+        'days': days,
+        'tiddlers': tiddlers,
+        'bag': bag,
+        'gravatar': gravatar(environ),
+        'user': usersign['name'],
+    })
+
+
+SPECIAL_PAGES = {
+    'RecentChanges': recent_changes
+}
 
 
 def create_wiki(environ, name, mode='private', username=None, desc='',
@@ -250,9 +285,9 @@ def wiki_page(environ, start_response):
     """
     Present a single tiddler from a given tank.
     """
+    tank_name = get_route_value(environ, 'bag_name')
     store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
-    tank_name = get_route_value(environ, 'bag_name')
 
     try:
         bag = store.get(Bag(tank_name))
@@ -263,6 +298,9 @@ def wiki_page(environ, start_response):
         tiddler_name = get_route_value(environ, 'tiddler_name')
     except (KeyError, AttributeError):
         raise HTTP302(tank_page_uri(environ, tank_name, 'index'))
+
+    if tiddler_name in SPECIAL_PAGES:
+        return SPECIAL_PAGES[tiddler_name](environ, start_response)
 
 
     # let permissions problems raise

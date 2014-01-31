@@ -10,6 +10,8 @@ from tiddlywebplugins.oauth import init as oauth_init
 from tiddlywebplugins.whoosher import init as whoosh_init
 from tiddlywebplugins.utils import replace_handler
 
+import tiddlywebplugins.relativetime
+
 from .config import config as tank_config
 from .home import home, dash
 from .register import register

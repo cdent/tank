@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Recent Changes in {{ bag.name }}{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/changes.css">
+{% endblock %}
+{% block body %}
+<header>
+{% include 'logout.html' %}
+    <span class="wikititle">Recent Changes</span>
+    <a class="wikititle" href="/tanks/{{ bag.name|e }}">TankTop</a>
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
+</header>
+
+<main>
+<h1>Changes in last {{ days }} days.</h1>
+<ul>
+{% for tiddler in tiddlers %}
+<li><a href="{{ tiddler.title|e }}">{{ tiddler.title }}</a></li>
+{% endfor %}
+</ul>
+<div>
+Changes in last
+{% for day in [1, 2, 7, 30] %}
+<a href="RecentChanges?d={{ day }}">{{ day }}</a>
+{% endfor %}
+days.
+</div>
+</main>
+
+{% endblock %}
+{% block scripts %}
+<script src="/bags/tank/tiddlers/jquery.js"></script>
+<script src="/bags/tank/tiddlers/checklists.js"></script>
+<script src="/bags/tank/tiddlers/checklistrunner.js"></script>
+{% endblock %}
