@@ -39,7 +39,7 @@
 </div>
 <ul class="tags">
     {% for tag in tiddler.tags %}
-    <li><a href="/search?q=bag:{{ tiddler.bag|e }}%20tag:{{ tag|e }}">{{ tag }}</a>
+    <li><a href="/search?q=bag:%22{{ tiddler.bag|e }}%22%20tag:%22{{ tag|e }}%22">{{ tag }}</a>
     {% endfor %}
 </ul>
 

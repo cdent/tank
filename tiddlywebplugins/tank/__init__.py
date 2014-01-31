@@ -7,12 +7,14 @@ from tiddlyweb.web.validator import BAG_VALIDATORS, InvalidBagError
 
 from tiddlywebplugins.logout import init as logout_init
 from tiddlywebplugins.oauth import init as oauth_init
+from tiddlywebplugins.whoosher import init as whoosh_init
 from tiddlywebplugins.utils import replace_handler
 
 from .config import config as tank_config
 from .home import home, dash
 from .register import register
 from .wiki import wiki_page, editor, edit, forge
+from .tags import list_tags
 
 
 SUBSCRIBER = 'SUBSCRIBER'
@@ -29,6 +31,7 @@ def establish_web(config):
             GET=wiki_page)
     selector.add('/edit', GET=editor, POST=edit)
     selector.add('/forge', POST=forge)
+    selector.add('/tags', GET=list_tags)
 
 
 def bag_quota(bag, environ):
@@ -69,5 +72,6 @@ def make_validators():
 def init(config):
     merge_config(config, tank_config, reconfig=True)
     make_validators()
+    whoosh_init(config)
     if 'selector' in config:
         establish_web(config)
