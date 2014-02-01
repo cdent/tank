@@ -21,9 +21,14 @@
     <a href="/tanks/docs/markdown">Markdown Help</a>
 </div>
 <div class="editor">
+{% if conflict %}
+Someone made a change while you were editing. Your text is below.
+See the <a href="/tanks/{{ tiddler.bag|e}}/{{ tiddler.title|e }}" target="_blank">current version</a>.
+{% endif %}
 <form action="/edit" method="POST">
 <input type="hidden" name="title" value="{{ tiddler.title }}">
 <input type="hidden" name="bag" value="{{ tiddler.bag }}">
+<input type="hidden" name="etag" value="{{ etag }}">
 <textarea name="text" rows="24" cols="80" placeholder="enter markdown text here">{{ tiddler.text }}</textarea>
 <input placeholder="tags" name="tags" value="{{ tiddler.tags|join(', ') }}" size="80">
 <button type="submit">Save</button>

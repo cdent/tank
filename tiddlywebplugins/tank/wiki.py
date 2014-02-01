@@ -9,7 +9,8 @@ from tiddlyweb.model.policy import Policy, PermissionsError
 from tiddlyweb.model.tiddler import Tiddler, current_timestring
 from tiddlyweb.store import NoBagError, NoTiddlerError
 from tiddlyweb.control import filter_tiddlers
-from tiddlyweb.web.util import get_route_value, encode_name, server_base_url
+from tiddlyweb.web.util import (get_route_value, encode_name, server_base_url,
+        tiddler_etag)
 from tiddlyweb.web.validator import validate_bag, InvalidBagError
 from tiddlyweb.wikitext import render_wikitext
 
@@ -168,6 +169,7 @@ def edit(environ, start_response):
     title = query['title'][0]
     text = query['text'][0]
     tags = query['tags'][0]
+    etag = query['etag'][0]
 
     tags = tags.split(', ')
 
@@ -182,8 +184,13 @@ def edit(environ, start_response):
 
     tiddler = Tiddler(title, bag_name)
     tiddler_new = False
+    conflict = False
     try:
         tiddler = store.get(tiddler)
+        existing_etag = tiddler_etag(environ, tiddler).replace('"', '').split(':', 1)[0]
+        print 'etags', etag, existing_etag
+        if etag != existing_etag:
+            conflict = True
     except NoTiddlerError:
         tiddler.type = 'text/x-markdown'
         tiddler_new = True
@@ -198,6 +205,9 @@ def edit(environ, start_response):
     tiddler.modifier = usersign['name']
     tiddler.modified = current_timestring()
 
+    if conflict:
+        return editor(environ, start_response, tiddler)
+
     store.put(tiddler)
 
     redirect_uri = tank_page_uri(environ, tiddler.bag, tiddler.title)
@@ -208,43 +218,49 @@ def edit(environ, start_response):
     return []
 
 
-def editor(environ, start_response):
+def editor(environ, start_response, extant_tiddler=None):
     store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
     query = environ['tiddlyweb.query']
-    bag_name = query['bag'][0]
-    tiddler_title = query['tiddler'][0]
 
-    if not (bag_name and tiddler_title):
-        raise HTTP400('bad query: bag and tiddler required')
-
-    bag = Bag(bag_name)
-    try:
-        bag = store.get(bag)
-    except NoBagError:
-        raise HTTP404('that tank does not exist')
-
-    tiddler = Tiddler(tiddler_title, bag_name)
-    tiddler_new = False
-    try:
-        tiddler = store.get(tiddler)
-    except NoTiddlerError:
-        tiddler.text = ''
-        tiddler.type = 'text/x-markdown'
-        tiddler_new = True
-
-    if tiddler_new:
-        bag.policy.allows(usersign, 'create')
+    if extant_tiddler:
+        tiddler = extant_tiddler
     else:
-        bag.policy.allows(usersign, 'write')
+        bag_name = query['bag'][0]
+        tiddler_title = query['tiddler'][0]
+
+        if not (bag_name and tiddler_title):
+            raise HTTP400('bad query: bag and tiddler required')
+
+        bag = Bag(bag_name)
+        try:
+            bag = store.get(bag)
+        except NoBagError:
+            raise HTTP404('that tank does not exist')
+
+        tiddler = Tiddler(tiddler_title, bag_name)
+        tiddler_new = False
+        try:
+            tiddler = store.get(tiddler)
+        except NoTiddlerError:
+            tiddler.text = ''
+            tiddler.type = 'text/x-markdown'
+            tiddler_new = True
+
+        if tiddler_new:
+            bag.policy.allows(usersign, 'create')
+        else:
+            bag.policy.allows(usersign, 'write')
 
     edit_template = get_template(environ, EDIT_TEMPLATE)
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
     return edit_template.generate({
+        'conflict': extant_tiddler is not None,
         'user': usersign['name'],
         'tiddler': tiddler,
+        'etag': tiddler_etag(environ, tiddler).replace('"', '').split(':', 1)[0]
     })
 
 
