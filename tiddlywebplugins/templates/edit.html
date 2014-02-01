@@ -31,7 +31,11 @@ See the <a href="/tanks/{{ tiddler.bag|e}}/{{ tiddler.title|e }}" target="_blank
 <input type="hidden" name="etag" value="{{ etag }}">
 <textarea name="text" rows="24" cols="80" placeholder="enter markdown text here">{{ tiddler.text }}</textarea>
 <input placeholder="tags" name="tags" value="{{ tiddler.tags|join(', ') }}" size="80">
+{% if conflict %}
+<button type="submit">Clobber</button>
+{% else %}
 <button type="submit">Save</button>
+{% endif %}
 <button type="reset">Reset</button>
 <a href="/tanks/{{ tiddler.bag |e }}/{{ tiddler.title |e }}">Cancel</a>
 </form>
