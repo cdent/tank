@@ -188,7 +188,6 @@ def edit(environ, start_response):
     try:
         tiddler = store.get(tiddler)
         existing_etag = tiddler_etag(environ, tiddler).replace('"', '').split(':', 1)[0]
-        print 'etags', etag, existing_etag
         if etag != existing_etag:
             conflict = True
     except NoTiddlerError:
