@@ -34,6 +34,9 @@ $(function() {
 				processData: false,
 				success: function() {
 					dropzone.text('Uploaded ' + file.name);
+				},
+				error: function(xhr, status, error) {
+					dropzone.text('Failed: ' + xhr.status + ' ' + error);
 				}
 			});
         }
