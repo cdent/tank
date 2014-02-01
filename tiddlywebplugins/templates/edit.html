@@ -7,7 +7,7 @@
 {% block body %}
 <header>
     <a class="wikititle" href="/tanks/{{tiddler.bag|e }}/{{ tiddler.title|e }}">{{ tiddler.title }}</a>
-    <a class="wikititle" href="RecentChanges">Changes</a>
+	<a class="wikititle" href="/tanks/{{tiddler.bag|e}}/RecentChanges">Changes</a>
     {% if tiddler.title != "index" %}
     <a class="wikititle" href="/tanks/{{ tiddler.bag|e }}">TankTop</a>
     {% endif %}
