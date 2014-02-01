@@ -51,8 +51,10 @@
 
 {% endblock %}
 {% block scripts %}
+{% if edit %}
 <script src="/bags/tank/tiddlers/jquery.js"></script>
 <script src="/bags/tank/tiddlers/checklists.js"></script>
 <script src="/bags/tank/tiddlers/checklistrunner.js"></script>
 <script src="/bags/tank/tiddlers/filedrop.js"></script>
+{% endif %}
 {% endblock %}
