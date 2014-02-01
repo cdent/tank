@@ -1,5 +1,5 @@
 """
-An extractor that checks that the user extracted by the 
+An extractor that checks that the user extracted by the
 wrapped extractor exists in the user store.
 """
 
@@ -31,7 +31,7 @@ class Extractor(ExtractorInterface):
                         ['Extractor'])
             except ImportError, exc:
                 raise ImportError('could not load extractor %s: %s' %
-                        (extractor_name, exc))
+                        (wrapped_extractor, exc))
         extractor = imported_module.Extractor()
         extracted_user = extractor.extract(environ, start_response)
         if extracted_user:

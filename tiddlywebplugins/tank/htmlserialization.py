@@ -10,10 +10,11 @@ from tiddlywebplugins.templates import get_template
 
 from .home import gravatar
 
+
 SEARCH_TEMPLATE = 'search.html'
 
-class Serialization(HTMLSerialization):
 
+class Serialization(HTMLSerialization):
 
     def list_tiddlers(self, tiddlers):
         if not tiddlers.is_search:

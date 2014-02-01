@@ -2,6 +2,7 @@
 Stubbing in the stubs.
 """
 
+from tiddlyweb.store import NoBagError
 from tiddlyweb.util import merge_config
 from tiddlyweb.web.validator import BAG_VALIDATORS, InvalidBagError
 

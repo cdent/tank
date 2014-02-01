@@ -7,6 +7,8 @@ If logged in, your home page/dashboard.
 
 from hashlib import md5
 
+from tiddlyweb.store import NoBagError
+
 from tiddlywebplugins.templates import get_template
 from tiddlywebplugins.utils import require_any_user
 
@@ -16,12 +18,14 @@ DASH_TEMPLATE = 'dash.html'
 FRONTPAGE_TEMPLATE = 'frontpage.html'
 #FRONTPAGE_CACHE_TIME = 300  # XXX caching a bit too aggressive
 
+
 def gravatar(environ):
     """
     Generate a gravatar link.
     """
     email = environ.get('tank.user_info', {}).get('email', '')
     return GRAVATAR % md5(email.lower()).hexdigest()
+
 
 def home(environ, start_response):
     """

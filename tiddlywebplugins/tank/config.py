@@ -10,7 +10,7 @@ config = {
     'auth_systems': ['tiddlywebplugins.tank.challenger'],
     'logged_in_redirect': '/dash',
     'wikitext.default_renderer': 'markdown',
-    'wikitext.type_render_map' :{
+    'wikitext.type_render_map': {
         'text/x-markdown': 'tiddlywebplugins.markdown'
     },
     'markdown.wiki_link_base': '',

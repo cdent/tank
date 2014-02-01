@@ -45,7 +45,7 @@ def register(environ, start_response):
     try:
         store.get(user)
         raise HTTP400('That username is not available.')
-    except StoreError:  # we expect and want this 
+    except StoreError:  # we expect and want this
         pass
 
     user.add_role(DEFAULT_ROLE)
@@ -71,7 +71,7 @@ def register(environ, start_response):
     cookie_age = config.get('cookie_age', None)
     cookie_header_string = make_cookie('tiddlyweb_user', user.usersign,
             mac_key=secret, path='/', expires=cookie_age)
-    start_response('303 See Other', 
+    start_response('303 See Other',
             [('Set-Cookie', cookie_header_string),
                 ('Content-Type', 'text/plain'),
                 ('Location', str(redirect_uri))])

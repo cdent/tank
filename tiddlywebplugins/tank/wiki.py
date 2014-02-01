@@ -9,6 +9,7 @@ from tiddlyweb.model.policy import Policy, PermissionsError
 from tiddlyweb.model.tiddler import Tiddler, current_timestring
 from tiddlyweb.store import NoBagError, NoTiddlerError
 from tiddlyweb.control import filter_tiddlers
+from tiddlyweb.web.handler.tiddler import get as tiddler_get
 from tiddlyweb.web.util import (get_route_value, encode_name, server_base_url,
         tiddler_etag)
 from tiddlyweb.web.validator import validate_bag, InvalidBagError
@@ -22,6 +23,7 @@ from .home import dash, gravatar
 WIKI_TEMPLATE = 'wiki.html'
 EDIT_TEMPLATE = 'edit.html'
 CHANGES_TEMPLATE = 'changes.html'
+
 
 def private_policy(username):
     return Policy(owner=username,
@@ -134,7 +136,6 @@ def forge(environ, start_response):
     Handle a post to create a new tank.
     """
     query = environ['tiddlyweb.query']
-    store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
 
     try:
@@ -148,7 +149,7 @@ def forge(environ, start_response):
     try:
         create_wiki(environ, tank_name, mode=tank_policy,
                 username=usersign['name'], desc=tank_desc)
-    except InvalidBagError as exc:
+    except InvalidBagError:
         return dash(environ, start_response, message='Over quota!')
 
     uri = tank_uri(environ, tank_name)
@@ -187,7 +188,8 @@ def edit(environ, start_response):
     conflict = False
     try:
         tiddler = store.get(tiddler)
-        existing_etag = tiddler_etag(environ, tiddler).replace('"', '').split(':', 1)[0]
+        existing_etag = tiddler_etag(environ, tiddler).replace('"',
+                '').split(':', 1)[0]
         if etag != existing_etag:
             conflict = True
     except NoTiddlerError:
@@ -259,7 +261,8 @@ def editor(environ, start_response, extant_tiddler=None):
         'conflict': extant_tiddler is not None,
         'user': usersign['name'],
         'tiddler': tiddler,
-        'etag': tiddler_etag(environ, tiddler).replace('"', '').split(':', 1)[0]
+        'etag': tiddler_etag(environ, tiddler).replace('"',
+            '').split(':', 1)[0]
     })
 
 
@@ -317,7 +320,6 @@ def wiki_page(environ, start_response):
 
     if tiddler_name in SPECIAL_PAGES:
         return SPECIAL_PAGES[tiddler_name](environ, start_response)
-
 
     # let permissions problems raise
     bag.policy.allows(usersign, 'read')
