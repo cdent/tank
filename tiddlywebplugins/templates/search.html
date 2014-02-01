@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}{{ tiddlers.title }}{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/changes.css">
+{% endblock %}
+{% block body %}
+<header>
+{% include 'logout.html' %}
+    <span class="wikititle">Search</span>
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
+</header>
+
+<main>
+<h1>{{ tiddlers.title }}</h1>
+<ul>
+{% for tiddler in tiddlers %}
+<li><a href="/tanks/{{ tiddler.bag|e }}/{{ tiddler.title|e }}">{{ tiddler.title }}</a></li>
+{% endfor %}
+</ul>
+</main>
+
+{% endblock %}
+{% block scripts %}
+{% endblock %}

@@ -18,4 +18,8 @@ config = {
     'markdown.transclude_url': tank_tiddler_uri,
     'markdown.target_resolver': tank_tiddler_resolver,
     'markdown.extensions': (['markdown_checklist.extension'], {}),
+    'serializers': {
+        'text/html': ['tiddlywebplugins.tank.htmlserialization',
+            'text/html; charset=UTF-8']
+    },
 }
