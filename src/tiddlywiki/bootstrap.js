@@ -1,13 +1,13 @@
 jQuery(document).ready(function() {
-	console.log('being called');
 	var recipe = window.location.pathname.replace(/^\/comps\//, ''),
 		port = window.location.port,
 		host = window.location.protocol
 			+ "//"
 			+ window.location.hostname
-			+ ((port != '80' || port != '443') ? ':' + port : ''),
+			+ ((port != '80' || port != '443') ? (':' + port) : ''),
 		workspace = 'recipes/' + recipe,
-		tiddlers = '/recipes/' + recipe + '/tiddlers?fat=1';
+		tiddlers = '/recipes/' + recipe
+                        + '/tiddlers?select=title:!app;fat=1';
 
 	var setCustomFields = function() {
 		config.defaultCustomFields = {
@@ -74,7 +74,6 @@ jQuery(document).ready(function() {
 			}
 		}
 		init();
-		console.log('success done');
 	};
 
 	setCustomFields();
