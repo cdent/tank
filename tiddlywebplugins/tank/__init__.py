@@ -9,6 +9,7 @@ from tiddlyweb.web.validator import BAG_VALIDATORS, InvalidBagError
 from tiddlywebplugins.logout import init as logout_init
 from tiddlywebplugins.oauth import init as oauth_init
 from tiddlywebplugins.whoosher import init as whoosh_init
+from tiddlywebplugins.status import init as status_init
 from tiddlywebplugins.utils import replace_handler
 
 import tiddlywebplugins.relativetime
@@ -25,6 +26,7 @@ SUBSCRIBER = 'SUBSCRIBER'
 
 
 def establish_web(config):
+    status_init(config)
     logout_init(config)
     oauth_init(config)
     selector = config['selector']
