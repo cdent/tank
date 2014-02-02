@@ -18,6 +18,7 @@ from .home import home, dash
 from .register import register
 from .wiki import wiki_page, editor, edit, forge
 from .tags import list_tags
+from .composition import comp
 
 
 SUBSCRIBER = 'SUBSCRIBER'
@@ -35,6 +36,7 @@ def establish_web(config):
     selector.add('/edit', GET=editor, POST=edit)
     selector.add('/forge', POST=forge)
     selector.add('/tags', GET=list_tags)
+    selector.add('/comps/{recipe_name:segment}', GET=comp)
 
 
 def bag_quota(bag, environ):
