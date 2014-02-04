@@ -13,6 +13,8 @@ Markdown used also has support for some additional features:
 * [foootnotes](http://pythonhosted.org/Markdown/extensions/footnotes.html)
 * [header
   ids](http://pythonhosted.org/Markdown/extensions/header_id.html)
+* [interactive checklists](https://github.com/FND/markdown-checklist)
+  that save their checked state back to the tiddler.
 * Wiki links and transclusions, described below.
 
 Links between tiddlers in a single tank and between tiddlers in different
@@ -28,9 +30,14 @@ Each of these links styles can have `@<name of tank>` appended to link to
 the named tiddler in the named tank. For example `CowHouse@foobar` would
 link to the tiddler named `CowHouse` in the tank named `foobar`.
 
+**Note**: `CamelCase` style linking does not play well with the default
+style of linking used in Markdown (e.g. `[title](target)`). It is best to
+not put `CamelCase` words within the title text, the results can be a
+bit odd.
+
 Tiddlers may also be transcluded into another. This means that one tiddler
 sucks in and presents the content of another tiddler within itself. The basic
-syntax is, on a line by itself:
+syntax is, _on a line by itself_:
 
 ```
 {{tiddler title}}
