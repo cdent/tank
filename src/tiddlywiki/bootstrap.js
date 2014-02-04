@@ -51,6 +51,7 @@ jQuery(document).ready(function() {
 		window.scrollTo(0,0);
 		setCustomFields(); // again
 		refreshAll();
+		refreshPageTitle();
 		if(pluginProblem) {
 			story.displayTiddler(null,"PluginManager");
 			displayMessage(config.messages.customConfigError);
