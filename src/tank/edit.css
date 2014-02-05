@@ -1,15 +1,16 @@
 
+.editor {
+    max-width: 35em;
+}
+
 .editor textarea, 
 .editor input {
     display: block;
-}
-
-.editor textarea,
-.editor input {
-    max-width: 39em;
+    width: 100%;
 }
 
 .info {
     float: right;
     width: 25%;
 }
+
