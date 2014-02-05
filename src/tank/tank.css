@@ -27,14 +27,14 @@ main {
 header {
     color: #efefef;
     background-color: #222222;
-    height: 50px;
+    min-height: 50px;
     width: 100%;
 }
 
 footer {
     color: #efefef;
     background-color: #222222;
-    height: 75px;
+    min-height: 75px;
     width: 100%;
     clear: both;
     bottom: 0;

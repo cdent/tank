@@ -309,7 +309,7 @@ def wiki_page(environ, start_response):
         tiddler = store.get(tiddler)
     except NoTiddlerError:
         tiddler.type = 'text/x-markdown'
-        tiddler.text = '## This tiddler does not yet exist\n'
+        tiddler.text = '### This tiddler does not yet exist\n'
         if creatable:
             editable = True
         deletable = False

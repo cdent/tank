@@ -6,7 +6,6 @@
 {% endblock %}
 {% block body %}
 <header>
-    <a class="wikititle" href="/tanks/{{tiddler.bag|e }}/{{ tiddler.title|e }}">{{ tiddler.title }}</a>
 	<a class="wikititle" href="/tanks/{{tiddler.bag|e}}/RecentChanges">Changes</a>
     {% if tiddler.title != "index" %}
     <a class="wikititle" href="/tanks/{{ tiddler.bag|e }}">TankTop</a>
@@ -21,6 +20,7 @@
     <a href="/tanks/docs/markdown">Markdown Help</a>
 </div>
 <div class="editor">
+<h1><a href="/tanks/{{tiddler.bag|e }}/{{ tiddler.title|e }}">{{ tiddler.title }}</a></h1>
 {% if conflict %}
 Someone made a change while you were editing. Your text is below.
 See the <a href="/tanks/{{ tiddler.bag|e}}/{{ tiddler.title|e }}" target="_blank">current version</a>.

@@ -1,6 +1,6 @@
 
 .tanks {
-    width: 40%;
+    max-width: 35em;
 }
 
 .tanks ul {

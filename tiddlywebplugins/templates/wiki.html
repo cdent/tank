@@ -8,7 +8,6 @@
 {% block body %}
 <header>
 {% include 'logout.html' %}
-    <span class="wikititle">{{ tiddler.title }}</span>
     {% if tiddler.title != "index" %}
     <a class="wikititle" href="/tanks/{{ bag.name|e }}">TankTop</a>
     {% endif %}
@@ -39,6 +38,7 @@
     <p>Other commands coming soon.</p>
 </div>
 <div class="output">
+<h1>{{ tiddler.title }}</h1>
 {{ html }}
 </div>
 <ul class="tags">
