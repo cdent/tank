@@ -52,6 +52,8 @@ footer img {
 footer ul,
 footer li {
     display: inline;
+    padding-left: 0;
+    padding-right: 1em;
 }
 
 footer a {
@@ -71,7 +73,7 @@ footer a:hover {
 }
 
 a.wikititle {
-    margin-left: 2em;
+    padding-right: 1em;
     color: #efefef;
     text-decoration: none;
 }

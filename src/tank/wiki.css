@@ -11,3 +11,20 @@
 .output img {
     max-width: 100%;
 }
+
+ul.tags {
+    border-top: thin solid black;
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    padding-top: .5em;
+}
+
+ul.tags:before {
+    content: "tags: ";
+}
+
+.tags li {
+    display: inline;
+    margin: 0;
+}

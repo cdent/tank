@@ -40,12 +40,12 @@
 <div class="output">
 <h1>{{ tiddler.title }}</h1>
 {{ html }}
-</div>
 <ul class="tags">
-    {% for tag in tiddler.tags %}
+    {% for tag in tiddler.tags|sort %}
     <li><a href="/search?q=bag:%22{{ tiddler.bag|e }}%22%20tag:%22{{ tag|e }}%22">{{ tag }}</a>
     {% endfor %}
 </ul>
+</div>
 
 </main>
 
