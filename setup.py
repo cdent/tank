@@ -23,6 +23,7 @@ setup(
     platforms = 'Posix; MacOS X; Windows',
     packages = find_packages(exclude=['test']),
     install_requires = [
+        'tiddlyweb>=2.0.2',
         'tiddlywebplugins.oauth',
         'tiddlywebplugins.utils',
         'tiddlywebplugins.templates',

@@ -19,47 +19,11 @@ from tiddlywebplugins.utils import require_role
 from tiddlywebplugins.templates import get_template
 
 from .home import dash, gravatar
+from .policy import WIKI_MODES
 
 WIKI_TEMPLATE = 'wiki.html'
 EDIT_TEMPLATE = 'edit.html'
 CHANGES_TEMPLATE = 'changes.html'
-
-
-def private_policy(username):
-    return Policy(owner=username,
-            read=[username],
-            write=[username],
-            create=[username],
-            delete=[username],
-            manage=[username],
-            accept=['NONE'])
-
-
-def protected_policy(username):
-    return Policy(owner=username,
-            read=[],
-            write=[username],
-            create=[username],
-            delete=[username],
-            manage=[username],
-            accept=['NONE'])
-
-
-def public_policy(username):
-    return Policy(owner=username,
-            read=[],
-            write=[],
-            create=[],
-            delete=[],
-            manage=[username],
-            accept=['NONE'])
-
-
-WIKI_MODES = {
-    'private': private_policy,
-    'protected': protected_policy,
-    'public': public_policy,
-}
 
 
 def recent_changes(environ, start_response):

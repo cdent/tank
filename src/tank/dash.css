@@ -3,3 +3,24 @@
     width: 40%;
 }
 
+.tanks ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.radiogroup {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.radiogroup li {
+    border: 1px transparent solid;
+}
+
+ul.radiogroup li:hover {
+    background-color: lightyellow;
+    border: 1px gray solid;
+    width: 10em;
+}

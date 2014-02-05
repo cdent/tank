@@ -12,6 +12,8 @@ from tiddlyweb.store import NoBagError
 from tiddlywebplugins.templates import get_template
 from tiddlywebplugins.utils import require_any_user
 
+from .policy import determine_tank_type, POLICY_ICONS
+
 
 GRAVATAR = 'https://www.gravatar.com/avatar/%s'
 DASH_TEMPLATE = 'dash.html'
@@ -55,8 +57,16 @@ def dash(environ, start_response, message=None):
             return False
         return bag.policy.owner == username and not bag.name.startswith('_')
 
+    def augment_bag(bag):
+        bag = store.get(bag)
+        policy_type = determine_tank_type(bag, username)
+        bag.icon = POLICY_ICONS[policy_type]
+        bag.type = policy_type
+        return bag
+
     # XXX should add in metadata here about which are private
-    kept_bags = (bag for bag in store.list_bags() if load_and_test_bag(bag))
+    kept_bags = (augment_bag(bag) for bag in store.list_bags()
+            if load_and_test_bag(bag))
 
     dash_template = get_template(environ, DASH_TEMPLATE)
     start_response('200 OK', [
