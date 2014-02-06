@@ -34,7 +34,7 @@ $(function() {
 					// set the onprogress event handler
 					xhr.upload.onprogress = function(evt) {
 						dropzone.text('Processing ' + file.name + ' '
-							+ evt.loaded/evt.total*100 + '%');
+							+ Math.floor(evt.loaded/evt.total*100) + '%');
 					};
 					// return the customized object
 					return xhr;
