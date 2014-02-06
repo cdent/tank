@@ -28,6 +28,17 @@ $(function() {
 			$.ajax({
 				url: '/bags/' + encodeURIComponent(tank) + '/tiddlers/'
 					+ encodeURIComponent(tiddler.title),
+				xhr: function() {
+					// get the native XmlHttpRequest object
+					var xhr = $.ajaxSettings.xhr();
+					// set the onprogress event handler
+					xhr.upload.onprogress = function(evt) {
+						dropzone.text('Processing ' + file.name + ' '
+							+ evt.loaded/evt.total*100 + '%');
+					};
+					// return the customized object
+					return xhr;
+				},
 				contentType: 'application/json',
 				type: 'PUT',
 				data: JSON.stringify(tiddler),
