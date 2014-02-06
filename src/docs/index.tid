@@ -7,7 +7,9 @@ Tank is a service for creating, keeping, managing and sharing content
 of all sorts online in an environment that encourages linking between
 things to build hypertextual webs of information.
 
-Tank is built on TiddlyWeb, a robust HTTP [[API]] for [[tiddlers|tiddler]]. 
-Because of this, your content can be of any sort and be accessed in many
-different ways. See examples of [[Content Types]] and access
-[[Representations]].
+Tank is built on [TiddlyWeb](http://tiddlyweb.com), a robust HTTP [[API]]
+for [[tiddlers|tiddler]]. Because of this, your content can be of any sort
+and be accessed in many different ways.
+
+Tiddlers are kept in [[tanks|tank]] and tanks can be augmented with
+[[comps|composition]].

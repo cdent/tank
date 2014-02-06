@@ -1,0 +1,19 @@
+modifier: cdent
+type: text/x-markdown
+
+_**Note:** For the time being there is no UI for creating comps.
+Coming soon, but in the meantime if you know how to manage
+[recipes](http://tiddlyweb.tiddlyspace.com/recipe) you know how
+to manage comps._
+
+A composition, or comp, combines two or more tanks to achieve 
+an alternate presentation or tool for managing the content in
+the tanks.
+
+In one of the tanks in the comp there must be a tiddler called `app`.
+When the comp is loaded, the `app` tiddler is loaded and used
+as the HTML starting point of a [[single page app|Single Page Apps]].
+
+This is the mechanism that will support using things like loading
+tiddlers in a [TiddlyWiki](http://tiddlywiki.com).
+

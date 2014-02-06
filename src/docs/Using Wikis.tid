@@ -1,0 +1,25 @@
+modifier: cdent
+type: text/x-markdown
+
+By default each [[tank]] can operate as a
+[wiki](http://en.wikipedia.org/wiki/Wiki). This comes from several
+capabilities:
+
+* pages are easy to create
+* simple markup is used to manage content
+* hypertextual links between pages are easy to make (either by using
+  `CamelCase` or wrapping words in `[[` and `]]`)
+* recently modified pages are viewable at the `Changes` link
+
+On top of this Tank also provides functionality that extends or enhances
+wiki functionality:
+
+* links between pages in different tanks (by appending `@<spacename`
+  to standard link syntax)
+* [transclusion](http://en.wikipedia.org/wiki/Transclusion) of content
+  inter- and intra-space (see [[markdown]] for syntax)
+* [[comps|composition]] which provide applications to use with the
+  tiddler content
+
+Comps are the mechanism through which [TiddlyWiki](http://tiddlywiki.com)
+(classic and five) functionality is provided.

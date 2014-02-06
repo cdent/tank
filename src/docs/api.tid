@@ -1,0 +1,21 @@
+modifier: cdent
+type: text/x-markdown
+
+Tank is built on top of [TiddlyWeb](http://tiddlyweb.com). This
+means that all the API features available in [TiddlyWeb](http://tiddlyweb.com)
+are available in Tank. Using the API you can:
+
+* create additional [[tanks|tank]]
+* manage the [policies](http://tiddlyweb.tiddlyspace.com/policy) on tanks
+* create and edit [[comps|composition]]
+* add [[tiddler]] content to your tanks
+
+You can visit entry points for the API at [/bags](/bags) and
+[/recipes](/recipes). All tanks are made up of one bag. All
+comps are made up of one recipe.
+
+The reason for the different names is that not all bags are tanks and
+not all recipes are comps.
+
+To learn more about the API see the [official
+documentation](http://tiddlyweb.tiddlyspace.com/HTTP%20API).

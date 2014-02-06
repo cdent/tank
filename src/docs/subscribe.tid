@@ -6,6 +6,11 @@ functionality. Eventually, after a period of testing, extended functionality
 will require a low subscription fee. This fee will be used to offset
 the costs of hosting and secure time for continued development.
 
+There will be two types of limits:
+
+* the maximum number of tanks a single user may own
+* the total number of bytes 
+
 Details on how subscription will be handled, for example how much it will cost,
 are yet to be decided. If you have comments or concerns, please [[contact]]
 us.

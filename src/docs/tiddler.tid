@@ -1,0 +1,23 @@
+modifier: cdent
+type: text/x-markdown
+
+A tiddler is the fundamental atom of content in Tank. It's also used
+in [TiddlyWeb](http://tiddlyweb.com), [TiddlySpace](http://tiddlyspace.com)
+and originates from [TiddlyWiki](http://tiddlywiki.com).
+
+At first glance a tiddler is the same as a _page_ in a wiki. It's true
+that it can be used in this way but there is a difference: A tiddler has
+three important features:
+
+* It can be any [media
+  type](http://en.wikipedia.org/wiki/Internet_media_type)
+* It can be manipulated with the [[API]]
+* It can be
+  [represented](http://tiddlyweb.tiddlyspace.com/representation) 
+  in a variety of forms.
+
+A tiddler is the building block that allows you to compose both content
+and functionality. In Tank nearly everything you see is built from
+tiddlers. This documentation is made up of tiddlers. The CSS which controls
+the presentation is tiddlers. Applications in [[comps|composition]] are
+tiddlers.
