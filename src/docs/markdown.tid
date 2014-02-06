@@ -3,8 +3,8 @@ type: text/x-markdown
 
 When a new tiddler is created in a tank, by default the syntax of its text
 is [Markdown](http://daringfireball.net/projects/markdown/basics). In addition
-to the basic forms for making headers, paragraphs, lists and links the
-Markdown used also has support for some additional features:
+to the basic forms for making headers, paragraphs, lists, links and images
+the Markdown used also has support for some additional features:
 
 * [fenced
   code](http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html)
@@ -16,6 +16,10 @@ Markdown used also has support for some additional features:
 * [interactive checklists](https://github.com/FND/markdown-checklist)
   that save their checked state back to the tiddler.
 * Wiki links and transclusions, described below.
+
+Go to the [basic
+documentation](http://daringfireball.net/projects/markdown/basics) for
+a reference on the standard features.
 
 Links between tiddlers in a single tank and between tiddlers in different
 tanks are possible. There are three styles of links:
