@@ -1,8 +1,6 @@
 modifier: cdent
 type: text/x-markdown
 
-# About Tank
-
 Tank is a service for creating, keeping, managing and sharing content
 of all sorts online in an environment that encourages linking between
 things to build hypertextual webs of information.

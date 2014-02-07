@@ -6,6 +6,7 @@ from tiddlyweb.store import NoBagError
 from tiddlyweb.util import merge_config
 from tiddlyweb.web.validator import BAG_VALIDATORS, InvalidBagError
 
+from tiddlywebplugins.atom import init as atom_init
 from tiddlywebplugins.logout import init as logout_init
 from tiddlywebplugins.oauth import init as oauth_init
 from tiddlywebplugins.whoosher import init as whoosh_init
@@ -26,6 +27,7 @@ SUBSCRIBER = 'SUBSCRIBER'
 
 
 def establish_web(config):
+    atom_init(config)
     status_init(config)
     logout_init(config)
     oauth_init(config)
@@ -82,3 +84,5 @@ def init(config):
     whoosh_init(config)
     if 'selector' in config:
         establish_web(config)
+    # second time to ensure serializers are correct
+    merge_config(config, tank_config, reconfig=True)

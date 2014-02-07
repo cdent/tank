@@ -70,9 +70,6 @@ footer a:hover {
 .wikititle {
     font-weight: bold;
     font-size: 150%;
-}
-
-a.wikititle {
     padding-right: 1em;
     color: #efefef;
     text-decoration: none;

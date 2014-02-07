@@ -6,6 +6,10 @@
 {% block body %}
 <header>
 {% include 'logout.html' %}
+    <a class="right wikititle" title="get a feed"
+        href="{{ tiddlers.link|replace('/search', '/search.atom') }}">
+        <i class="fa fa-rss"></i>
+    </a>
     <span class="wikititle">Search</span>
     {% if user != "GUEST" %}
     <a class="wikititle" href="/dash">Dash</a>

@@ -5,3 +5,9 @@
     <input type="hidden" name="tiddlyweb_redirect" value="/">
 </form>
 {% endif %}
+{% if bag %}
+<a class="right wikititle" title="get a feed"
+    href="/bags/{{ bag.name|e }}/tiddlers.atom">
+    <i class="fa fa-rss"></i>
+</a>
+{% endif %}

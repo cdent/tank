@@ -32,6 +32,7 @@ setup(
         'tiddlywebplugins.logout',
         'tiddlywebplugins.relativetime',
         'tiddlywebplugins.status',
+        'tiddlywebplugins.atom',
         'markdown-checklist',
         'httpexceptor'
         ],
