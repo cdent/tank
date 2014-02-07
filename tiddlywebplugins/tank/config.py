@@ -13,6 +13,7 @@ config = {
     'wikitext.type_render_map': {
         'text/x-markdown': 'tiddlywebplugins.markdown'
     },
+    'links.at_means_bag': True,
     'markdown.wiki_link_base': '',
     'markdown.interlinker': tank_uri,
     'markdown.transclude_url': tank_tiddler_uri,

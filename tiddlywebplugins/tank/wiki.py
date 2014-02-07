@@ -253,7 +253,7 @@ def tank_tiddler_uri(environ, tiddler):
 
 def tank_tiddler_resolver(environ, target, tiddler):
     """
-    Modifier a tiddler object to add a bag of the tank named by target.
+    Modify a tiddler object to add a bag of the tank named by target.
 
     Check permissions and let Store and Permission errors raise.
     """
@@ -262,6 +262,35 @@ def tank_tiddler_resolver(environ, target, tiddler):
     bag = store.get(bag)
     bag.policy.allows(environ['tiddlyweb.usersign'], 'read')
     tiddler.bag = target
+
+
+def get_backlinks(environ, tiddler):
+    """
+    Extract the current backlinks for this tiddler.
+    """
+    from tiddlywebplugins.links.linksmanager import LinksManager
+    store = environ['tiddlyweb.store']
+    usersign = environ['tiddlyweb.usersign']
+
+    links_manager = LinksManager(environ)
+    links = links_manager.read_backlinks(tiddler)
+    back_tiddlers = []
+
+    def _is_readable(tiddler):
+        try:
+            bag = store.get(Bag(tiddler.bag))
+            bag.policy.allows(usersign, 'read')
+            return True
+        except (NoBagError, PermissionsError):
+            return False
+
+    for link in links:
+        container, title = link.split(':', 1)
+        tiddler = Tiddler(title, container)
+        if _is_readable(tiddler):
+            back_tiddlers.append(tiddler)
+
+    return back_tiddlers
 
 
 def wiki_page(environ, start_response):
@@ -315,6 +344,7 @@ def wiki_page(environ, start_response):
         deletable = False
 
     if tiddler.type == 'text/x-markdown':
+        backlinks = get_backlinks(environ, tiddler)
         html = render_wikitext(tiddler, environ)
         wiki_template = get_template(environ, WIKI_TEMPLATE)
         start_response('200 OK', [
@@ -326,6 +356,7 @@ def wiki_page(environ, start_response):
             'tiddler': tiddler,
             'html': html,
             'bag': bag,
+            'backlinks': backlinks,
             'edit': editable,
             'delete': deletable,
         })

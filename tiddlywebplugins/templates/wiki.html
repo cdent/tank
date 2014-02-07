@@ -35,6 +35,17 @@
     {% if edit %}
     <div id="dropzone">Drop binaries into your tank here.</div>
     {% endif %}
+    {% if backlinks %}
+    <div class="backlinks">
+        <h3>Backlinks</h3>
+    <ul>
+        {% for tiddler in backlinks %}
+        <li><a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">
+            {{ tiddler.title }}{%- if tiddler.bag != bag.name -%}@{{ tiddler.bag }}{%- endif -%}</a></li>
+        {% endfor %}
+    </ul>
+    </div>
+    {% endif %}
     <p>Other commands coming soon.</p>
 </div>
 <div class="output">
