@@ -6,9 +6,9 @@
 {% endblock %}
 {% block body %}
 <header>
-	<a class="wikititle" href="/tanks/{{tiddler.bag|e}}/RecentChanges">Changes</a>
+	<a class="wikititle" href="/tanks/{{tiddler.bag|uri}}/RecentChanges">Changes</a>
     {% if tiddler.title != "index" %}
-    <a class="wikititle" href="/tanks/{{ tiddler.bag|e }}">TankTop</a>
+    <a class="wikititle" href="/tanks/{{ tiddler.bag|uri }}">TankTop</a>
     {% endif %}
     {% if user != "GUEST" %}
     <a class="wikititle" href="/dash">Dash</a>
@@ -20,10 +20,10 @@
     <a href="/tanks/docs/markdown">Markdown Help</a>
 </div>
 <div class="editor">
-<h1><a href="/tanks/{{tiddler.bag|e }}/{{ tiddler.title|e }}">{{ tiddler.title }}</a></h1>
+<h1><a href="/tanks/{{tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a></h1>
 {% if conflict %}
 Someone made a change while you were editing. Your text is below.
-See the <a href="/tanks/{{ tiddler.bag|e}}/{{ tiddler.title|e }}" target="_blank">current version</a>.
+See the <a href="/tanks/{{ tiddler.bag|uri}}/{{ tiddler.title|uri }}" target="_blank">current version</a>.
 {% endif %}
 <form action="/edit" method="POST">
 <input type="hidden" name="title" value="{{ tiddler.title }}">
@@ -37,7 +37,7 @@ See the <a href="/tanks/{{ tiddler.bag|e}}/{{ tiddler.title|e }}" target="_blank
 <button type="submit">Save</button>
 {% endif %}
 <button type="reset">Reset</button>
-<a href="/tanks/{{ tiddler.bag |e }}/{{ tiddler.title |e }}">Cancel</a>
+<a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">Cancel</a>
 </form>
 </div>
 </main>

@@ -3,13 +3,13 @@
 {% block morehead %}
     <link rel="stylesheet" href="/bags/tank/tiddlers/wiki.css">
 	<link rel="edit"
-	href="/bags/{{ tiddler.bag|e }}/tiddlers/{{ tiddler.title|e }}">
+	href="/bags/{{ tiddler.bag|uri }}/tiddlers/{{ tiddler.title|uri }}">
 {% endblock %}
 {% block body %}
 <header>
 {% include 'logout.html' %}
     {% if tiddler.title != "index" %}
-    <a class="wikititle" href="/tanks/{{ bag.name|e }}">TankTop</a>
+    <a class="wikititle" href="/tanks/{{ bag.name|uri }}">TankTop</a>
     {% endif %}
     <a class="wikititle" href="RecentChanges">Changes</a>
     {% if user != "GUEST" %}
@@ -17,12 +17,12 @@
     {% endif %}
     {% if edit %}
     <a class="wikititle"
-        href="/edit?bag={{ bag.name|e }};tiddler={{ tiddler.title|e }}">Edit</a>
+        href="/edit?bag={{ bag.name|uri }};tiddler={{ tiddler.title|uri }}">Edit</a>
     {% endif %}
     {# temporarily disable while there is no delete
     {% if delete %}
     <a class="wikititle"
-        href="/delete?bag={{ bag.name|e }};tiddler={{ tiddler.title|e }}">Delete</a>
+        href="/delete?bag={{ bag.name|uri }};tiddler={{ tiddler.title|uri }}">Delete</a>
     {% endif %}
     #}
 </header>
@@ -43,7 +43,7 @@
 {% if tiddler.tags %}
 <ul class="tags">
     {% for tag in tiddler.tags|sort %}
-    <li><a href="/search?q=bag:%22{{ tiddler.bag|e }}%22%20tag:%22{{ tag|e }}%22">{{ tag }}</a>
+    <li><a href="/search?q=bag:%22{{ tiddler.bag|uri }}%22%20tag:%22{{ tag|uri }}%22">{{ tag }}</a>
     {% endfor %}
 </ul>
 {% endif %}

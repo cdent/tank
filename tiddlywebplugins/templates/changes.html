@@ -7,7 +7,7 @@
 <header>
 {% include 'logout.html' %}
     <span class="wikititle">Recent Changes</span>
-    <a class="wikititle" href="/tanks/{{ bag.name|e }}">TankTop</a>
+    <a class="wikititle" href="/tanks/{{ bag.name|uri }}">TankTop</a>
     {% if user != "GUEST" %}
     <a class="wikititle" href="/dash">Dash</a>
     {% endif %}
@@ -17,7 +17,7 @@
 <h1>Changes in last {{ days }} days.</h1>
 <ul>
 {% for tiddler in tiddlers %}
-<li><a href="{{ tiddler.title|e }}">{{ tiddler.title }}</a></li>
+<li><a href="{{ tiddler.title|uri }}">{{ tiddler.title }}</a></li>
 {% endfor %}
 </ul>
 <div>

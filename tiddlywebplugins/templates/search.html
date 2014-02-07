@@ -20,7 +20,7 @@
 <h1>{{ tiddlers.title }}</h1>
 <ul>
 {% for tiddler in tiddlers %}
-<li><a href="/tanks/{{ tiddler.bag|e }}/{{ tiddler.title|e }}">{{ tiddler.title }}</a></li>
+<li><a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a></li>
 {% endfor %}
 </ul>
 </main>

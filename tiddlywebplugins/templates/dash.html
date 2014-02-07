@@ -38,7 +38,7 @@
     <h2>Your tanks</h2>
     <ul>
         {% for bag in bags|sort(attribute='name') %}
-        <li><i title="{{ bag.type }}" class="fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|e }}">{{ bag.name }}</a>
+        <li><i title="{{ bag.type }}" class="fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
         <span class="description">{{ bag.desc }}</span></li>
         {% endfor %}
     </ul>
