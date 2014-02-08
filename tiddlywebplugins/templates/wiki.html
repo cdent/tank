@@ -46,7 +46,9 @@
     </ul>
     </div>
     {% endif %}
-    <p>Other commands coming soon.</p>
+    {% if edit and delete %}
+    {% include 'mover.html' %}
+    {% endif %}
 </div>
 <div class="output">
 <h1>{{ tiddler.title }}</h1>
@@ -69,5 +71,8 @@
 <script src="/bags/tank/tiddlers/checklists.js"></script>
 <script src="/bags/tank/tiddlers/checklistrunner.js"></script>
 <script src="/bags/tank/tiddlers/filedrop.js"></script>
+{% endif %}
+{% if edit and delete %}
+<script src="/bags/tank/tiddlers/mover.js"></script>
 {% endif %}
 {% endblock %}

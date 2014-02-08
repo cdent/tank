@@ -28,3 +28,7 @@ ul.tags:before {
     display: inline;
     margin: 0;
 }
+
+#mover form {
+	display: none;
+}

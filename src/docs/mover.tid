@@ -1,0 +1,12 @@
+modifier: cdent
+modifier: 201402080000
+type: text/x-markdown
+
+The mover is a tool which makes it easy to move a [[tiddler]] from
+one [[tank]] to another.
+
+To use the mover you must be able to create tiddlers in the target tank
+_and_ there must not be a tiddler of the same name in the target.
+
+When clicked, an interface will be revealed presenting a selection of
+available bags.

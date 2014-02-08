@@ -33,6 +33,7 @@ setup(
         'tiddlywebplugins.relativetime',
         'tiddlywebplugins.status',
         'tiddlywebplugins.atom',
+        'tiddlywebplugins.policyfilter',
         'tiddlywebplugins.links>=1.1.0',
         'markdown-checklist',
         'httpexceptor'

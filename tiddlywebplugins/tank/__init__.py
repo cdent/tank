@@ -10,6 +10,7 @@ from tiddlywebplugins.atom import init as atom_init
 from tiddlywebplugins.links import init as links_init
 from tiddlywebplugins.logout import init as logout_init
 from tiddlywebplugins.oauth import init as oauth_init
+from tiddlywebplugins.policyfilter import init as policy_init
 from tiddlywebplugins.whoosher import init as whoosh_init
 from tiddlywebplugins.status import init as status_init
 from tiddlywebplugins.utils import replace_handler
@@ -84,6 +85,7 @@ def init(config):
     make_validators()
     whoosh_init(config)
     links_init(config)
+    policy_init(config)
     if 'selector' in config:
         establish_web(config)
     # second time to ensure serializers are correct
