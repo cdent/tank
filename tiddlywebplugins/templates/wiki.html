@@ -37,7 +37,7 @@
     {% endif %}
     {% if backlinks %}
     <div class="backlinks">
-        <h3>Backlinks</h3>
+        <h3>Backlinks <a href="/tanks/docs/backlinks"><i class="fa fa-question-circle"></i></a></h3>
     <ul>
         {% for tiddler in backlinks %}
         <li><a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">

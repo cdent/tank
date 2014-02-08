@@ -1,0 +1,7 @@
+modifier: cdent
+modified: 201402080000
+type: text/x-markdown
+
+Backlinks are links from other [[tiddlers|tiddler]] to the current
+one. They provide context for the meaning or relevance of the current
+tiddler.
