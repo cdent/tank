@@ -12,7 +12,9 @@ from tiddlyweb.control import filter_tiddlers
 from tiddlyweb.web.handler.tiddler import get as tiddler_get
 from tiddlyweb.web.util import (get_route_value, encode_name, server_base_url,
         tiddler_etag)
-from tiddlyweb.web.validator import validate_bag, InvalidBagError
+from tiddlyweb.web.validator import (validate_bag, validate_tiddler,
+        InvalidBagError, InvalidTiddlerError)
+
 from tiddlyweb.wikitext import render_wikitext
 
 from tiddlywebplugins.utils import require_role
@@ -171,7 +173,15 @@ def edit(environ, start_response):
     tiddler.modified = current_timestring()
 
     if conflict:
-        return editor(environ, start_response, tiddler)
+        return editor(environ, start_response, tiddler,
+                message='conflict')
+
+    try:
+        validate_tiddler(tiddler, environ)
+    except InvalidTiddlerError as exc:
+        return editor(environ, start_response, tiddler,
+                message='Tiddler content is invalid: %s' % exc )
+
 
     store.put(tiddler)
 
@@ -183,7 +193,7 @@ def edit(environ, start_response):
     return []
 
 
-def editor(environ, start_response, extant_tiddler=None):
+def editor(environ, start_response, extant_tiddler=None, message=''):
     store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
     query = environ['tiddlyweb.query']
@@ -222,7 +232,7 @@ def editor(environ, start_response, extant_tiddler=None):
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
     return edit_template.generate({
-        'conflict': extant_tiddler is not None,
+        'message': message,
         'user': usersign['name'],
         'tiddler': tiddler,
         'etag': tiddler_etag(environ, tiddler).replace('"',

@@ -21,9 +21,12 @@
 </div>
 <div class="editor">
 <h1><a href="/tanks/{{tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a></h1>
-{% if conflict %}
-Someone made a change while you were editing. Your text is below.
-See the <a href="/tanks/{{ tiddler.bag|uri}}/{{ tiddler.title|uri }}" target="_blank">current version</a>.
+{% if message == 'conflict' %}
+<div class="message">Someone made a change while you were editing. Your
+    text is below.
+    See the <a href="/tanks/{{ tiddler.bag|uri}}/{{ tiddler.title|uri }}" target="_blank">current version</a>.</div>
+{% elif message %}
+<div class="message">{{ message|e }}</div>
 {% endif %}
 <form action="/edit" method="POST">
 <input type="hidden" name="title" value="{{ tiddler.title }}">
