@@ -18,6 +18,9 @@
 
 <main>
 <h1>{{ tiddlers.title }}</h1>
+{% if global_query %}
+<p><a href="/search?q={{ global_query|uri }}">Search again, globally</a></p>
+{% endif %}
 <ul>
 {% for tiddler in tiddlers %}
 <li><a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a></li>
