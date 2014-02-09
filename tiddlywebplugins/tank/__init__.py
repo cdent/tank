@@ -21,7 +21,7 @@ from .config import config as tank_config
 from .home import home, dash
 from .register import register
 from .wiki import wiki_page, editor, edit, forge
-from .tags import list_tags
+from .search import list_tags
 from .composition import comp
 
 

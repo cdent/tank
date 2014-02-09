@@ -7,12 +7,15 @@ If logged in, your home page/dashboard.
 
 from hashlib import md5
 
-from tiddlyweb.store import NoBagError
+from tiddlyweb.store import StoreError
 
 from tiddlywebplugins.templates import get_template
 from tiddlywebplugins.utils import require_any_user
 
+from tiddlywebplugins.whoosher import query_parse, get_searcher
+
 from .policy import determine_tank_type, POLICY_ICONS
+from .search import get_comp_bags
 
 
 GRAVATAR = 'https://www.gravatar.com/avatar/%s'
@@ -47,15 +50,17 @@ def dash(environ, start_response, message=None):
     """
     Display info for the current user.
     """
-    username = environ['tiddlyweb.usersign']['name']
+    usersign = environ['tiddlyweb.usersign']
+    username = usersign['name']
     store = environ['tiddlyweb.store']
+    config = environ['tiddlyweb.config']
 
-    def load_and_test_bag(bag):
+    def load_and_test_entity(entity):
         try:
-            bag = store.get(bag)
-        except NoBagError:
+            entity = store.get(entity)
+        except StoreError:
             return False
-        return bag.policy.owner == username and not bag.name.startswith('_')
+        return entity.policy.owner == username and not entity.name.startswith('_')
 
     def augment_bag(bag):
         bag = store.get(bag)
@@ -64,9 +69,13 @@ def dash(environ, start_response, message=None):
         bag.type = policy_type
         return bag
 
-    # XXX should add in metadata here about which are private
     kept_bags = (augment_bag(bag) for bag in store.list_bags()
-            if load_and_test_bag(bag))
+            if load_and_test_entity(bag))
+
+    comp_bags = get_comp_bags(store, config, usersign)
+
+    comps = (recipe for recipe in store.list_recipes()
+            if load_and_test_entity(recipe))
 
     dash_template = get_template(environ, DASH_TEMPLATE)
     start_response('200 OK', [
@@ -76,5 +85,7 @@ def dash(environ, start_response, message=None):
         'gravatar': gravatar(environ),
         'user': username,
         'bags': kept_bags,
-        'message': message
+        'message': message,
+        'comp_bags': comp_bags,
+        'comps': comps,
     })

@@ -14,6 +14,7 @@ from tiddlyweb.web.util import (get_route_value, encode_name, server_base_url,
         tiddler_etag)
 from tiddlyweb.web.validator import (validate_bag, validate_tiddler,
         InvalidBagError, InvalidTiddlerError)
+from tiddlyweb.util import renderable
 
 from tiddlyweb.wikitext import render_wikitext
 
@@ -22,6 +23,7 @@ from tiddlywebplugins.templates import get_template
 
 from .home import dash, gravatar
 from .policy import WIKI_MODES
+from .search import full_search
 
 WIKI_TEMPLATE = 'wiki.html'
 EDIT_TEMPLATE = 'edit.html'
@@ -310,6 +312,7 @@ def wiki_page(environ, start_response):
     tank_name = get_route_value(environ, 'bag_name')
     store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
+    config = environ['tiddlyweb.config']
 
     try:
         bag = store.get(Bag(tank_name))
@@ -353,8 +356,9 @@ def wiki_page(environ, start_response):
             editable = True
         deletable = False
 
-    if tiddler.type == 'text/x-markdown':
+    if renderable(tiddler, environ):
         backlinks = get_backlinks(environ, tiddler)
+        compable = full_search(config, 'id:"%s:app"' % tank_name)
         html = render_wikitext(tiddler, environ)
         wiki_template = get_template(environ, WIKI_TEMPLATE)
         start_response('200 OK', [
@@ -369,6 +373,7 @@ def wiki_page(environ, start_response):
             'backlinks': backlinks,
             'edit': editable,
             'delete': deletable,
+            'compable': compable,
         })
     else:
         return tiddler_get(environ, start_response)

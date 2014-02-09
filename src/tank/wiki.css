@@ -32,3 +32,11 @@ ul.tags:before {
 #mover form {
 	display: none;
 }
+
+#compmaker form {
+	display: none;
+}
+
+#compmaker input {
+	width: 100%;
+}

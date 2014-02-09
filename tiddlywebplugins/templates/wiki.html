@@ -32,8 +32,8 @@
     {% if message %}
     <div class="message">{{ message }}</div>
     {% endif %}
-    {% if edit %}
-    <div id="dropzone">Drop binaries into your tank here.</div>
+    {% if compable %}
+    {% include 'compmaker.html' %}
     {% endif %}
     {% if backlinks %}
     <div class="backlinks">
@@ -48,6 +48,9 @@
     {% endif %}
     {% if edit and delete %}
     {% include 'mover.html' %}
+    {% endif %}
+    {% if edit %}
+    <div id="dropzone">Drop binaries into your tank here.</div>
     {% endif %}
 </div>
 <div class="output">
@@ -66,13 +69,17 @@
 
 {% endblock %}
 {% block scripts %}
-{% if edit %}
 <script src="/bags/tank/tiddlers/jquery.js"></script>
+{% if edit %}
 <script src="/bags/tank/tiddlers/checklists.js"></script>
 <script src="/bags/tank/tiddlers/checklistrunner.js"></script>
 <script src="/bags/tank/tiddlers/filedrop.js"></script>
 {% endif %}
 {% if edit and delete %}
 <script src="/bags/tank/tiddlers/mover.js"></script>
+{% endif %}
+{% if compable %}
+<script src="/status.js"></script>
+<script src="/bags/tank/tiddlers/compmaker.js"></script>
 {% endif %}
 {% endblock %}
