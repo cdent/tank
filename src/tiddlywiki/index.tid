@@ -1,0 +1,11 @@
+modifier: cdent
+modified: 201402090000
+type: text/x-markdown
+tags: excludeLists
+
+This tank provides the necessaries for being able to present TiddlyWiki
+Classic content. Make a [[composition]]@docs of this tank with one of yours
+and then visit the comp.
+
+Content is loaded into the TiddlyWiki at startup time, so there will be
+an initial short delay before you have an operational TiddlyWiki.
