@@ -2,7 +2,7 @@ modifier: cdent
 modified: 201402060000
 type: text/x-markdown
 
-When a new tiddler is created in a tank, by default the syntax of its text
+When a new [[tiddler]] is created in a tank, by default the syntax of its text
 is [Markdown](http://daringfireball.net/projects/markdown/basics). In addition
 to the basic forms for making headers, paragraphs, lists, links and images
 the Markdown used also has support for some additional features:
@@ -51,3 +51,39 @@ syntax is, _on a line by itself_:
 As above, an `@<name of tank>` can be appended (outside the `}}`) to transclude
 from a different tank. If the current user cannot read from the other tank
 the transclusion will not happen.
+
+In the default tank editing interface, you can extract text from the current
+tiddler into a new one that is then transcluded into the current one. This
+process is caused "extraclusion" and is driven by some special syntax that
+surrounds the text that is to be extracluded:
+
+```
+Main content
+
+.extraclude newTitle
+
+Extracluded content
+
+.extraclude
+```
+
+When this content is saved, the original tiddler's text will be:
+
+```
+Main content
+
+{{newTitle}}
+```
+
+and newTitle will contain:
+
+```
+
+Extracluded content
+
+```
+
+Multiple extraclusions can be in one document.
+
+This can be a very powerful editing tool but should be used with plenty of care
+and thought.

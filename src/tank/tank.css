@@ -24,6 +24,11 @@ main {
     color: #222222;
 }
 
+main pre {
+    background-color: #fbfbfb;
+    padding: .5em;
+}
+
 header {
     color: #efefef;
     background-color: #222222;
