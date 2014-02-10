@@ -9,8 +9,10 @@ the costs of hosting and secure time for continued development.
 
 There will be two types of limits:
 
-* the maximum number of tanks a single user may own
-* the total number of bytes 
+* the maximum number of [[tanks|tank]] a single user may own
+* the total number of bytes in [[tiddlers|tiddler]]
+
+Subscribers will be able to have content beyond the limits.
 
 Details on how subscription will be handled, for example how much it will cost,
 are yet to be decided. If you have comments or concerns, please [[contact]]
