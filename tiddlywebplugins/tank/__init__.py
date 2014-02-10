@@ -7,12 +7,14 @@ from tiddlyweb.util import merge_config
 from tiddlyweb.web.validator import BAG_VALIDATORS, InvalidBagError
 
 from tiddlywebplugins.atom import init as atom_init
+from tiddlywebplugins.extraclude import init as extraclude_init
 from tiddlywebplugins.links import init as links_init
 from tiddlywebplugins.logout import init as logout_init
 from tiddlywebplugins.oauth import init as oauth_init
 from tiddlywebplugins.policyfilter import init as policy_init
 from tiddlywebplugins.whoosher import init as whoosh_init
 from tiddlywebplugins.status import init as status_init
+
 from tiddlywebplugins.utils import replace_handler
 
 import tiddlywebplugins.relativetime
@@ -30,6 +32,7 @@ SUBSCRIBER = 'SUBSCRIBER'
 
 def establish_web(config):
     atom_init(config)
+    extraclude_init(config)
     status_init(config)
     logout_init(config)
     oauth_init(config)
