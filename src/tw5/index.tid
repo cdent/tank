@@ -1,0 +1,16 @@
+modifier: cdent
+modified: 201402110000
+type: text/x-markdown
+
+This [[tank]]@docs includes an `app` that provides a form
+of [TiddlyWiki5](http://tiddlywiki.com) suitable for use in
+a [[composition]]@docs.
+
+For the time being this is experimental, not least because
+tw5 is itself, especially operating with TiddlyWeb@docs, still a bit
+of an experiment.
+
+To use this comp, create a tank in which you will keep your tw5 content
+and then create a comp (see the nearby command) with that tank. When
+you visit the comp you will be presented with a tw5 in which you 
+can create and edit content.
