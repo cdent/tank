@@ -1,0 +1,29 @@
+modifier: cdent
+modified: 201402120000
+type: text/x-markdown
+
+## Current
+
+* Keep content of any form in [[tanks|tank]] with customizable access
+  control and a full-featured [[API]].
+* Use a tank as a simple [[markdown]] [[wiki|Using Wikis]] with
+  [[backlinks]], transclusion and inter-tank links.
+* [[Compose|composition]] a tank with applications such as [TiddlyWiki
+  Classic](http://classic.tiddlywiki.com/) and [TiddlyWiki
+  Five](http://tiddlywiki.com/), including building custom apps.
+* [[Move|mover]] [[tiddlers|tiddler]] between tanks.
+* Host [[single page applications|Single Page Apps]] that use the
+  [[API]].
+* Atom feeds of content in tanks.
+* Login using [GitHub](https://github.com/).
+* SSL Everywhere.
+
+## Planned
+
+* Server side rendering of tw classic and five wikitext.
+* Additional applications for comps.
+* Websocket-based in-browser notifications.
+* Custom access control editor.
+* Login using other services (e.g. facebook).
+
+Have an idea? [[Contact us|contact]]!
