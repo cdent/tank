@@ -29,6 +29,7 @@
         <li><input type="radio" name="policy_type" id="pt_pub" value="public">
         <label for="pt_pub"><i class="fa fa-folder-open-o"></i> Public</label></li>
         </ul>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <input name="desc" placeholder="optional description"><br/>
         <input name="Create" type="submit" value="Create">
     </form>

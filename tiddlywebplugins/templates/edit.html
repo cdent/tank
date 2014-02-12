@@ -32,6 +32,7 @@
 <input type="hidden" name="title" value="{{ tiddler.title }}">
 <input type="hidden" name="bag" value="{{ tiddler.bag }}">
 <input type="hidden" name="etag" value="{{ etag }}">
+<input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 <textarea name="text" rows="24" cols="60" placeholder="enter markdown text here">{{ tiddler.text }}</textarea>
 <input placeholder="tags" name="tags" value="{{ tiddler.tags|join(', ') }}" size="60">
 {% if conflict %}

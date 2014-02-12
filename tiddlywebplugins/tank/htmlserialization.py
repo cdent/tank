@@ -9,6 +9,7 @@ from tiddlywebplugins.atom.htmllinks import Serialization as HTMLSerialization
 from tiddlywebplugins.templates import get_template
 
 from .home import gravatar
+from .csrf import get_nonce
 
 
 SEARCH_TEMPLATE = 'search.html'
@@ -35,6 +36,7 @@ class Serialization(HTMLSerialization):
             'user': self.environ['tiddlyweb.usersign']['name'],
             'tiddlers': tiddlers,
             'global_query': global_query,
+            'csrf_token': get_nonce(self.environ),
         })
 
 

@@ -24,6 +24,7 @@ from tiddlywebplugins.templates import get_template
 from .home import dash, gravatar
 from .policy import WIKI_MODES
 from .search import full_search
+from .csrf import get_nonce
 
 WIKI_TEMPLATE = 'wiki.html'
 EDIT_TEMPLATE = 'edit.html'
@@ -53,6 +54,7 @@ def recent_changes(environ, start_response):
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
     return changes_template.generate({
+        'csrf_token': get_nonce(environ),
         'days': days,
         'tiddlers': tiddlers,
         'bag': bag,
@@ -234,6 +236,7 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
     return edit_template.generate({
+        'csrf_token': get_nonce(environ),
         'message': message,
         'user': usersign['name'],
         'tiddler': tiddler,
@@ -365,6 +368,7 @@ def wiki_page(environ, start_response):
             ('Content-Type', 'text/html; charset=UTF-8'),
             ('Cache-Control', 'no-cache')])
         return wiki_template.generate({
+            'csrf_token': get_nonce(environ),
             'gravatar': gravatar(environ),
             'user': usersign['name'],
             'tiddler': tiddler,

@@ -35,6 +35,7 @@ setup(
         'tiddlywebplugins.atom',
         'tiddlywebplugins.policyfilter',
         'tiddlywebplugins.links>=1.1.0',
+        'tiddlywebplugins.csrf',
         'markdown-checklist',
         'httpexceptor'
         ],

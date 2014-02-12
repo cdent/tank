@@ -15,6 +15,8 @@ from tiddlywebplugins.policyfilter import init as policy_init
 from tiddlywebplugins.whoosher import init as whoosh_init
 from tiddlywebplugins.status import init as status_init
 
+from tiddlywebplugins.csrf import CSRFProtector
+
 from tiddlywebplugins.utils import replace_handler
 
 import tiddlywebplugins.relativetime
@@ -36,6 +38,10 @@ def establish_web(config):
     status_init(config)
     logout_init(config)
     oauth_init(config)
+
+    if CSRFProtector not in config['server_request_filters']:
+        config['server_request_filters'].append(CSRFProtector)
+
     selector = config['selector']
     replace_handler(selector, '/', dict(GET=home))
     selector.add('/dash', GET=dash)

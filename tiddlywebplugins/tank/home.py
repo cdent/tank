@@ -16,6 +16,7 @@ from tiddlywebplugins.whoosher import query_parse, get_searcher
 
 from .policy import determine_tank_type, POLICY_ICONS
 from .search import get_comp_bags
+from .csrf import get_nonce
 
 
 GRAVATAR = 'https://www.gravatar.com/avatar/%s'
@@ -88,4 +89,5 @@ def dash(environ, start_response, message=None):
         'message': message,
         'comp_bags': comp_bags,
         'comps': comps,
+        'csrf_token': get_nonce(environ)
     })
