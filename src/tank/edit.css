@@ -4,8 +4,7 @@
 }
 
 .editor textarea, 
-.editor input {
-    display: block;
+.editor input[name="tags"] {
     width: 100%;
 }
 

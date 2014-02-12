@@ -142,7 +142,7 @@ def edit(environ, start_response):
     tags = query['tags'][0]
     etag = query['etag'][0]
 
-    tags = tags.split(', ')
+    tags = [tag.strip() for tag in tags.split(',')]
 
     if not (bag_name and title):
         raise HTTP400('bad query: bag and title required')
