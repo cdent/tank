@@ -74,6 +74,8 @@ jQuery(document).ready(function() {
 				story.refreshTiddler(tid.title, null, true);
 			}
 		}
+		config.shadowTiddlers.SiteTitle = 'TiddlyWiki';
+		config.shadowTiddlers.SiteSubtitle = 'Loaded';
 		init();
 	};
 
