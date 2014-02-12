@@ -20,6 +20,7 @@ type: text/x-markdown
 
 ## Planned
 
+* Prettiness!
 * Server side rendering of tw classic and five wikitext.
 * Additional applications for comps.
 * Websocket-based in-browser notifications.
