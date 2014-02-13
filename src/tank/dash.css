@@ -24,3 +24,7 @@ ul.radiogroup li:hover {
     border: 1px gray solid;
     width: 10em;
 }
+
+.command {
+    padding-bottom: 1em;
+}
