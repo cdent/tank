@@ -4,10 +4,13 @@ Routines associated with finding and listing tags.
 An experiment for now.
 """
 
+import re
+
 from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.policy import PermissionsError
 from tiddlywebplugins.whoosher import get_searcher, query_parse
 
+QUERY_PARSE_RE = re.compile(r'(\w+):("[^"]+")\s*')
 
 def list_tags(environ, start_response):
     """
@@ -24,9 +27,12 @@ def list_tags(environ, start_response):
     searcher = get_searcher(config)
 
     if query:
-        # XXX this is not robust in the face of wacky inputs
-        # (including quoted inputs), for now we ride.
-        kwargs = dict([entry.split(':') for entry in query.split()])
+        # This parsing means that the if there are of the same keyword
+        # the last one wins. This is okay because using both would
+        # be illogical.
+        kwargs = {}
+        for match in QUERY_PARSE_RE.finditer(query):
+            kwargs[match.group(1)] = match.group(2)
         documents = searcher.documents(**kwargs)
     else:
         documents = searcher.documents()

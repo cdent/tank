@@ -27,7 +27,7 @@
 		var uri = '/tags',
 			query = window.location.search.replace(/^.*bag=([^;]*);.*$/, '$1');
 		if (! $('input[name=global]').is(':checked')) {
-			uri = uri + '?q=bag:' + query;
+			uri = uri + '?q=bag:"' + query + '"';
 		}
 		$.ajax({
 			type: 'get',
