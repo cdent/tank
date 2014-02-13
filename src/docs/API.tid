@@ -18,5 +18,26 @@ comps are made up of one recipe.
 The reason for the different names is that not all bags are tanks and
 not all recipes are comps.
 
-To learn more about the API see the [official
+To learn more about the API endpoints see the [official
 documentation](http://tiddlyweb.tiddlyspace.com/HTTP%20API).
+
+## Access Control
+
+Access to the API is controlled by auth tokens in the form of
+oAuth2 Bearer tokens. Tokens are created (or revoked) at [/auth](/auth).
+
+Use them in each request you make by adding an authorization header:
+
+```
+Authorization: Bearer <your token>
+```
+
+An example using `curl`:
+
+```
+curl -v -H 'Authorization: bearer 4cdff82f-2b8b-4a92-8c95-a7f2dfd95f7' \
+    -H 'Accept: text/plain' \
+	https://tank.peermore.com/bags/cdent-notebook/tiddlers/index
+```
+
+Take care with your tokens to not exposing them to prying eyes.

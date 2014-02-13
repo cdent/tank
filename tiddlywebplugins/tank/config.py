@@ -6,7 +6,8 @@ from tiddlywebplugins.tank.wiki import (tank_uri, tank_tiddler_uri,
         tank_tiddler_resolver)
 
 config = {
-    'extractors': ['tiddlywebplugins.tank.extractor'],
+    'extractors': ['tiddlywebplugins.oauth.extractor',
+        'tiddlywebplugins.tank.extractor'],
     'auth_systems': ['tiddlywebplugins.tank.challenger'],
     'logged_in_redirect': '/dash',
     'wikitext.default_renderer': 'markdown',

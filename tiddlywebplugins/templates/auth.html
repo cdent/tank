@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Manage Auth{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/auth.css">
+{% endblock %}
+{% block body %}
+<header>
+{% include 'logout.html' %}
+    <span class="wikititle">Manage Auth</span>
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
+</header>
+
+<main>
+<h1>Your Tokens </h1>
+<form name="create">
+<input name="desc" placeholder="optional description">
+<input name="confirm" type="submit" value="confirm">
+<input name="csrf_token" type="hidden" value="{{ csrf_token }}">
+</form>
+<div class="error"></div>
+<p>These are your existing <a href="/tanks/docs/API">API</a> tokens. Create
+as many as you need but <em>keep them private</em>.</p>
+<ul class="tokens">
+{% for token in tokens %}
+<li><span class="title">{{ token.title }}</span> <span class="desc">{{ token.text }}</span> </li>
+{% endfor %}
+</ul>
+</main>
+
+{% endblock %}
+{% block scripts %}
+<script src="/bags/tank/tiddlers/jquery.js"></script>
+<script src="/bags/tank/tiddlers/auth.js"></script>
+{% endblock %}

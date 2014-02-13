@@ -27,6 +27,8 @@ main {
 main pre {
     background-color: #fbfbfb;
     padding: .5em;
+	overflow-x: scroll;
+	white-space: pre;
 }
 
 header {

@@ -1,0 +1,20 @@
+
+.fa:hover {
+	cursor: pointer;
+}
+
+input {
+	display: none;
+}
+
+input[name=desc] {
+	width: 80%;
+}
+
+main {
+	max-width: 35em;
+}
+
+.error {
+    color: red;
+}
