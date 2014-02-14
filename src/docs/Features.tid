@@ -17,13 +17,13 @@ type: text/x-markdown
 * Atom feeds of content in tanks.
 * Login using [GitHub](https://github.com/).
 * SSL Everywhere.
+* Websocket-based in-browser notifications.
 
 ## Planned
 
 * Prettiness!
 * Server side rendering of tw classic and five wikitext.
 * Additional applications for comps.
-* Websocket-based in-browser notifications.
 * Custom access control editor.
 * Login using other services (e.g. facebook).
 
