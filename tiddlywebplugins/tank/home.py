@@ -38,12 +38,16 @@ def home(environ, start_response):
     Display a starting page.
     """
     username = environ['tiddlyweb.usersign']['name']
+    config = environ['tiddlyweb.config']
 
     frontpage_template = get_template(environ, FRONTPAGE_TEMPLATE)
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
-    return frontpage_template.generate({'user': username})
+    return frontpage_template.generate({
+        'user': username,
+        'socket_link': config.get('socket.link'),
+    })
 
 
 @require_any_user()
@@ -83,6 +87,7 @@ def dash(environ, start_response, message=None):
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
     return dash_template.generate({
+        'socket_link': config.get('socket.link'),
         'gravatar': gravatar(environ),
         'user': username,
         'bags': kept_bags,

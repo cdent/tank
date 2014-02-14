@@ -28,9 +28,11 @@
     </footer>
     <script src="/status.js"></script>
     <script src="/bags/tank/tiddlers/jquery.js"></script>
-    <script src="http://tankt.peermore.com:8081/socket.io/socket.io.js"></script>
+    {% if socket_link %}
+    <script src="{{ socket_link }}"></script>
     <script src="/bags/tank/tiddlers/tiddlersocket.js"></script>
     <script src="/bags/tank/tiddlers/socketinfo.js"></script>
+    {% endif %}
     {% block scripts %}
     {% endblock %}
     </body>

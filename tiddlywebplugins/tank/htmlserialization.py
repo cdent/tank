@@ -21,6 +21,7 @@ class Serialization(HTMLSerialization):
         if not tiddlers.is_search:
             return HTMLSerialization.list_tiddlers(self, tiddlers)
 
+        config = self.environ['tiddlyweb.config']
         search_query = self.environ['tiddlyweb.query'].get('q', [''])[0]
         tiddlers.link = '/search?%s' % self.environ.get('QUERY_STRING', '')
 
@@ -32,6 +33,7 @@ class Serialization(HTMLSerialization):
 
         search_template = get_template(self.environ, SEARCH_TEMPLATE)
         return search_template.generate({
+            'socket_link': config.get('socket.link'),
             'gravatar': gravatar(self.environ),
             'user': self.environ['tiddlyweb.usersign']['name'],
             'tiddlers': tiddlers,

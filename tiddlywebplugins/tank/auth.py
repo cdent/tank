@@ -44,6 +44,7 @@ def view_auth(environ, start_response):
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
     return template.generate({
+        'socket_link': config.get('socket.link'),
         'csrf_token': get_nonce(environ),
         'gravatar': gravatar(environ),
         'user': username,

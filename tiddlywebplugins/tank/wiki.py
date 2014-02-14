@@ -38,6 +38,7 @@ def recent_changes(environ, start_response):
     tank_name = get_route_value(environ, 'bag_name')
     store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
+    config = environ['tiddlyweb.config']
     days = environ['tiddlyweb.query'].get('d', [7])[0]
 
     try:
@@ -54,6 +55,7 @@ def recent_changes(environ, start_response):
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
     return changes_template.generate({
+        'socket_link': config.get('socket.link'),
         'csrf_token': get_nonce(environ),
         'days': days,
         'tiddlers': tiddlers,
@@ -201,6 +203,7 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
     store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
     query = environ['tiddlyweb.query']
+    config = environ['tiddlyweb.config']
 
     if extant_tiddler:
         tiddler = extant_tiddler
@@ -236,6 +239,7 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
     return edit_template.generate({
+        'socket_link': config.get('socket.link'),
         'csrf_token': get_nonce(environ),
         'gravatar': gravatar(environ),
         'message': message,
@@ -369,6 +373,7 @@ def wiki_page(environ, start_response):
             ('Content-Type', 'text/html; charset=UTF-8'),
             ('Cache-Control', 'no-cache')])
         return wiki_template.generate({
+            'socket_link': config.get('socket.link'),
             'csrf_token': get_nonce(environ),
             'gravatar': gravatar(environ),
             'user': usersign['name'],
