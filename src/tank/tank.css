@@ -107,6 +107,37 @@ a.wikititle:hover {
     vertical-align: middle;
 }
 
+.socketicon {
+    position: relative;
+}
+
+.socketicon:hover {
+    cursor: pointer;
+}
+
+.socketinfo {
+    position: absolute;
+    top: 20;
+    right: 0;
+    display: none;
+    font-size: small;
+    z-index: 99;
+    width: 10em;
+    margin: 0;
+    padding: .5em;
+    list-style: none;
+    background: white;
+    border: thin solid black;
+}
+
+.socketinfo a {
+	text-decoration: none;
+}
+
+.socketinfo span {
+	color: black;
+}
+
 @media screen and (max-width: 62em) {
     .commands {
         float: none;

@@ -237,6 +237,7 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
         ('Cache-Control', 'no-cache')])
     return edit_template.generate({
         'csrf_token': get_nonce(environ),
+        'gravatar': gravatar(environ),
         'message': message,
         'user': usersign['name'],
         'tiddler': tiddler,

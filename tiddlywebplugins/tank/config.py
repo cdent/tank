@@ -14,7 +14,10 @@ config = {
     'wikitext.type_render_map': {
         'text/x-markdown': 'tiddlywebplugins.markdown'
     },
+    'use_dispatcher': True,
     'links.at_means_bag': True,
+    # Note: whoosher on beanstalk introduces latency issues
+    'beanstalk.listeners': ['tiddlywebplugins.jsondispatcher'],
     'markdown.wiki_link_base': '',
     'markdown.interlinker': tank_uri,
     'markdown.transclude_url': tank_tiddler_uri,

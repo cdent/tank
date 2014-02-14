@@ -7,6 +7,8 @@ from tiddlyweb.util import merge_config
 from tiddlyweb.web.validator import BAG_VALIDATORS, InvalidBagError
 
 from tiddlywebplugins.atom import init as atom_init
+from tiddlywebplugins.dispatcher import init as dispatcher_init
+from tiddlywebplugins.dispatcher.listener import init as listener_init
 from tiddlywebplugins.extraclude import init as extraclude_init
 from tiddlywebplugins.links import init as links_init
 from tiddlywebplugins.logout import init as logout_init
@@ -97,6 +99,8 @@ def init(config):
     whoosh_init(config)
     links_init(config)
     policy_init(config)
+    dispatcher_init(config)
+    listener_init(config)
     if 'selector' in config:
         establish_web(config)
     # second time to ensure serializers are correct
