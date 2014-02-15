@@ -54,15 +54,19 @@
     {% endif %}
 </div>
 <div class="output">
-<h1>{{ tiddler.title }}</h1>
-{{ html }}
+    <h1 class="tiddlertitle"><span class="meta">
+            <span class="modified" title="{{ tiddler.modified|rfc3339 }}">{{ tiddler.modified }}</span>
+            <span class="modifier">{{ tiddler.modifier }}</span>
+        </span>
+        {{ tiddler.title }}</h1>
 {% if tiddler.tags %}
 <ul class="tags">
     {% for tag in tiddler.tags|sort %}
-    <li><a href="/search?q=bag:%22{{ tiddler.bag|uri }}%22%20tag:%22{{ tag|uri }}%22">{{ tag }}</a>
+    <li><a href="/search?q=bag:%22{{ tiddler.bag|uri }}%22%20tag:%22{{ tag|uri }}%22">{{ tag }}</a></li>
     {% endfor %}
 </ul>
 {% endif %}
+{{ html }}
 </div>
 
 </main>
@@ -80,4 +84,10 @@
 {% if compable %}
 <script src="/bags/tank/tiddlers/compmaker.js"></script>
 {% endif %}
+<script src="/bags/tank/tiddlers/jquery.timeago.js"></script>
+<script>
+jQuery(document).ready(function() {
+        jQuery(".modified").timeago();
+});
+</script>
 {% endblock %}

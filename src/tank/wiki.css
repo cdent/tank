@@ -12,22 +12,42 @@
     max-width: 100%;
 }
 
-ul.tags {
-    border-top: thin solid black;
-    list-style: none;
+.tiddlertitle {
     margin: 0;
-    padding-left: 0;
-    padding-top: .5em;
 }
 
-ul.tags:before {
-    content: "tags: ";
+ul.tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    line-height: 150%;
 }
 
 .tags li {
+    font-size: 80%;
     display: inline;
-    margin: 0;
+    margin: 0 .5em 0 0;
+    background: lightblue;
+    border-radius: 4px;
+    padding: .2em .4em .2em .4em;
 }
+
+.tags a {
+    color: white;
+    text-decoration: none;
+}
+
+.meta {
+    float: right;
+    font-size: 45%;
+}
+
+.meta span {
+    display: block;
+    text-align: right;
+}
+
 
 #mover form {
 	display: none;
