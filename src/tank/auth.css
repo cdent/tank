@@ -18,3 +18,18 @@ main {
 .error {
     color: red;
 }
+
+.desc {
+    padding-left: 1em;
+    padding-right: 1em;
+    font-style: italic;
+}
+
+.tokens li {
+    margin-bottom: .5em;
+    border-bottom: thin solid lightgrey;
+}
+
+.tokens li a {
+    float: right;
+}

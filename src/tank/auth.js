@@ -3,21 +3,24 @@
 
 	function deleteToken(ev) {
 		var parent = $(this).parent(),
-			title = parent.find('span').first().text();
-		$.ajax({
-			uri: '/auth',
-			type: 'delete',
-			data: JSON.stringify({title: title}),
-			success: function() { parent.remove() },
-			error: displayError,
-		});
+			title = parent.text();
+		if (window.confirm('Are you sure you want to delete '
+				+ title + '?')) {
+			$.ajax({
+				uri: '/auth',
+				type: 'delete',
+				data: JSON.stringify({title: title}),
+				success: function() { parent.parent().remove() },
+				error: displayError,
+			});
+		}
 	}
 
 	function addDeleter(item) {
 		var click = $('<a>').on('click', deleteToken),
 			ex = $('<i>').attr('class', 'fa fa-times-circle');
 		click.append(ex);
-		item.append(click);
+		item.find('.title').append(click);
 	}
 
 	function updateList(data) {
