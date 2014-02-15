@@ -13,3 +13,16 @@ as the HTML starting point of a [[single page app|Single Page Apps]].
 This is the mechanism that supports using things like loading
 tiddlers in a [TiddlyWiki](http://tiddlywiki.com).
 
+At this time there are two ways to create a composition. One, advanced,
+option is to use the [[API]] to create a recipe. The other works as
+follows:
+
+* Visit your [dashboard](/dash) and follow one of the links in
+  Available Compositions.
+* Using the "This tank is composable" interface, choose a name
+  and tank to compose with.
+
+The comp that is created will be owned by you. If the tank you compose
+with is readable by others then the comp you create will be visible
+to them in lists such as [recipes](/recipes). Creating and editing
+content is dependent on the policies of the tank you choose.

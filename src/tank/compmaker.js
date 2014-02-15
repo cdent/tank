@@ -16,12 +16,26 @@
 	}
 
 	function putRecipe(chosenBag, name, desc) {
-		var user = tiddlyweb.status.username,
-			recipe = {
-				policy: {
-					owner: user,
-					manage: [user],
-				},
+		var user = tiddlyweb.status.username;
+		$.ajax({
+			url: '/bags/' + encodeURIComponent(chosenBag),
+			type: 'get',
+			dataType: 'json',
+			success: function(data) {
+				var policy = data.policy;
+				policy.owner = user;
+				policy.manager = [user];
+				_putRecipe(chosenBag, policy, name, desc);
+			},
+			error: function(xhr, status, err) {
+				return displayMessage('Unable to get target policy: ' + status);
+			}
+		});
+	}
+
+	function _putRecipe(chosenBag, policy, name, desc) {
+		var recipe = {
+				policy: policy,
 				recipe: [
 					[currentBag, ''],
 					[chosenBag, '']
