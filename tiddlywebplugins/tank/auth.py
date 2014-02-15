@@ -37,7 +37,7 @@ def view_auth(environ, start_response):
 
     our_tokens = [store.get(tiddler) for tiddler in 
             filter_tiddlers(store.list_bag_tiddlers(Bag(bag_name)),
-                'modifier:%s' % username)]
+                'select=modifier:%s' % username, environ)]
 
     template = get_template(environ, AUTH_TEMPLATE)
     start_response('200 OK', [
