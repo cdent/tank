@@ -7,9 +7,8 @@
 		if (window.confirm('Are you sure you want to delete '
 				+ title + '?')) {
 			$.ajax({
-				uri: '/auth',
+				url: '/auth/' + encodeURIComponent(title),
 				type: 'delete',
-				data: JSON.stringify({title: title}),
 				success: function() { parent.parent().remove() },
 				error: displayError,
 			});

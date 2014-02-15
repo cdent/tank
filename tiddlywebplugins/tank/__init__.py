@@ -47,7 +47,8 @@ def establish_web(config):
 
     selector = config['selector']
     replace_handler(selector, '/', dict(GET=home))
-    selector.add('/auth', GET=view_auth, POST=make_key, DELETE=destroy_key)
+    selector.add('/auth/{key_name:segment}', DELETE=destroy_key)
+    selector.add('/auth', GET=view_auth, POST=make_key)
     selector.add('/dash', GET=dash)
     selector.add('/register', POST=register)
     selector.add('/tanks/{bag_name:segment}[/{tiddler_name:segment}]',

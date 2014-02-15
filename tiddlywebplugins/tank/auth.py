@@ -14,7 +14,7 @@ from tiddlyweb.control import filter_tiddlers
 from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.serializer import Serializer
-from tiddlyweb.web.util import content_length_and_type, read_request_body
+from tiddlyweb.web.util import get_route_value
 
 from .home import gravatar
 from .csrf import get_nonce
@@ -89,16 +89,9 @@ def destroy_key(environ, start_response):
     store = environ['tiddlyweb.store']
     username = environ['tiddlyweb.usersign']['name']
     bag_name = config.get('oauth.tokens_bag', 'oauth_tokens')
+    key_name = get_route_value(environ, 'key_name')
 
-    length, content_type = content_length_and_type(environ)
-    content = read_request_body(environ, length)
-    try:
-        data = simplejson.loads(content)
-        title = data['title']
-    except (AttributeError, ValueError, KeyError):
-        raise HTTP400('bad data')
-
-    tiddler = Tiddler(title, bag_name)
+    tiddler = Tiddler(key_name, bag_name)
     try:
         tiddler = store.get(tiddler)
     except NoTiddlerError:
