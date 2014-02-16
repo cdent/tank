@@ -18,11 +18,12 @@ type: text/x-markdown
 * Login using [GitHub](https://github.com/).
 * SSL Everywhere.
 * Websocket-based in-browser notifications.
+* Server side rendering of tw classic wikitext.
 
 ## Planned
 
 * Prettiness!
-* Server side rendering of tw classic and five wikitext.
+* Server side rendering of tw five wikitext.
 * Additional applications for comps.
 * Custom access control editor.
 * Login using other services (e.g. facebook).
