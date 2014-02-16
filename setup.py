@@ -37,6 +37,7 @@ setup(
         'tiddlywebplugins.links>=1.1.0',
         'tiddlywebplugins.csrf',
         'tiddlywebplugins.jsondispatcher',
+        'tiddlywebplugins.twikified',
         'markdown-checklist',
         'httpexceptor'
         ],
