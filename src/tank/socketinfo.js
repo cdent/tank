@@ -5,10 +5,12 @@
         hostname = window.location.hostname,
 		port = window.location.port ? '8081' : '8080',
 		socketuri = protocol + '//' + hostname + ':' + port,
+                allsocket = $('.socketall'),
 		allsocketinfo = $('.socketall .socketinfo'),
-		allsocketicon = $('.socketall'),
+		allsocketicon = $('.allicon'),
+                friendsocket = $('.socketfriends'),
 		friendinfo = $('.socketfriends .socketinfo'),
-		friendicon = $('.socketfriends'),
+		friendicon = $('.friendsicon'),
 		user = tiddlyweb.status.username,
 		currentUserTag = '@' + user;
 
@@ -21,7 +23,7 @@
 			{});
 		allInfo.start();
 
-		allsocketicon.on('click', function() {
+		allsocket.on('click', function() {
 			allsocketinfo.toggle();
 			if (allsocketicon.hasClass('fa-bell')) {
 				allsocketicon.removeClass('fa-bell');
@@ -29,7 +31,7 @@
 			};
 		});
 
-		allsocketicon.on('tiddlersUpdate', function() {
+		allsocket.on('tiddlersUpdate', function() {
 			allsocketicon.removeClass('fa-bell-o');
 			allsocketicon.addClass('fa-bell');
 		});
@@ -43,7 +45,7 @@
 			{});
 		friendInfo.start();
 
-		friendicon.on('click', function() {
+		friendsocket.on('click', function() {
 			friendinfo.toggle();
 			if (friendicon.hasClass('fa-smile-o')) {
 				friendicon.removeClass('fa-smile-o');
@@ -51,7 +53,7 @@
 			};
 		});
 
-		friendicon.on('tiddlersUpdate', function(ev, tiddler) {
+		friendsocket.on('tiddlersUpdate', function(ev, tiddler) {
 			friendicon.removeClass('fa-meh-o');
 			friendicon.addClass('fa-smile-o');
 		});
