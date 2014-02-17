@@ -5,8 +5,8 @@ type: text/x-markdown
 Tank has a websocket server that broadcasts messages about
 [[tiddlers|tiddler]] in [[tanks|tank]] which are publicly readable.
 This server is used to provide activity notifications on many pages and
-can also be used in [[comps|composition]] and [[single page apps|Single
-Page Apps]].
+can also be used in [[comps|composition]] and
+[[single page apps|Single Page Apps]].
 
 On common pages, the header now has two new icons: A straight mouth face
 and a clear bell.
