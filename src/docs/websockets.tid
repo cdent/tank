@@ -1,0 +1,34 @@
+modifier: cdent
+modified: 201402170000
+type: text/x-markdown
+
+Tank has a websocket server that broadcasts messages about
+[[tiddlers|tiddler]] in [[tanks|tank]] which are publicly readable.
+This server is used to provide activity notifications on many pages and
+can also be used in [[comps|composition]] and [[single page apps|Single
+Page Apps]].
+
+On common pages, the header now has two new icons: A straight mouth face
+and a clear bell.
+
+When the clear bell turns white that means at least one new public
+tiddler was just created. Clicking on the bell will reveal a little
+dropdown listing up to five recent tiddlers. The title is a link to the
+tiddler. Clicking on it will visit the tiddler. Clicking elsewhere
+in the dropdown will close it.
+
+When the face turns into a smile, a new tiddler has been created which
+is tagged `@<yourusername>`. This signals to you that someone has
+created a tiddler for which they'd like your attention. You can click
+on the face, open the dropdown and follow the link to see what they
+have to say.
+
+The websocket interface can also be used by in custom code to get
+notifications of tiddlers. Look at the following to see how the features
+described above work and adapt accordingly:
+
+    https://tank.peermore.com/tanks/tank/socketinfo.js
+    https://tank.peermore.com/tanks/tank/tiddlersocket.js
+
+Looking at the source of any page, such as the [frontpage](/), will reveal
+how the scripts are called and a other requirements.

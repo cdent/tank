@@ -17,7 +17,7 @@ type: text/x-markdown
 * Atom feeds of content in tanks.
 * Login using [GitHub](https://github.com/).
 * SSL Everywhere.
-* Websocket-based in-browser notifications.
+* [[Websocket-based|websockets]] in-browser notifications.
 * Server side rendering of tw classic wikitext.
 
 ## Planned
