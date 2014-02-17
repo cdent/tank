@@ -21,6 +21,7 @@ main, header, footer {
 }
 
 main {
+    position: relative;
     color: #222222;
 }
 
@@ -138,8 +139,31 @@ a.wikititle:hover {
 	color: black;
 }
 
+.commandbox {
+    display: none;
+}
+
+#nav_more {
+    position: absolute;
+    left: -999px;
+}
+
 @media screen and (max-width: 62em) {
+    .commandbox {
+        display: inline;
+        cursor: pointer;
+    }
+
     .commands {
+        position: absolute;
         float: none;
+        left: -21em;
+        background: lightblue;
+        z-index: 99;
+        padding: 1em;
+    }
+
+    input[type=checkbox]:checked ~ .commands {
+        left: 1em;
     }
 }

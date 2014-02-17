@@ -10,7 +10,10 @@
 </header>
 
 <main>
-<h1 class="greeting">Hi {{user}}</h1>
+<input type="checkbox" id="nav_more" role="button">
+<label class="commandbox" for="nav_more">
+    <i class="fa fa-align-justify"></i>
+</label>
 <div class="commands">
     {% if message %}
     <div class="message">{{ message }}</div>
@@ -38,6 +41,7 @@
         <a href="/auth">Manage API keys</a>
     </div>
 </div>
+<h1 class="greeting">Hi {{user}}</h1>
 <div class="tanks">
     <h2>Your tanks</h2>
     <ul>
