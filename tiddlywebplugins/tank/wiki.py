@@ -141,6 +141,7 @@ def edit(environ, start_response):
     bag_name = query['bag'][0]
     title = query['title'][0]
     text = query['text'][0]
+    tiddler_type = query['type'][0]
     tags = query['tags'][0]
     etag = query['etag'][0]
 
@@ -165,7 +166,7 @@ def edit(environ, start_response):
         if etag != existing_etag:
             conflict = True
     except NoTiddlerError:
-        tiddler.type = 'text/x-markdown'
+        tiddler.type = tiddler_type
         tiddler_new = True
 
     if tiddler_new:
