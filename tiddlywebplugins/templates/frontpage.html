@@ -10,7 +10,18 @@
 </header>
 
 <main>
-<div class="hero">
+{% if user=='GUEST' %}
+<div class="commands regisign">
+    <i class="fa fa-github"></i> <a href="/_oauth/callback?server_name=github">Sign Up or In with GitHub</a>
+</div>
+{% else %}
+<div class="commands">
+    <p>Welcome Back {{user}}.</p>
+    <p>Would you like to go to your <a
+        href="/dash">dashboard</a>?</p>
+</div>
+{% endif %}
+<div class="output">
 <h2>For Your Tiddlers</h2>
 <p>An indexed store and <a href="/tanks/docs/API">API</a> for <em>your</em>
 bits of stuff on the web, hypertexted for your pleasure.</p>
@@ -32,17 +43,6 @@ to ensure its continued support and maintenance.
 <a href="/tanks/docs/contact">Stay in touch</a> to learn more.
 </p>
 </div>
-{% if user=='GUEST' %}
-<div class="notify regisign">
-    <i class="fa fa-github"></i> <a href="/_oauth/callback?server_name=github">Sign Up or In with GitHub</a>
-</div>
-{% else %}
-<div class="notify">
-    <p>Welcome Back {{user}}.</p>
-    <p>Would you like to go to your <a
-        href="/dash">dashboard</a>?</p>
-</div>
-{% endif %}
 </main>
 
 {% endblock %}

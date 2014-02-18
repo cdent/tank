@@ -1,15 +1,7 @@
 
-.output {
-    max-width: 35em;
-}
-
 #dropzone {
     border: thin dashed black;
     padding: .5em;
-}
-
-.output img {
-    max-width: 100%;
 }
 
 .tiddlertitle {

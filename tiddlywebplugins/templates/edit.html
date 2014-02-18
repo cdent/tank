@@ -18,7 +18,11 @@
 </header>
 
 <main>
-<div class="info">
+<input type="checkbox" id="nav_more" role="button">
+<label class="commandbox" for="nav_more">
+    <i class="fa fa-align-justify"></i>
+</label>
+<div class="commands">
     <a href="/tanks/docs/markdown">Markdown Help</a>
 </div>
 <div class="editor">
@@ -35,7 +39,7 @@
 <input type="hidden" name="bag" value="{{ tiddler.bag }}">
 <input type="hidden" name="etag" value="{{ etag }}">
 <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-<textarea name="text" rows="24" cols="60" placeholder="enter markdown text here">{{ tiddler.text }}</textarea><br/>
+<textarea name="text" rows="20" cols="60" placeholder="enter markdown text here">{{ tiddler.text }}</textarea><br/>
 <label><input type="checkbox" name="global"> Use global tags in autocomplete?<label><br/>
 <input placeholder="tags" name="tags" value="{{ tiddler.tags|join(', ') }}" size="60"><br/>
 {% if conflict %}

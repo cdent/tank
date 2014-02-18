@@ -1,9 +1,10 @@
-.notify {
-    float: left;
-    width: 25%;
-}
 
-.hero {
-    float: left;
-    width: 70%;
+
+@media screen and (max-width: 62em) {
+    .commands {
+        position: static;
+        float: none;
+        background: lightblue;
+        padding: .5em 1em .5em 1em;
+    }
 }

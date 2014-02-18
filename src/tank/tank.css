@@ -91,6 +91,16 @@ a.wikititle:hover {
     float: right;
 }
 
+.output {
+    max-width: 35em;
+}
+
+
+.output img {
+    max-width: 100%;
+}
+
+
 .commands {
     max-width: 20em;
     float: right;
@@ -118,8 +128,6 @@ a.wikititle:hover {
 
 .socketinfo {
     position: absolute;
-    top: 20;
-    right: 0;
     display: none;
     font-size: small;
     z-index: 99;
