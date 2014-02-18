@@ -11,7 +11,7 @@ When the comp is loaded, the `app` tiddler is loaded and used
 as the HTML starting point of a [[single page app|Single Page Apps]].
 
 This is the mechanism that supports using things like loading
-tiddlers in a [TiddlyWiki](http://tiddlywiki.com).
+tiddlers in [[TiddlyWiki Classic]] and [[TiddlyWiki Five]].
 
 At this time there are two ways to create a composition. One, advanced,
 option is to use the [[API]] to create a recipe. The other works as

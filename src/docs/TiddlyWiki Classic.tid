@@ -1,0 +1,30 @@
+modifier: cdent
+modified: 201402180000
+type: text/x-markdown
+
+Tank can host [TiddlyWiki Classic](http://classic.tiddlywiki.com)
+tiddlywikis using [[comps|composition]].
+
+The Tiddlywiki file itself is the `app` component of the comp, your
+content is in the associated [[tank]]. Unlike other [[TiddlyWeb]] based
+Tiddlywiki systems, in Tank the Tiddlywiki is loaded and then uses a
+`bootstrap.js` file to load in the tiddler content. While this content
+is loading a _Loading_ message is presented. After all content is loaded
+the page is refreshed and default tiddlers and titles are used.
+
+This process means that the initial time to get a view on the Tiddlywiki
+is quite short, but the time it takes to be able to interact is
+dependent on the amount of content in the wiki.
+
+Once the page is refreshed the Tiddlywiki behaves as you would expect
+with content automatically saving back to the tank with which the
+comp has been built. If that tank is private your content will be private.
+
+Tank is set up so that Tiddlywiki content can also be viewed outside
+of Tiddlywiki in the regular tank view and in the Atom feeds. The
+content is rendered using [twikifier](https://github.com/tiddlyweb/twikifier).
+
+_For the time being the Tiddlywiki provided by the comp is a basic
+default. In the future it will be possible to compose comps themselves.
+This means that it will be possible to augment the default Tiddlywiki
+with themes and collections of plugins suitable for particular purposes._

@@ -1,0 +1,24 @@
+modifier: cdent
+modified: 201402180000
+type: text/x-markdown
+
+Tank can host [TiddlyWiki Five](http://.tiddlywiki.com)
+tiddlywikis using [[comps|composition]].
+
+The Tiddlywiki file itself is the `app` component of the comp, your
+content is in the associated [[tank]]. TW5 has been designed from the
+outset to have good support for talking to TiddlyWeb based services.
+
+After the `app` loads, TW5 then loads a list of the [[tiddlers|tiddler]]
+in the comp, lazily loading the actual content on demand. On a timeout
+loop it checks for new content on the server and in the wiki, synchronizing
+as necessary in both directions.
+
+TW5 itself is still in beta and the support for TiddlyWeb still has
+a few issues. For example loading default tiddlers does not yet work.
+These issues are receiving active attention.
+
+_For the time being TW5 content that is viewed on Tank outside of
+the Tiddlywiki will not be rendered to HTML. This will be fixed when
+a tw5 version of [twikifier](https://github.com/tiddlyweb/twikifier)
+has been completed._
