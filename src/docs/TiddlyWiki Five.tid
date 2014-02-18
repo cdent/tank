@@ -2,7 +2,7 @@ modifier: cdent
 modified: 201402180000
 type: text/x-markdown
 
-Tank can host [TiddlyWiki Five](http://.tiddlywiki.com)
+Tank can host [TiddlyWiki Five](http://tiddlywiki.com)
 tiddlywikis using [[comps|composition]].
 
 The Tiddlywiki file itself is the `app` component of the comp, your
