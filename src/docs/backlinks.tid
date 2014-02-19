@@ -4,4 +4,5 @@ type: text/x-markdown
 
 Backlinks are links from other [[tiddlers|tiddler]] to the current
 one. They provide context for the meaning or relevance of the current
-tiddler.
+tiddler. Backlinks are excellent way to understand the overall meaning
+in linked information and extract unexpected connections.

@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402030000
+modified: 201402190000
 type: text/x-markdown
 
 # What is a tank
@@ -14,8 +14,8 @@ For example you might have a private tank where you keep your unpublished
 notes, another for your todo items, and another for blog postings.
 
 Anything can go in a tank. When you first create a new tank you will view
-it's index page. From there not only can you create new pages, in [[markdown]],
-but also you can drag and drop binary files into the tank.
+its index page. From there not only can you create new pages, in [[markdown]],
+you can also drag and drop binary files into the tank.
 
 Using [[comps|composition]] it is possible to create other types of
 content in your tanks, including [TiddlyWiki](http://tiddlywiki.com) style
@@ -26,9 +26,9 @@ tiddlers.
 By default every user can have a maximum of five tanks.
 [[Subscribers|subscribe]] may have more.
 
-When creating a new tank they can be given one of three predefined
+When creating a new tank it can be given one of three predefined
 [policies](http://tiddlyweb.tiddlyspace.com/policy) for controlling
-access or a custom policy[^custom].
+access. It is also possible to have a custom policy[^custom].
 
 Private
 :   Only the owner of the tank can read, create, edit or delete tiddlers

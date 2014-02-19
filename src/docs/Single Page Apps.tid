@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402070000
+modified: 201402190000
 type: text/x-markdown
 
 A [single page
@@ -8,14 +8,16 @@ is a page of HTML which includes or loads all the necessary CSS and Javascript
 to enable a set of application behaviors.
 
 Tank makes an ideal host for single page applications because you can
-host both the application (and its assets) _and_ the data or content
-that the application uses in the same place. Accessing and managing
-the data is done over the [[API]].
+host the application _and_ the data or content that the application
+uses in the same place while managing both over the [[API]].
 
 You can make an SPA in two ways:
 
-* Putting the HTML and other files in a tank and then accessing the
+* Putting the HTML and other files in a [[tank]] and then accessing the
   HTML file directly.
 * Creating a [[tank]] where the main HTML file is named `app` and
   necessary assets are kept in the same tank. Then use that tank in
   a [[comp|composition]].
+
+[tsapp](http://tsapp.tiddlyspace.com/), in `tiddlyweb_mode`, can be used
+to help build SPAs on Tank.

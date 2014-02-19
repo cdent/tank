@@ -1,5 +1,5 @@
 modifier: cdent
-modifier: 201402080000
+modifier: 201402190000
 type: text/x-markdown
 
 The mover is a tool which makes it easy to move a [[tiddler]] from
@@ -9,4 +9,7 @@ To use the mover you must be able to create tiddlers in the target tank
 _and_ there must not be a tiddler of the same name in the target.
 
 When clicked, an interface will be revealed presenting a selection of
-available bags.
+available tanks. Choose one and click confirm. If the move was successful
+all the revisions of the current tiddler will be copied to the target
+tank and deleted from the current. If there was an error, a message will
+be presented.

@@ -7,22 +7,22 @@ an alternate presentation or tool for managing the content in
 the tanks.
 
 In one of the tanks in the comp there must be a tiddler called `app`.
-When the comp is loaded, the `app` tiddler is loaded and used
+When the comp is loaded, the `app` tiddler is sent to the browser and used
 as the HTML starting point of a [[single page app|Single Page Apps]].
 
-This is the mechanism that supports using things like loading
+This is the mechanism that supports using loading
 tiddlers in [[TiddlyWiki Classic]] and [[TiddlyWiki Five]].
 
-At this time there are two ways to create a composition. One, advanced,
-option is to use the [[API]] to create a recipe. The other works as
-follows:
+At this time there are two ways to create a composition. An advanced
+option is to use the [[API]] to create a recipe. A more simple option
+works as follows:
 
 * Visit your [dashboard](/dash) and follow one of the links in
-  Available Compositions.
+  _Available Compositions_.
 * Using the "This tank is composable" interface, choose a name
-  and tank to compose with.
+  and a [[tank]] to compose with.
 
 The comp that is created will be owned by you. If the tank you compose
 with is readable by others then the comp you create will be visible
-to them in lists such as [recipes](/recipes). Creating and editing
-content is dependent on the policies of the tank you choose.
+to them in lists such as [recipes](/recipes). Permission to creating
+and edit content is dependent on the policies of the tank you choose.

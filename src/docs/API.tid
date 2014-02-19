@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402060000
+modified: 201402190000
 type: text/x-markdown
 
 Tank is built on top of [TiddlyWeb](http://tiddlyweb.com). This
@@ -40,4 +40,4 @@ curl -v -H 'Authorization: bearer 4cdff82f-2b8b-4a92-8c95-a7f2dfd95f7' \
 	https://tank.peermore.com/bags/cdent-notebook/tiddlers/index
 ```
 
-Take care with your tokens to not exposing them to prying eyes.
+Take care with your tokens to not expose them to prying eyes.

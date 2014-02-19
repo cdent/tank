@@ -1,6 +1,8 @@
 modifier: cdent
-modified: 201402120000
+modified: 201402190000
 type: text/x-markdown
+
+{{summary}}
 
 ## Current
 
@@ -14,18 +16,18 @@ type: text/x-markdown
 * [[Move|mover]] [[tiddlers|tiddler]] between tanks.
 * Host [[single page applications|Single Page Apps]] that use the
   [[API]].
-* Atom feeds of content in tanks.
+* Subscribe to Atom feeds of content in tanks.
 * Login using [GitHub](https://github.com/).
-* SSL Everywhere.
-* [[Websocket-based|websockets]] in-browser notifications.
-* Server side rendering of tw classic wikitext.
+* Be protected by SSL Everywhere.
+* Receive [[websocket-based|websockets]] in-browser notifications.
+* View server-side rendering of tw classic wikitext.
 
 ## Planned
 
-* Prettiness!
-* Server side rendering of tw five wikitext.
-* Additional applications for comps.
-* Custom access control editor.
+* Bask in the prettiness of some proper web design.
+* View server-side rendering of tw five wikitext.
+* Use additional applications for comps.
+* Manage tanks with a custom access control editor.
 * Login using other services (e.g. facebook).
 
 Have an idea? [[Contact us|contact]]!

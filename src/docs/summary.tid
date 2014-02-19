@@ -1,0 +1,14 @@
+modifier: cdent
+modified: 201402190000
+type: text/x-markdown
+
+Tank is a service for creating, keeping, managing and sharing content
+online in an environment that encourages linking between things to build
+hypertextual webs of information.
+
+Tank could be described as an enhanced [[wiki|Using Wikis]]. It has
+the features expected in a wiki (quick linking, easy formatting, recent
+changes) that enable excellent personal notebooks and small group
+collaboration and it has features that allow multiple types of content,
+diverse modes of sharing and easy use and creation of custom applications
+that work the content.
