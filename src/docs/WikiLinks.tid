@@ -1,0 +1,21 @@
+modifier: cdent
+modified: 201402200000
+type: text/x-markdown
+
+Links between [[tiddlers|tiddler]] in a single tank and between tiddlers
+in different tanks are possible. There are three styles of links:
+
+* Wiki links that use `CamelCase` (links to a tiddler named `CamelCase`)
+* Free links that use a `[[bracket syntax]]` (links to a tiddler named
+  `bracket syntax`)
+* Labelled links: `[[label|target]]` (links to a tiddler named
+  `target` with a link title of `label`)
+
+Each of these links styles can have `@<name of tank>` appended to link to
+the named tiddler in the named tank. For example `CowHouse@foobar` would
+link to the tiddler named `CowHouse` in the tank named `foobar`.
+
+**Note**: `CamelCase` style linking does not play well with the default
+style of linking used in Markdown (e.g. `[title](target)`). It is best to
+not put `CamelCase` words within the title text, the results can be a
+bit odd.

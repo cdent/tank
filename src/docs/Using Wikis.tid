@@ -16,10 +16,10 @@ On top of this Tank also provides functionality that extends or enhances
 wiki functionality:
 
 * flexible access control per [[tank]]
-* links between pages in different tanks (by appending `@<spacename`
-  to standard link syntax)
-* [transclusion](http://en.wikipedia.org/wiki/Transclusion) of content
-  inter- and intra-space (see [[markdown]] for the syntax)
+* [[links|WikiLinks]]  between pages in different tanks
+  (by appending `@<spacename` to standard link syntax)
+* [[transclusion]] of content inter- and intra-space
+* [[extraclusion]]
 * content can be used in [[Single Page Apps]]
 * content can be manipulated using the API
 * [[comps|composition]] which provide applications to use with the

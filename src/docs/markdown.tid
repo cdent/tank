@@ -5,7 +5,7 @@ type: text/x-markdown
 When a new [[tiddler]] is created in a tank, by default the syntax of its text
 is [Markdown](http://daringfireball.net/projects/markdown/basics). In addition
 to the basic forms for making headers, paragraphs, lists, links and images
-the Markdown used also has support for some additional features:
+the Markdown used also has support for some common extensions:
 
 * [fenced
   code](http://pythonhosted.org/Markdown/extensions/fenced_code_blocks.html)
@@ -15,75 +15,14 @@ the Markdown used also has support for some additional features:
 * [header
   ids](http://pythonhosted.org/Markdown/extensions/header_id.html)
 * [interactive checklists](https://github.com/FND/markdown-checklist)
-  that save their checked state back to the tiddler.
-* Wiki links and transclusions, described below.
 
-Go to the [basic
+Tank also has its own custom markdown features:
+
+* WikiLinks
+* [[transclusion]]
+* [[extraclusion]]
+
+Go to the [basic markdown
 documentation](http://daringfireball.net/projects/markdown/basics) for
 a reference on the standard features.
 
-Links between tiddlers in a single tank and between tiddlers in different
-tanks are possible. There are three styles of links:
-
-* Wiki links that use `CamelCase` (links to a tiddler named `CamelCase`)
-* Free links that use a `[[bracket syntax]]` (links to a tiddler named
-  `bracket syntax`)
-* Labelled links: `[[label|target]]` (links to a tiddler named
-  `target` with a link title of `label`)
-
-Each of these links styles can have `@<name of tank>` appended to link to
-the named tiddler in the named tank. For example `CowHouse@foobar` would
-link to the tiddler named `CowHouse` in the tank named `foobar`.
-
-**Note**: `CamelCase` style linking does not play well with the default
-style of linking used in Markdown (e.g. `[title](target)`). It is best to
-not put `CamelCase` words within the title text, the results can be a
-bit odd.
-
-Tiddlers may also be transcluded into another. This means that one tiddler
-sucks in and presents the content of another tiddler within itself. The basic
-syntax is, _on a line by itself_:
-
-```
-{{tiddler title}}
-```
-
-As above, an `@<name of tank>` can be appended (outside the `}}`) to transclude
-from a different tank. If the current user cannot read from the other tank
-the transclusion will not happen.
-
-In the default tank editing interface, you can extract text from the current
-tiddler into a new one that is then transcluded into the current one. This
-process is caused "extraclusion" and is driven by some special syntax that
-surrounds the text that is to be extracluded:
-
-```
-Main content
-
-.extraclude newTitle
-
-Extracluded content
-
-.extraclude
-```
-
-When this content is saved, the original tiddler's text will be:
-
-```
-Main content
-
-{{newTitle}}
-```
-
-and newTitle will contain:
-
-```
-
-Extracluded content
-
-```
-
-Multiple extraclusions can be in one document.
-
-This can be a very powerful editing tool but should be used with plenty of care
-and thought.

@@ -1,0 +1,40 @@
+modifier: cdent
+modified: 201402200000
+type: text/x-markdown
+
+When editing tiddlers, you can extract text from the current
+[[tiddler]] into a new one that is then [[transcluded|transclusion]]
+into the current one. This process is caused "extraclusion" and is driven
+by some special syntax that surrounds the text that is to be extracluded:
+
+```
+Main content
+
+.extraclude newTitle
+
+Extracluded content
+
+.extraclude
+```
+
+When this content is saved, the original tiddler's text will be:
+
+```
+Main content
+
+{{newTitle}}
+```
+
+and newTitle will contain:
+
+```
+
+Extracluded content
+
+```
+
+Multiple extraclusions can be in one document. The process works with
+both [[markdown]] and TiddlyWiki text.
+
+This can be a very powerful editing tool but should be used with plenty of care
+and thought.
