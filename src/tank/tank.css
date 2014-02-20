@@ -140,11 +140,20 @@ a.wikititle:hover {
 }
 
 .socketinfo a {
-	text-decoration: none;
+    text-decoration: none;
 }
 
-.socketinfo span {
-	color: black;
+.socketinfo a:hover {
+    text-decoration: underline;
+}
+
+.socketinfo dd {
+    color: black;
+    margin-left: .5em;
+}
+
+.socketinfo span.modified {
+    display: block;
 }
 
 .commandbox {

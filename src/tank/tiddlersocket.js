@@ -46,7 +46,7 @@ var Tiddlers = (function($) {
         },
 
 		sizer: function() {
-			return 5;
+			return 10;
 		},
 
         generateItem: function(tiddler) {
@@ -56,26 +56,29 @@ var Tiddlers = (function($) {
 
             var link = $('<a>').attr({'href': href}).text(tiddler.title);
 
-			var extra = $('<span>').text(' in ' + tank);
+			var dd = $('<dd>').text('in ' + tank);
+			var span = $('<span>').addClass('modified').attr('title',
+					tiddlerDate).text(tiddler.modified).timeago();
+			dd.prepend(span);
 
             // jquery data() plays funny when the element is not part of the DOM
             // so use attr()
-            var li = $('<li>')
-                .attr("data-tiddler-uri", tiddler.uri)
-                .append(link)
-				.append(extra);
-            return li;
+            var dt = $('<dt>').append(link);
+
+            return {dt: dt, dd: dd};
         },
 
         updateUI: function(noTrigger) {
             var tiddler = this.queue.shift();
-			var li = this.generateItem(tiddler);
+			var item = this.generateItem(tiddler);
 
 			if (! noTrigger) {
 				this.el.trigger('tiddlersUpdate', tiddler);
 			}
-			this.el.prepend(li);
+			this.el.prepend(item.dd);
+			this.el.prepend(item.dt);
 			while (this.el.children().length > this.sizer()) {
+				this.el.children().last().remove();
 				this.el.children().last().remove();
 			}
         },

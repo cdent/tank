@@ -33,6 +33,12 @@
     <script src="/bags/tank/tiddlers/tiddlersocket.js"></script>
     <script src="/bags/tank/tiddlers/socketinfo.js"></script>
     {% endif %}
+    <script src="/bags/tank/tiddlers/jquery.timeago.js"></script>
+    <script>
+    jQuery(document).ready(function() {
+            jQuery(".modified").timeago();
+    });
+    </script>
     {% block scripts %}
     {% endblock %}
     </body>
