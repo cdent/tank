@@ -12,9 +12,6 @@
     <a class="wikititle" href="/tanks/{{ bag.name|uri }}">TankTop</a>
     {% endif %}
     <a class="wikititle" href="RecentChanges">Changes</a>
-    {% if user != "GUEST" %}
-    <a class="wikititle" href="/dash">Dash</a>
-    {% endif %}
     {% if edit %}
     <a accesskey="e" class="wikititle"
         href="/edit?bag={{ bag.name|uri }};tiddler={{ tiddler.title|uri }}">Edit</a>
@@ -25,6 +22,9 @@
         href="/delete?bag={{ bag.name|uri }};tiddler={{ tiddler.title|uri }}">Delete</a>
     {% endif %}
     #}
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
 </header>
 
 <main>
