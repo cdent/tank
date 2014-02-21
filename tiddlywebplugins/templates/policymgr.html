@@ -24,9 +24,9 @@
         <a href="#/{{tank.name|escape}}">{{tank.name}}</a></li>
     </ul>
 </div>
-<div class="tank" ng-show="tank" ng-controller="TankCtrl">
+<div class="tank" ng-hide="editing" ng-show="tank" ng-controller="TankCtrl">
     <h1>{{tank.name}}
-        <i ng-click='startEditor()' class="startEditor fa fa-pencil"></i>
+        <i ng-click='startEditor()' title="edit" class="editicon fa fa-pencil"></i>
     </h1>
     <p>Owner: {{tank.policy.owner}}</p>
     <p>{{tank.desc}}</p>
@@ -41,6 +41,25 @@
         </tr>
     </table>
 </div>
+<div class="editor" ng-show="editTank" ng-controller="TankEditor">
+    <h1>{{editTank.name}}
+        <i ng-click='saveTank()' title="save" class="editicon fa fa-check"></i>
+        <i ng-click='cancelEditor()' title="cancel" class="editicon fa fa-times"></i>
+    </h1>
+    <form>
+        <p><label>Owner:
+            <input name="owner" ng-model="editTank.policy.owner"></label></p>
+        <p><label>Description:
+            <input name="desc" ng-model="editTank.desc"></label></p>
+        <table>
+        <tr><th>Constraint</th><th>Members</th></tr>
+        <tr ng-repeat="constraint in constraints">
+            <td>{{constraint}}</td>
+            <td>
+                <input name="members" ng-list ng-model="editTank.policy[constraint]">
+            </td>
+        </tr>
+        </table>
 </main>
 {% endraw %}
 

@@ -3,6 +3,10 @@
     display: none !important;
 }   
 
-.startEditor {
+.editicon {
     cursor: pointer;
+}
+
+.member {
+    padding-right: 1em;
 }
