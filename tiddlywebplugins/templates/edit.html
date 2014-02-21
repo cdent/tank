@@ -23,7 +23,8 @@
     <i class="fa fa-align-justify"></i>
 </label>
 <div class="commands">
-    <a href="/tanks/docs/markdown">Markdown Help</a>
+    <p><a href="/tanks/docs/markdown">Markdown Help</a></p>
+    <div id="dropzoneMessage"></div>
 </div>
 <div class="editor">
 <h1><a href="/tanks/{{tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a></h1>
@@ -40,7 +41,7 @@
 <input type="hidden" name="etag" value="{{ etag }}">
 <input type="hidden" name="type" value="{{ tiddler.type }}">
 <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-<textarea name="text" rows="20" cols="60" placeholder="enter markdown text here">{{ tiddler.text }}</textarea><br/>
+<textarea id="dropzone" name="text" rows="20" cols="60" placeholder="enter markdown text here">{{ tiddler.text }}</textarea><br/>
 <label><input type="checkbox" name="global"> Use global tags in autocomplete?<label><br/>
 <input placeholder="tags" name="tags" value="{{ tiddler.tags|join(', ') }}" size="60"><br/>
 {% if conflict %}
@@ -58,4 +59,5 @@
 {% block scripts %}
 <script src="/bags/tank/tiddlers/selectize.js"></script>
 <script src="/bags/tank/tiddlers/tagger.js"></script>
+<script src="/bags/tank/tiddlers/filedrop.js"></script>
 {% endblock %}

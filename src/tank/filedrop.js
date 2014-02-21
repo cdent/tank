@@ -1,8 +1,15 @@
 $(function() {
 
     var tank = window.location.pathname.replace(/^\/tanks\//, '').split('/')[0],
-		dropzone = $('#dropzone');
+		dropzone = $('#dropzone'),
+		dropzoneMessage = dropzone,
+		injectText = false;
 
+	if (!tank) {
+		tank = window.location.search.replace(/^.*bag=([^;&]*)[;&].*$/, '$1');
+		dropzoneMessage = $('#dropzoneMessage');
+		injectText = true;
+	}
 
     function dragNoop(ev) {
         ev.stopPropagation();
@@ -10,11 +17,11 @@ $(function() {
     }
 
     function handleFile(file) {
-        dropzone.text('Processing ' + file.name);
+        dropzoneMessage.text('Processing ' + file.name);
 
         var reader = new FileReader();
         reader.onerror = function(ev) {
-			dropzone.text('Error ' + ev);
+			dropzoneMessage.text('Error ' + ev);
             console.log('error', ev);
         }
         reader.onload = function(ev) {
@@ -33,7 +40,7 @@ $(function() {
 					var xhr = $.ajaxSettings.xhr();
 					// set the onprogress event handler
 					xhr.upload.onprogress = function(evt) {
-						dropzone.text('Processing ' + file.name + ' '
+						dropzoneMessage.text('Processing ' + file.name + ' '
 							+ Math.floor(evt.loaded/evt.total*100) + '%');
 					};
 					// return the customized object
@@ -44,20 +51,32 @@ $(function() {
 				data: JSON.stringify(tiddler),
 				processData: false,
 				success: function() {
-					dropzone.text('Uploaded ' + file.name);
+					dropzoneMessage.text('Uploaded ' + file.name);
+					if (injectText) {
+						var cursorPosition = dropzone.prop('selectionEnd'),
+							textAreaTxt = dropzone.val();
+							txtToAdd = makeMarkdownLink(tiddler.title);
+						dropzone.val(textAreaTxt.substring(0, cursorPosition)
+								+ txtToAdd
+								+ textAreaTxt.substring(cursorPosition) );
+					}
 				},
 				error: function(xhr, status, error) {
-					dropzone.text('Failed: ' + xhr.status + ' ' + error);
+					dropzoneMessage.text('Failed: ' + xhr.status + ' ' + error);
 				}
 			});
         }
 
         reader.onloadend = function(ev) {
-            console.log('onloadend');
+            //console.log('onloadend');
         }
 
         reader.readAsDataURL(file);
     }
+
+	function makeMarkdownLink(text) {
+		return '![' + text + '](' + encodeURIComponent(text) + ')\n';
+	}
 
     function dragDrop(ev) {
         ev.stopPropagation();
