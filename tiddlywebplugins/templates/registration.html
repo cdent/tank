@@ -11,7 +11,8 @@
 <main>
 <form method="POST" action="/register">
     Username:<br>
-    <input name="login" value="{{login}}"><br>
+    {{login}}<br>
+    <input name="login" value="{{login}}" type="hidden">
     Name:<br>
     <input name="name" value="{{name}}"><br>
     Email:<br>
@@ -19,7 +20,7 @@
     <input type="hidden" name="redirect" value="/dash">
     Comments:<br>
     <textarea name="extra" rows=4 placeholder="Anything else"></textarea><br>
-    <input type="checkbox" name="announcements">Check to receive email announcements.<br>
+    <label><input type="checkbox" name="announcements">Check to receive email announcements.</label><br>
     <input type="submit" value="Sign Up!">
 </form>
 </main>
