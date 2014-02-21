@@ -21,11 +21,13 @@
     <ul ng-cloak>
         <li class="tank"
         ng-repeat="tank in tanks | filter:tankFilterText | orderBy:'name'">
-        <a href="#/{{tank|escape}}">{{tank}}</a></li>
+        <a href="#/{{tank.name|escape}}">{{tank.name}}</a></li>
     </ul>
 </div>
 <div class="tank" ng-show="tank" ng-controller="TankCtrl">
-    <h1>{{tank.name}}</h1>
+    <h1>{{tank.name}}
+        <i ng-click='startEditor()' class="startEditor fa fa-pencil"></i>
+    </h1>
     <p>Owner: {{tank.policy.owner}}</p>
     <p>{{tank.desc}}</p>
     <table>
