@@ -40,7 +40,10 @@ app.factory('tankService', function($http, $q) {
 
 app.controller('TanksCtrl', function($scope, tankService) {
 	tankService.getTanks(function(data) {
-		$scope.tanks = data;
+		$scope.tanks = [];
+		angular.forEach(data, function(value, key) {
+			$scope.tanks.push(value);
+		});
 	});
 });
 
