@@ -52,11 +52,12 @@ app.controller('TankEditor', function($scope, $http, $rootScope) {
 	$scope.$on('startEdit', function(ev, data) {
 		console.log('header startEdit', data);
 		$scope.editTank = angular.copy(data.tank);
+		$scope.originalData = angular.copy(data.tank);
 	});
 
 	$scope.cancelEditor = function() {
 		$scope.editTank = null;
-		$rootScope.$broadcast('finishEdit');
+		$rootScope.$broadcast('finishEdit', {tank: $scope.originalData});
 	};
 
 	// XXX: move to service?
@@ -95,8 +96,8 @@ app.controller('TankCtrl', function($scope, $location, $rootScope, tankService) 
 
 	$scope.$on('finishEdit', function(ev, data) {
 		if (data) {
-			$scope.tank = data.tank;
-			$scope.tanks[data.name] = data.tank;
+			$scope.tank = angular.copy(data.tank);
+			$scope.tanks[data.name] = $scope.tank;
 		}
 	});
 
