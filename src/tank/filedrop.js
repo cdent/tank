@@ -24,11 +24,8 @@ $(function() {
 			dropzoneMessage.text('Error ' + ev);
             console.log('error', ev);
         }
-        reader.onload = function(ev) {
-            var data = ev.target.result.replace(/^data[^,]*,/, '');
+        reader.onloadend = function(ev) {
             var tiddler = {
-                tags: [],
-                text: data,
                 title: file.name,
                 type: file.type,
             };
@@ -46,16 +43,16 @@ $(function() {
 					// return the customized object
 					return xhr;
 				},
-				contentType: 'application/json',
+				contentType: file.type,
 				type: 'PUT',
-				data: JSON.stringify(tiddler),
+				data: reader.result,
 				processData: false,
 				success: function() {
 					dropzoneMessage.text('Uploaded ' + file.name);
 					if (injectText) {
 						var cursorPosition = dropzone.prop('selectionEnd'),
 							textAreaTxt = dropzone.val();
-							txtToAdd = makeMarkdownLink(tiddler.title);
+							txtToAdd = makeMarkdownLink(tiddler);
 						dropzone.val(textAreaTxt.substring(0, cursorPosition)
 								+ txtToAdd
 								+ textAreaTxt.substring(cursorPosition) );
@@ -67,15 +64,17 @@ $(function() {
 			});
         }
 
-        reader.onloadend = function(ev) {
-            //console.log('onloadend');
-        }
-
-        reader.readAsDataURL(file);
+        reader.readAsArrayBuffer(file);
     }
 
-	function makeMarkdownLink(text) {
-		return '![' + text + '](' + encodeURIComponent(text) + ')\n';
+	function makeMarkdownLink(tiddler) {
+		if (tiddler.type.match(/^image\//)) {
+			return '![' + tiddler.title + ']('
+				+ encodeURIComponent(tiddler.title) + ')\n';
+		} else {
+			return '[' + tiddler.title + ']('
+				+ encodeURIComponent(tiddler.title) + ')\n';
+		}
 	}
 
     function dragDrop(ev) {
