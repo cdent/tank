@@ -30,6 +30,7 @@ from .wiki import wiki_page, editor, edit, forge
 from .search import list_tags
 from .composition import comp
 from .auth import view_auth, make_key, destroy_key
+from .policymgr import policymgr
 
 
 SUBSCRIBER = 'SUBSCRIBER'
@@ -57,6 +58,7 @@ def establish_web(config):
     selector.add('/forge', POST=forge)
     selector.add('/tags', GET=list_tags)
     selector.add('/comps/{recipe_name:segment}', GET=comp)
+    selector.add('/policymgr', GET=policymgr)
 
 
 def bag_quota(bag, environ):

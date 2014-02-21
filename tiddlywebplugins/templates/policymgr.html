@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %}Policy Manager{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/policymgr.css">
+{% endblock %}
+
+{% block body %}
+<header>
+{% include 'logout.html' %}
+    <span class="wikititle">Policy Manager</span>
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
+</header>
+
+{% raw %}
+<main ng-app="app">
+<div class="tanks" ng-controller="TanksCtrl">
+    <input type="text" ng-model="tankFilterText" size="30"
+     placeholder="Filter Tanks">
+    <ul ng-cloak>
+        <li class="tank"
+        ng-repeat="tank in tanks | filter:tankFilterText | orderBy:'name'">
+        <a href="#/{{tank|escape}}">{{tank}}</a></li>
+    </ul>
+</div>
+<div class="tank" ng-show="tank" ng-controller="TankCtrl">
+    <h1>{{tank.name}}</h1>
+    <p>Owner: {{tank.policy.owner}}</p>
+    <p>{{tank.desc}}</p>
+    <table>
+        <tr><th>Constraint</th><th>Members</th></tr>
+        <tr ng-repeat="constraint in constraints">
+            <td>{{constraint}}</td>
+            <td>
+                <span class="member"
+                    ng-repeat="member in tank.policy[constraint]">{{member}}</span>
+            </td>
+        </tr>
+    </table>
+</div>
+</main>
+{% endraw %}
+
+{% endblock %}
+{% block scripts %}
+<script src="/bags/tank/tiddlers/angular.min.js"></script>
+<script src="/bags/tank/tiddlers/policymgr.js"></script>
+{% endblock %}
