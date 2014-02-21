@@ -15,6 +15,14 @@
 
 {% raw %}
 <main ng-app="app">
+<input type="checkbox" id="nav_more" role="button">
+<label class="commandbox" for="nav_more">
+    <i class="fa fa-align-justify"></i>
+</label>
+<div class="commands">
+    <p><a href="/tanks/docs/Policy%20Manager">Help with Policy Manager</a></p>
+</div>
+<div class="output">
 <div class="tanks" ng-controller="TanksCtrl">
     <input type="text" ng-model="tankFilterText" size="30"
      placeholder="Filter Tanks">
@@ -60,6 +68,8 @@
             </td>
         </tr>
         </table>
+</div>
+</div>
 </main>
 {% endraw %}
 

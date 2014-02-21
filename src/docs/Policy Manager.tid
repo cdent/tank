@@ -1,0 +1,22 @@
+modifier: cdent
+modified: 201402210000
+type: text/x-markdown
+
+The [policy manager](/policymgr) is available to logged in
+users to manage the [policies](http://tiddlyweb.tiddlyspace.com/policy)
+on their [[tanks|tank]]. It is used to add or remove users
+from the policies controlling who can read, write, create or delete
+tiddlers in the tank and who can manage those policies.
+
+_The policy manager is a dangerous tool. Used incorrectly it is possible
+to be locked out of a tank._
+
+The current interface is experimental and will be improved based on
+feedback. Please [[contact us|contact]] or leave an
+[issue](https://github.com/cdent/tank/issues)
+
+The general principle is to click on a tank to view its settings. Clicking
+on the pencil icon will then reveal a form where values can be changed. In
+the policy constraints usernames are (for the time being) separated by
+commas. Clicking the X will cancel changes. Clicking the checkmark
+will save the changes.
