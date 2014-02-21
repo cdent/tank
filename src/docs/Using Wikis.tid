@@ -20,6 +20,7 @@ wiki functionality:
   (by appending `@<spacename` to standard link syntax)
 * [[transclusion]] of content inter- and intra-space
 * [[extraclusion]]
+* file [[drag and drop|Drag and Drop]]
 * content can be used in [[Single Page Apps]]
 * content can be manipulated using the API
 * [[comps|composition]] which provide applications to use with the

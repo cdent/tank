@@ -1,0 +1,15 @@
+modifier: cdent
+modified: 201402210000
+type: text/x-markdown
+
+Binary content, such as images, can be easily added to a [[tank]]
+by dragging a file into the tank. This can be done when viewing
+a tank page by dropping a file into the box labeled "Drop binaries
+into your tank here" or when editing a page by dropping a file into
+the editing textarea.
+
+If a file is dropped when editing, a link to it will be added to the
+text. If the type of the file is an image, the link will be an
+image link.
+
+_Note_: The syntax of the created links is [[markdown]].

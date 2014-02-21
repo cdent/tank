@@ -11,6 +11,7 @@ type: text/x-markdown
 * Use a tank as a simple [[markdown]] [[wiki|Using Wikis]] with
   [[backlinks]], [[transclusion]], [[extraclusion]] and
   [[inter-tank links|WikiLinks]].
+* [[Drag and Drop]] content into your tanks.
 * [[Compose|composition]] a tank with applications such as
   [[TiddlyWiki Classic]] and [[TiddlyWiki Five]], including building
   custom apps.
