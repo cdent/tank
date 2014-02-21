@@ -24,7 +24,7 @@
         <a href="#/{{tank.name|escape}}">{{tank.name}}</a></li>
     </ul>
 </div>
-<div class="tank" ng-hide="editing" ng-show="tank" ng-controller="TankCtrl">
+<div class="tank" ng-show="tank" ng-controller="TankCtrl">
     <h1>{{tank.name}}
         <i ng-click='startEditor()' title="edit" class="editicon fa fa-pencil"></i>
     </h1>

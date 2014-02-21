@@ -12,7 +12,7 @@ app.factory('tankService', function($http, $q) {
 			if (tanks) {
 				callback(tanks);
 			} else {
-				$http.get('/bags.json?select=policy:create')
+				$http.get('/bags.json?select=policy:manage')
 					.then(function(res) {
 						var bags = res.data;
 						var resources = bags.map(function(name) {
@@ -75,7 +75,7 @@ app.controller('TankCtrl', function($scope, $location, $rootScope, tankService) 
 	function setData(tankName) {
 		tankService.getTanks(function(data) {
 			$scope.tanks = data;
-			$scope.tank = $scope.tanks[tankName];
+			$scope.tank = angular.copy($scope.tanks[tankName]);
 		});
 	}
 
@@ -91,7 +91,6 @@ app.controller('TankCtrl', function($scope, $location, $rootScope, tankService) 
 	);
 
 	$scope.$on('finishEdit', function(ev, data) {
-		$scope.editing = false;
 		if (data) {
 			$scope.tank = data.tank;
 			$scope.tanks[data.name] = data.tank;
@@ -99,8 +98,8 @@ app.controller('TankCtrl', function($scope, $location, $rootScope, tankService) 
 	});
 
 	$scope.startEditor = function() {
-		$scope.editing = true;
 		$rootScope.$broadcast('startEdit', {tank: $scope.tank});
+		$scope.tank = null;
 	};
 
 });
