@@ -38,6 +38,7 @@ setup(
         'tiddlywebplugins.csrf',
         'tiddlywebplugins.jsondispatcher',
         'tiddlywebplugins.twikified',
+        'tiddlywebplugins.extraclude',
         'markdown-checklist',
         'httpexceptor'
         ],
