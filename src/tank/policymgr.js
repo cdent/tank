@@ -50,9 +50,12 @@ app.controller('TanksCtrl', function($scope, tankService) {
 app.controller('TankEditor', function($scope, $http, $rootScope) {
 	$scope.constraints = ['manage', 'read', 'write', 'create', 'delete'];
 	$scope.$on('startEdit', function(ev, data) {
-		console.log('header startEdit', data);
 		$scope.editTank = angular.copy(data.tank);
 		$scope.originalData = angular.copy(data.tank);
+	});
+
+	$scope.$on('clearEdit', function() {
+		$scope.editTank = null;
 	});
 
 	$scope.cancelEditor = function() {
@@ -88,6 +91,7 @@ app.controller('TankCtrl', function($scope, $location, $rootScope, tankService) 
 			if (path) {
 				var tankName = path.split('/')[1];
 				if (tankName) {
+					$rootScope.$broadcast('clearEdit');
 					setData(tankName);
 				}
 			}
