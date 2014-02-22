@@ -101,7 +101,7 @@ app.controller('TankCtrl', function($scope, $location, $rootScope, tankService) 
 	$scope.$on('finishEdit', function(ev, data) {
 		if (data) {
 			$scope.tank = angular.copy(data.tank);
-			$scope.tanks[data.name] = $scope.tank;
+			$scope.tanks[$scope.tank.name] = $scope.tank;
 		}
 	});
 
