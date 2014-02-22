@@ -8,11 +8,9 @@ app.filter('escape', function() {
 app.factory('tankService', function($http, $q) {
 	var tanks;
 	return {
-		getTanks: function(callback) {
-			if (tanks) {
-				callback(tanks);
-			} else {
-				$http.get('/bags.json?select=policy:manage')
+		getTanks: function() {
+			if (!tanks) { // not yet cached
+				tanks = $http.get('/bags.json?select=policy:manage')
 					.then(function(res) {
 						var bags = res.data;
 						var resources = bags.map(function(name) {
@@ -30,16 +28,16 @@ app.factory('tankService', function($http, $q) {
 							angular.extend(res.data, {name: tankName});
 							data[tankName] = res.data;
 						});
-						tanks = data;
-						callback(tanks);
+						return data;
 					});
 			}
-		}
+			return tanks;
+		};
 	};
 });
 
 app.controller('TanksCtrl', function($scope, tankService) {
-	tankService.getTanks(function(data) {
+	tankService.getTanks.then(function(data) {
 		$scope.tanks = [];
 		angular.forEach(data, function(value, key) {
 			$scope.tanks.push(value);
@@ -80,7 +78,7 @@ app.controller('TankCtrl', function($scope, $location, $rootScope, tankService) 
 	$scope.constraints = ['manage', 'read', 'write', 'create', 'delete'];
 
 	function setData(tankName) {
-		tankService.getTanks(function(data) {
+		tankService.getTanks.then(function(data) {
 			$scope.tanks = data;
 			$scope.tank = angular.copy($scope.tanks[tankName]);
 		});
