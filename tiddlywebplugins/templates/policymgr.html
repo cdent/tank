@@ -43,8 +43,9 @@
         <tr ng-repeat="constraint in constraints">
             <td>{{constraint}}</td>
             <td>
-                <span class="member"
+                <span ng-if="tank.policy[constraint].length" class="member"
                     ng-repeat="member in tank.policy[constraint]">{{member}}</span>
+                <span ng-if="!tank.policy[constraint].length" class="member">everyone</span>
             </td>
         </tr>
     </table>
@@ -64,7 +65,7 @@
         <tr ng-repeat="constraint in constraints">
             <td>{{constraint}}</td>
             <td>
-                <input name="members" ng-list ng-model="editTank.policy[constraint]">
+                <input placeholder="everyone" name="members" ng-list ng-model="editTank.policy[constraint]">
             </td>
         </tr>
         </table>
