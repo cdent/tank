@@ -5,34 +5,33 @@ app.filter('escape', function() {
 	return window.encodeURIComponent;
 });
 
-app.factory('tankService', function($http, $q) {
+app.service('tankService', function($http, $q) {
 	var tanks;
-	return {
-		getTanks: function() {
-			if (!tanks) { // not yet cached
-				tanks = $http.get('/bags.json?select=policy:manage')
-					.then(function(res) {
-						var bags = res.data;
-						var resources = bags.map(function(name) {
-							var uri = '/bags/' + encodeURIComponent(name);
-							return $http.get(uri,
-								{headers: {'Accept': 'application/json'}});
-						});
-						return $q.all(resources);
-					})
-					.then(function(res) {
-						var data = {};
-						res.forEach(function(res) {
-							var tankName = res.config.url
-								.replace(/\/bags\/([^\/]+)/, "$1");
-							angular.extend(res.data, {name: tankName});
-							data[tankName] = res.data;
-						});
-						return data;
-					});
-			}
+	this.getTanks = function() {
+		if (tanks) { // previously cached
 			return tanks;
-		};
+		}
+		tanks = $http.get('/bags.json?select=policy:manage')
+			.then(function(res) {
+				var bags = res.data;
+				var resources = bags.map(function(name) {
+					var uri = '/bags/' + encodeURIComponent(name);
+					return $http.get(uri,
+						{headers: {'Accept': 'application/json'}});
+				});
+				return $q.all(resources);
+			})
+			.then(function(res) {
+				var data = {};
+				res.forEach(function(res) {
+					var tankName = res.config.url
+						.replace(/\/bags\/([^\/]+)/, "$1");
+					angular.extend(res.data, {name: tankName});
+					data[tankName] = res.data;
+				});
+				return data;
+			});
+		return tanks;
 	};
 });
 
