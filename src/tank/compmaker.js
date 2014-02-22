@@ -5,7 +5,7 @@
 		form = container.find('form'),
 		select = form.find('select[name="bag"]'),
 		currentTiddlerURI = $('link[rel=edit]').attr('href'),
-		currentBag = unescape(currentTiddlerURI.split('/')[2]);
+		currentBag = decodeURIComponent(currentTiddlerURI.split('/')[2]);
 
 	function displayMessage(message) {
 		var messageArea = form.find('.message');

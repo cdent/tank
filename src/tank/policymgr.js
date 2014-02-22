@@ -26,6 +26,7 @@ app.service('tankService', function($http, $q) {
 				res.forEach(function(res) {
 					var tankName = res.config.url
 						.replace(/\/bags\/([^\/]+)/, "$1");
+					tankName = decodeURIComponent(tankName);
 					angular.extend(res.data, {name: tankName});
 					data[tankName] = res.data;
 				});
