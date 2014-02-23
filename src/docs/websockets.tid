@@ -27,8 +27,8 @@ The websocket interface can also be used in custom code to get
 notifications of tiddlers. Look at the following to see how the features
 described above work and adapt accordingly:
 
-* https://tank.peermore.com/tanks/tank/socketinfo.js
-* https://tank.peermore.com/tanks/tank/tiddlersocket.js
+* [socketinfo.js](https://tank.peermore.com/tanks/tank/socketinfo.js)
+* [tiddlersocket.js](https://tank.peermore.com/tanks/tank/tiddlersocket.js)
 
 Looking at the source of any page, such as the [frontpage](/), will reveal
 how the scripts are called and other requirements.
