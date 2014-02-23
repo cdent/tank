@@ -14,6 +14,7 @@ body {
     background-color: #efefef;
     margin: auto;
     width: 90%;
+    max-width: 1200px;
 }
 
 main, header, footer {
@@ -166,6 +167,10 @@ a.wikititle:hover {
 }
 
 @media screen and (max-width: 62em) {
+    body {
+        width: 100%;
+    }
+
     .commandbox {
         display: inline;
         cursor: pointer;
