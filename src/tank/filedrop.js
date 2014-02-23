@@ -3,7 +3,8 @@ $(function() {
     var tank = window.location.pathname.replace(/^\/tanks\//, '').split('/')[0],
 		dropzone = $('#dropzone'),
 		dropzoneMessage = dropzone,
-		injectText = false;
+		injectText = false,
+		specialExtensionsRe = new RegExp('^(.*)\.(?:txt|html|atom|json)$');
 
 	if (!tank) {
 		tank = window.location.search.replace(/^.*bag=([^;&]*)[;&].*$/, '$1');
@@ -25,8 +26,13 @@ $(function() {
             console.log('error', ev);
         }
         reader.onloadend = function(ev) {
+			if (!file.type) {
+				return dropzoneMessage.text(
+							'Unable to determine file type. Try adding an extension.');
+			}
+			name = file.name.replace(specialExtensionsRe, "$1");
             var tiddler = {
-                title: file.name,
+                title: name,
                 type: file.type,
             };
 			$.ajax({
@@ -48,7 +54,9 @@ $(function() {
 				data: reader.result,
 				processData: false,
 				success: function() {
-					dropzoneMessage.text('Uploaded ' + file.name);
+					var a = $('<a>').text('Uploaded ' + name)
+						.attr('href', encodeURIComponent(name));
+					dropzoneMessage.empty().append(a);
 					if (injectText) {
 						var cursorPosition = dropzone.prop('selectionEnd'),
 							textAreaTxt = dropzone.val();
