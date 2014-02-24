@@ -209,8 +209,11 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
     if extant_tiddler:
         tiddler = extant_tiddler
     else:
-        bag_name = query['bag'][0]
-        tiddler_title = query['tiddler'][0]
+        try:
+            bag_name = query['bag'][0]
+            tiddler_title = query['tiddler'][0]
+        except KeyError:
+            raise HTTP400('bad query: bag and tiddler required')
 
         if not (bag_name and tiddler_title):
             raise HTTP400('bad query: bag and tiddler required')
