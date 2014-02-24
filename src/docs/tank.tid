@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402190000
+modified: 201402240000
 type: text/x-markdown
 
 # What is a tank
@@ -28,7 +28,8 @@ By default every user can have a maximum of five tanks.
 
 When creating a new tank it can be given one of three predefined
 [policies](http://tiddlyweb.tiddlyspace.com/policy) for controlling
-access. It is also possible to have a custom policy[^custom].
+access. It is also possible to have a custom policy by using the
+[[Policy Manager]].
 
 Private
 :   Only the owner of the tank can read, create, edit or delete tiddlers
@@ -42,6 +43,3 @@ Protected
 Public
 :   Anyone can read, create, edit or delete tiddlers in the tank. This is
     akin to an old-school public wiki.
-
-[^custom]: Custom policies are coming soon. Once they are available it will
-be possible to control access for individual users.

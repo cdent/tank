@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402190000
+modified: 201402240000
 type: text/x-markdown
 
 {{summary}}
@@ -23,13 +23,13 @@ type: text/x-markdown
 * Be protected by SSL Everywhere.
 * Receive [[websocket-based|websockets]] in-browser notifications.
 * View server-side rendering of tw classic wikitext.
+* Manage tanks with a custom access control editor, [[Policy Manager]].
 
 ## Planned
 
 * Bask in the prettiness of some proper web design.
 * View server-side rendering of tw five wikitext.
 * Use additional applications for comps.
-* Manage tanks with a custom access control editor.
 * Login using other services (e.g. facebook).
 
 Have an idea? [[Contact us|contact]]!

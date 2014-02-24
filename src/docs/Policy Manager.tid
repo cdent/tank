@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402210000
+modified: 201402240000
 type: text/x-markdown
 
 The [policy manager](/policymgr) is available to logged in
@@ -9,7 +9,8 @@ from the policies controlling who can read, write, create or delete
 tiddlers in the tank and who can manage those policies.
 
 _The policy manager is a dangerous tool. Used incorrectly it is possible
-to be locked out of a tank._
+to be locked out of a tank. Please make sure you have a full understanding
+of [policies](http://tiddlyweb.tiddlyspace.com/policy)._
 
 The current interface is experimental and will be improved based on
 feedback. Please [[contact us|contact]] or leave an
