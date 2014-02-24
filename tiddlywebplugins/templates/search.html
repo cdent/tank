@@ -17,6 +17,16 @@
 </header>
 
 <main>
+<input type="checkbox" id="nav_more" role="button">
+<label class="commandbox" for="nav_more">
+    <i class="fa fa-align-justify"></i>
+</label>
+<div class="commands">
+    <form>
+        <input name="q" placeholder="Search again">
+    </form>
+</div>
+<div class="output">
 <h1>{{ tiddlers.title }}</h1>
 {% if global_query %}
 <p><a href="/search?q={{ global_query|uri }}">Search again, globally</a></p>
@@ -26,6 +36,7 @@
 <li><a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a></li>
 {% endfor %}
 </ul>
+</div>
 </main>
 
 {% endblock %}
