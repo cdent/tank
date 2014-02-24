@@ -23,8 +23,11 @@
     <i class="fa fa-align-justify"></i>
 </label>
 <div class="commands">
-    <p><a href="/tanks/docs/markdown">Markdown Help</a></p>
+    <div><a href="/tanks/docs/markdown">Markdown Help</a></div>
     <div id="dropzoneMessage"></div>
+    <form action="/search" target="_blank">
+        <input name="q" placeholder="Search (opens in new tab)">
+    </form>
 </div>
 <div class="editor">
 <h1><a href="/tanks/{{tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a></h1>

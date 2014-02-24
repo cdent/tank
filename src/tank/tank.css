@@ -107,6 +107,10 @@ a.wikititle:hover {
     float: right;
 }
 
+.commands div {
+    margin-bottom: 1em;
+}
+
 .message {
     font-size: 125%;
     color: red;
