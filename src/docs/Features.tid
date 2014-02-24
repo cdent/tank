@@ -19,7 +19,7 @@ type: text/x-markdown
 * Host [[single page applications|Single Page Apps]] that use the
   [[API]].
 * Subscribe to Atom feeds of content in tanks.
-* Login using [GitHub](https://github.com/).
+* Login using [GitHub](https://github.com/), Facebook or Google.
 * Be protected by SSL Everywhere.
 * Receive [[websocket-based|websockets]] in-browser notifications.
 * View server-side rendering of tw classic wikitext.
@@ -30,6 +30,5 @@ type: text/x-markdown
 * Bask in the prettiness of some proper web design.
 * View server-side rendering of tw five wikitext.
 * Use additional applications for comps.
-* Login using other services (e.g. facebook).
 
 Have an idea? [[Contact us|contact]]!
