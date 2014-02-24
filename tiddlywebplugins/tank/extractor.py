@@ -6,6 +6,7 @@ wrapped extractor exists in the user store.
 import logging
 import simplejson
 
+from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.model.user import User
 from tiddlyweb.store import StoreError
 from tiddlyweb.web.extractors import ExtractorInterface
@@ -38,10 +39,13 @@ class Extractor(ExtractorInterface):
             LOGGER.debug('UserExtract:%s found %s', wrapped_extractor,
                     extracted_user)
             try:
-                user = store.get(User(extracted_user['name']))
+                map_tiddler = Tiddler(extracted_user['name'], 'MAPUSER')
+                map_tiddler = store.get(map_tiddler)
+                username = map_tiddler.fields['mapped_user']
+                user = store.get(User(username))
                 environ['tank.user'] = user
                 environ['tank.user_info'] = simplejson.loads(user.note)
-                return extracted_user
-            except StoreError:
+                return {'name': username, 'roles': []}
+            except (StoreError, KeyError):
                 pass
         return False

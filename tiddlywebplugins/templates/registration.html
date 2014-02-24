@@ -9,20 +9,40 @@
 </header>
 
 <main>
+<input type="checkbox" id="nav_more" role="button">
+<label class="commandbox" for="nav_more">
+    <i class="fa fa-align-justify"></i>
+</label>
+<div class="commands">
+    <p class="command">The username you choose will show up as the
+    modifier of the content
+    you edit. Other users can tag their content with @&lt;yourusername&gt;
+    and you will received a notification.</p>
+</div>
+<div class="output">
 <form method="POST" action="/register">
-    Username:<br>
-    {{login}}<br>
-    <input name="login" value="{{login}}" type="hidden">
-    Name:<br>
-    <input name="name" value="{{name}}"><br>
-    Email:<br>
-    <input name="email" value="{{email}}"><br>
+    <input type="hidden" name="server_name" value="{{server_name}}">
+    <input type="hidden" name="server_name_sig" value="{{server_name_sig}}">
+    <input type="hidden" name="server_login" value="{{server_login}}">
+    <input type="hidden" name="server_login_sig" value="{{server_login_sig}}">
     <input type="hidden" name="redirect" value="/dash">
-    Comments:<br>
-    <textarea name="extra" rows=4 placeholder="Anything else"></textarea><br>
-    <label><input type="checkbox" name="announcements">Check to receive email announcements.</label><br>
+    {% if local_user %}
+    <p>Your remote username, {{login}}, is already in use on Tank, you'll
+    have to choose another.</p>
+    <label><input name="login" placeholder="Username">Username</label>
+    {% else %}
+    <p>If you like you can use your remote username. Or you can choose
+    something else.</p>
+    <label><input name="login" value="{{login}}">Username</label>
+    {% endif %}
+    <label><input name="name" value="{{name}}">Name</label>
+    <label><input name="email" value="{{email}}">Email</label>
+    <textarea name="extra" rows=4 placeholder="Anything else"></textarea>
+    <label><input type="checkbox" name="announcements">Check to receive
+        email announcements.</label>
     <input type="submit" value="Sign Up!">
 </form>
+</div>
 </main>
 
 {% endblock %}

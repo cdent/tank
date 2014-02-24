@@ -1,11 +1,14 @@
 
-main {
-    width: 50%;
-    margin: 2em auto 2em auto;
-}
-
 input, textarea {
     width: 30em;
+}
+
+label, textarea {
+    display: block;
+}
+
+label input {
+    margin-right: .5em;
 }
 
 input[type="checkbox"] {
