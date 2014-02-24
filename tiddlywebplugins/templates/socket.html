@@ -1,10 +1,16 @@
 <span class="wikititle right socketicon socketall">
     <i class="allicon fa fa-bell-o"></i>
-    <dl class="socketinfo"></dl>
+    <div class="socketinfo">
+        <a class="socketsearch"><i class="fa fa-search"></i></a>
+        <dl></dl>
+    </div>
 </span>
 {% if user and user != 'GUEST' %}
 <span class="wikititle right socketicon socketfriends">
     <i class="friendsicon fa fa-meh-o"></i>
-    <dl class="socketinfo"></dl>
+    <div class="socketinfo">
+        <a class="socketsearch"><i class="fa fa-search"></i></a>
+        <dl></dl>
+    </div>
 </span>
 {% endif %}

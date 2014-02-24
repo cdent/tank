@@ -140,6 +140,16 @@ a.wikititle:hover {
     border: thin solid black;
 }
 
+.socketinfo dl {
+    margin: 0;
+}
+
+.socketsearch {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
 .socketinfo a {
     text-decoration: none;
 }

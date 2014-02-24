@@ -14,11 +14,20 @@
 		user = tiddlyweb.status.username,
 		currentUserTag = '@' + user;
 
+	function timestampToday() {
+		var date = new Date(),
+			year = date.getUTCFullYear() + '',
+			month = date.getUTCMonth() + 1 + '',
+			day = date.getUTCDate() + '';
+		day = day.length == 1 ? '0' + day : day;
+		month = month.length == 1 ? '0' + month : month;
+		return year + month + day + '*';
+	}
 
 	if (allsocketinfo.length) {
 		var allInfo = new Tiddlers(allsocketinfo,
 			socketuri,
-			'/search?q=',
+			'/search?q=modified:' + timestampToday(),
 			['*'],
 			{});
 		allInfo.start();

@@ -5,9 +5,14 @@ var Tiddlers = (function($) {
     "use strict";
 
     var Tiddlers = function(el, socketuri, sourceuri, updater, options) {
-        this.el = el;
-        this.source = sourceuri + ';sort=modified';
+        this.el = el.find('dl');
+        this.source = sourceuri + ';sort=-modified;limit=5;sort=modified';
         this.updater = updater;
+
+		var searchURI = sourceuri + ';sort=-modified',
+			socketsearch = el.find('.socketsearch');
+		socketsearch.attr('href', searchURI);
+
         if (typeof(io) !== 'undefined') {
             this.socket = io.connect(socketuri,
                     {'force new connection': true});
@@ -61,8 +66,6 @@ var Tiddlers = (function($) {
 					tiddlerDate).text(tiddler.modified).timeago();
 			dd.prepend(span);
 
-            // jquery data() plays funny when the element is not part of the DOM
-            // so use attr()
             var dt = $('<dt>').append(link);
 
             return {dt: dt, dd: dd};
