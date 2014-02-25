@@ -52,7 +52,8 @@
     </table>
 </div>
 <div class="editor" ng-show="editTank" ng-controller="TankEditor">
-    <h1>{{editTank.name}}
+    <h1><i title="{{editTank.type}}" class="fa {{editTank.icon}}"></i>
+        {{editTank.name}}
         <i ng-click='saveTank()' title="save" class="editicon fa fa-check"></i>
         <i ng-click='cancelEditor()' title="cancel" class="editicon fa fa-times"></i>
     </h1>

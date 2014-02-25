@@ -53,8 +53,6 @@ app.service('tankTypeIcon', function() {
 
 	this.get = function(policy) {
 		var username = policy.owner;
-		console.log(policy)
-		console.log(private_policy(username));
 		if (angular.equals(policy, private_policy(username))) {
 			return {type: 'private', icon: POLICY_ICONS.private};
 		}
@@ -108,11 +106,13 @@ app.controller('TanksCtrl', function($scope, tankService) {
 	});
 });
 
-app.controller('TankEditor', function($scope, $http, $rootScope) {
+app.controller('TankEditor', function($scope, $http, $rootScope, tankTypeIcon) {
 	$scope.constraints = ['manage', 'read', 'write', 'create', 'delete'];
 	$scope.$on('startEdit', function(ev, data) {
 		$scope.editTank = angular.copy(data.tank);
 		$scope.originalData = angular.copy(data.tank);
+		angular.extend($scope.editTank,
+			tankTypeIcon.get($scope.editTank.policy));
 	});
 
 	$scope.$on('clearEdit', function() {
@@ -166,6 +166,7 @@ app.controller('TankCtrl', function($scope, $location, $rootScope,
 		if (data) {
 			$scope.tank = angular.copy(data.tank);
 			$scope.tanks[$scope.tank.name] = $scope.tank;
+			angular.extend($scope.tank, tankTypeIcon.get($scope.tank.policy));
 		}
 	});
 
