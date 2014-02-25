@@ -59,6 +59,10 @@
     <form action="/search">
         <input name="q" placeholder="Search all of tank">
     </form>
+    <form action="/edit">
+        <input name="bag" value="{{ tiddler.bag }}" type="hidden">
+        <input name="tiddler" placeholder="Create a new tiddler">
+    </form>
 </div>
 <div class="output">
     <h1 class="tiddlertitle"><span class="meta">

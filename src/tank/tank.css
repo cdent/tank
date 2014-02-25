@@ -107,7 +107,8 @@ a.wikititle:hover {
     float: right;
 }
 
-.commands div {
+.commands div,
+.commands form {
     margin-bottom: 1em;
 }
 
