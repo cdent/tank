@@ -15,6 +15,12 @@ app.filter('escape', function() {
 
 app.service('tankTypeIcon', function() {
 
+	var policyMakers = {
+		private: private_policy,
+		protected: protected_policy,
+		public: public_policy,
+	};
+
 	function private_policy(username) {
 		return {
 			owner: username,
@@ -50,6 +56,10 @@ app.service('tankTypeIcon', function() {
 			accept: ['NONE']
 		}
 	}
+
+	this.makePolicy = function(type, username) {
+		return policyMakers[type](username);
+	};
 
 	this.get = function(policy) {
 		var username = policy.owner;
@@ -108,6 +118,7 @@ app.controller('TanksCtrl', function($scope, tankService) {
 
 app.controller('TankEditor', function($scope, $http, $rootScope, tankTypeIcon) {
 	$scope.constraints = ['manage', 'read', 'write', 'create', 'delete'];
+	$scope.policyTypes = Object.keys(POLICY_ICONS);
 	$scope.$on('startEdit', function(ev, data) {
 		$scope.editTank = angular.copy(data.tank);
 		$scope.originalData = angular.copy(data.tank);
@@ -122,6 +133,11 @@ app.controller('TankEditor', function($scope, $http, $rootScope, tankTypeIcon) {
 	$scope.cancelEditor = function() {
 		$scope.editTank = null;
 		$rootScope.$broadcast('finishEdit', {tank: $scope.originalData});
+	};
+
+	$scope.changePolicy = function(type) {
+		$scope.editTank.policy = tankTypeIcon.makePolicy(type,
+			$scope.editTank.policy.owner);
 	};
 
 	// XXX: move to service?

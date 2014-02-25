@@ -62,6 +62,12 @@
             <input name="owner" ng-model="editTank.policy.owner"></label></p>
         <p><label>Description:
             <input name="desc" ng-model="editTank.desc"></label></p>
+        <p>Make: 
+        <label ng-hide="type == 'custom'" ng-repeat="type in policyTypes">
+            <input ng-click="changePolicy(type)" name="policytype" type="radio" value="{{type}}"
+            ng-model="editTank.type">
+            {{type}}
+        </label>
         <table>
         <tr><th>Constraint</th><th>Members</th></tr>
         <tr ng-repeat="constraint in constraints">
