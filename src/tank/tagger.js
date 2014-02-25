@@ -2,12 +2,12 @@
 	"use strict";
 
 	var selectizer,
-		tags = [];
+		tags;
 
 	function start() {
 		if (selectizer) {
 			selectizer.destroy();
-			tags = [];
+			tags = undefined;
 		}
 		var select = $('input[name=tags]').selectize({
 			delimeter: ',',
@@ -21,7 +21,7 @@
 	}
 
 	function getTags(callback) {
-		if (tags.length > 0) {
+		if (tags !== undefined) {
 			return callback(tags);
 		}
 		var uri = '/tags',
@@ -33,6 +33,7 @@
 			type: 'get',
 			url: uri,
 			success: function(data) {
+				tags = [];
 				$.each(data.split(/\n/), function(index, item) {
 					if (item) {
 						tags.push({value: item, text: item});
