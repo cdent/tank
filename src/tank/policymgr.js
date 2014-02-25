@@ -1,8 +1,71 @@
-
+(function(){
 var app = angular.module('app', []);
+
+var POLICY_ICONS = {
+	private: 'fa-folder',
+	protected: 'fa-folder-o',
+	public: 'fa-folder-open-o',
+	custom: 'fa-wrench'
+};
+
 
 app.filter('escape', function() {
 	return window.encodeURIComponent;
+});
+
+app.service('tankTypeIcon', function() {
+
+	function private_policy(username) {
+		return {
+			owner: username,
+			read: [username],
+			write: [username],
+			create: [username],
+			delete: [username],
+			manage: [username],
+			accept: ['NONE']
+		}
+	}
+
+	function protected_policy(username) {
+		return {
+			owner: username,
+			read: [],
+			write: [username],
+			create: [username],
+			delete: [username],
+			manage: [username],
+			accept: ['NONE']
+		}
+	}
+
+	function public_policy(username) {
+		return {
+			owner: username,
+			read: [],
+			write: [],
+			create: [],
+			delete: [],
+			manage: [username],
+			accept: ['NONE']
+		}
+	}
+
+	this.get = function(policy) {
+		var username = policy.owner;
+		console.log(policy)
+		console.log(private_policy(username));
+		if (angular.equals(policy, private_policy(username))) {
+			return {type: 'private', icon: POLICY_ICONS.private};
+		}
+		if (angular.equals(policy, protected_policy(username))) {
+			return {type: 'protected', icon: POLICY_ICONS.protected};
+		}
+		if (angular.equals(policy, public_policy(username))) {
+			return {type: 'public', icon: POLICY_ICONS.public};
+		}
+		return {type: 'custom', icon: POLICY_ICONS.custom};
+	};
 });
 
 app.service('tankService', function($http, $q) {
@@ -74,13 +137,16 @@ app.controller('TankEditor', function($scope, $http, $rootScope) {
 
 });
 
-app.controller('TankCtrl', function($scope, $location, $rootScope, tankService) {
+app.controller('TankCtrl', function($scope, $location, $rootScope,
+			tankService, tankTypeIcon)
+{
 	$scope.constraints = ['manage', 'read', 'write', 'create', 'delete'];
 
 	function setData(tankName) {
 		tankService.getTanks().then(function(data) {
 			$scope.tanks = data;
 			$scope.tank = angular.copy($scope.tanks[tankName]);
+			angular.extend($scope.tank, tankTypeIcon.get($scope.tank.policy));
 		});
 	}
 
@@ -109,3 +175,4 @@ app.controller('TankCtrl', function($scope, $location, $rootScope, tankService) 
 	};
 
 });
+})();

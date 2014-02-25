@@ -33,7 +33,8 @@
     </ul>
 </div>
 <div class="tank" ng-show="tank" ng-controller="TankCtrl">
-    <h1>{{tank.name}}
+    <h1><i title="{{tank.type}}" class="fa {{tank.icon}}"></i>
+        {{tank.name}}
         <i ng-click='startEditor()' title="edit" class="editicon fa fa-pencil"></i>
     </h1>
     <p>Owner: {{tank.policy.owner}}</p>
