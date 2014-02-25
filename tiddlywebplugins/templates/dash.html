@@ -47,18 +47,33 @@
         <input name="q" placeholder="Search all of tank">
     </form>
 </div>
+<div class="output">
+<ul class="anchornav">
+    <li><a title="Your tanks" href="#yours"><i class="fa fa-home"></i></a></li>
+    <li><a title="Friendly tanks" href="#friends"><i class="fa fa-smile-o"></i></a></li>
+    <li><a title="Your comps" href="#ycomps"><i class="fa fa-arrows-h"></i></a></li>
+    <li><a title="Available comps" href="#acomps"><i class="fa fa-arrows-alt"></i></a></li>
+</ul>
 <h1 class="greeting">Hi {{user}}</h1>
 <div class="tanks">
-    <h2>Your tanks</h2>
+    <h2 id="yours">Your tanks</h2>
     <ul>
         {% for bag in owned_bags|sort(attribute='name') %}
         <li><i title="{{ bag.type }}" class="fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
         <span class="description">{{ bag.desc }}</span></li>
         {% endfor %}
     </ul>
+    <h2 id="friends">Friendly tanks
+        <i title="Tanks you can write in" class="fa fa-question-circle"></i></h2>
+    <ul>
+        {% for bag in friendly_bags|sort(attribute='name') %}
+        <li><i title="{{ bag.type }}" class="fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
+        <span class="description">{{ bag.desc }}</span></li>
+        {% endfor %}
+    </ul>
 </div>
-<div class="ycomps">
-    <h2>Your Comps
+<div class="comps">
+    <h2 id="ycomps">Your Comps
         <a href="/tanks/docs/composition"><i class="fa fa-question-circle"></i></a></h2>
     <ul>
         {% for comp in owned_comps|sort(attribute='name') %}
@@ -66,15 +81,14 @@
         <span class="description">{{ comp.desc }}</span></li>
         {% endfor %}
     </ul>
-</div>
-<div class="acomps">
-    <h2>Available Comps</h2>
+    <h2 id="acomps">Available Comps</h2>
     <ul>
         {% for bag in comp_bags|sort(attribute='name') %}
         <li><a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
         <span class="description">{{ bag.desc }}</span></li>
         {% endfor %}
     </ul>
+</div>
 </div>
 </main>
 

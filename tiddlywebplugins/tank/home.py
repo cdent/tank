@@ -7,6 +7,7 @@ If logged in, your home page/dashboard.
 
 from hashlib import md5
 
+from tiddlyweb.filters import recursive_filter, parse_for_filters
 from tiddlyweb.store import StoreError
 
 from tiddlywebplugins.templates import get_template
@@ -63,6 +64,7 @@ def dash(environ, start_response, message=None):
     owned_bags = get_owned_bags(store, username)
     owned_comps = get_owned_comps(store, username)
     comp_bags = get_comp_bags(store, config, usersign)
+    friendly_bags = get_friendly_bags(store, environ, username)
 
     dash_template = get_template(environ, DASH_TEMPLATE)
     start_response('200 OK', [
@@ -73,6 +75,7 @@ def dash(environ, start_response, message=None):
         'gravatar': gravatar(environ),
         'user': username,
         'owned_bags': owned_bags,
+        'friendly_bags': friendly_bags,
         'message': message,
         'comp_bags': comp_bags,
         'owned_comps': owned_comps,
@@ -93,13 +96,29 @@ def augment_bag(store, bag, username=None):
     return bag
 
 
-def load_and_test_entity(store, entity, username):
+def load_and_test_entity(store, entity, username, negate_user=False):
     try:
         entity = store.get(entity)
     except StoreError:
         return False
+    if negate_user:
+        return (entity.policy.owner != username
+                and not entity.name.startswith('_'))
     return (entity.policy.owner == username
             and not entity.name.startswith('_'))
+
+
+def get_friendly_bags(store, environ, username):
+    """
+    Return a list of bags that this user can write in.
+    """
+    def filter(environ, filter_string, entities):
+        return recursive_filter(parse_for_filters(
+            filter_string, environ)[0], entities)
+
+    return (augment_bag(store, bag) for bag in
+            filter(environ, 'select=policy:create', store.list_bags())
+            if load_and_test_entity(store, bag, username, negate_user=True))
 
 
 def get_owned_bags(store, username):
@@ -109,6 +128,7 @@ def get_owned_bags(store, username):
     """
     return (augment_bag(store, bag) for bag in store.list_bags()
             if load_and_test_entity(store, bag, username))
+
 
 def get_owned_comps(store, username):
     """

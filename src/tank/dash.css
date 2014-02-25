@@ -28,3 +28,14 @@ ul.radiogroup li:hover {
 .command {
     padding-bottom: 1em;
 }
+
+ul.anchornav {
+    float: right;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.anchornav li {
+    display: inline;
+}

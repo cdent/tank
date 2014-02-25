@@ -180,6 +180,10 @@ a.wikititle:hover {
     left: -999px;
 }
 
+i[title]:hover {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 62em) {
     body {
         width: 100%;
