@@ -51,7 +51,7 @@
 <div class="tanks">
     <h2>Your tanks</h2>
     <ul>
-        {% for bag in bags|sort(attribute='name') %}
+        {% for bag in owned_bags|sort(attribute='name') %}
         <li><i title="{{ bag.type }}" class="fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
         <span class="description">{{ bag.desc }}</span></li>
         {% endfor %}
@@ -61,7 +61,7 @@
     <h2>Your Comps
         <a href="/tanks/docs/composition"><i class="fa fa-question-circle"></i></a></h2>
     <ul>
-        {% for comp in comps|sort(attribute='name') %}
+        {% for comp in owned_comps|sort(attribute='name') %}
         <li><a href="/comps/{{ comp.name|uri }}">{{ comp.name }}</a>
         <span class="description">{{ comp.desc }}</span></li>
         {% endfor %}

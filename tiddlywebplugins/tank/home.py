@@ -60,27 +60,9 @@ def dash(environ, start_response, message=None):
     store = environ['tiddlyweb.store']
     config = environ['tiddlyweb.config']
 
-    def load_and_test_entity(entity):
-        try:
-            entity = store.get(entity)
-        except StoreError:
-            return False
-        return entity.policy.owner == username and not entity.name.startswith('_')
-
-    def augment_bag(bag):
-        bag = store.get(bag)
-        policy_type = determine_tank_type(bag, username)
-        bag.icon = POLICY_ICONS[policy_type]
-        bag.type = policy_type
-        return bag
-
-    kept_bags = (augment_bag(bag) for bag in store.list_bags()
-            if load_and_test_entity(bag))
-
+    owned_bags = get_owned_bags(store, username)
+    owned_comps = get_owned_comps(store, username)
     comp_bags = get_comp_bags(store, config, usersign)
-
-    comps = (recipe for recipe in store.list_recipes()
-            if load_and_test_entity(recipe))
 
     dash_template = get_template(environ, DASH_TEMPLATE)
     start_response('200 OK', [
@@ -90,9 +72,48 @@ def dash(environ, start_response, message=None):
         'socket_link': config.get('socket.link'),
         'gravatar': gravatar(environ),
         'user': username,
-        'bags': kept_bags,
+        'owned_bags': owned_bags,
         'message': message,
         'comp_bags': comp_bags,
-        'comps': comps,
+        'owned_comps': owned_comps,
         'csrf_token': get_nonce(environ)
     })
+
+
+def augment_bag(store, bag, username=None):
+    """
+    Augment a bag object with information about it's policy type.
+    """
+    bag = store.get(bag)
+    if not username:
+        username = bag.policy.owner
+    policy_type = determine_tank_type(bag, username)
+    bag.icon = POLICY_ICONS[policy_type]
+    bag.type = policy_type
+    return bag
+
+
+def load_and_test_entity(store, entity, username):
+    try:
+        entity = store.get(entity)
+    except StoreError:
+        return False
+    return (entity.policy.owner == username
+            and not entity.name.startswith('_'))
+
+
+def get_owned_bags(store, username):
+    """
+    Return a list of bags owned by username, except for ones
+    that have a name starting with '_'.
+    """
+    return (augment_bag(store, bag) for bag in store.list_bags()
+            if load_and_test_entity(store, bag, username))
+
+def get_owned_comps(store, username):
+    """
+    Return a list of comps owned by username, except for ones
+    that have a name starting with '_'.
+    """
+    return (recipe for recipe in store.list_recipes()
+            if load_and_test_entity(store, recipe, username))
