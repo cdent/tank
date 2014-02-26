@@ -30,8 +30,20 @@
         <input name="q" placeholder="Search (opens in new tab)">
     </form>
 </div>
-<div class="editor">
-<h1><a href="/tanks/{{tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a></h1>
+<div class="output editor">
+<form action="/edit" method="POST">
+<h1>
+<a href="/tanks/{{tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a>
+<span class="controls">
+{% if conflict %}
+<button type="submit">Clobber</button>
+{% else %}
+<button accesskey="s" type="submit">Save</button>
+{% endif %}
+<button type="reset">Reset</button>
+<a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">Cancel</a>
+</span>
+</h1>
 {% if message == 'conflict' %}
 <div class="message">Someone made a change while you were editing. Your
     text is below.
@@ -39,22 +51,14 @@
 {% elif message %}
 <div class="message">{{ message|e }}</div>
 {% endif %}
-<form action="/edit" method="POST">
 <input type="hidden" name="title" value="{{ tiddler.title }}">
 <input type="hidden" name="bag" value="{{ tiddler.bag }}">
 <input type="hidden" name="etag" value="{{ etag }}">
 <input type="hidden" name="type" value="{{ tiddler.type }}">
 <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-<textarea id="dropzone" name="text" rows="20" cols="60" placeholder="enter markdown text here">{{ tiddler.text }}</textarea><br/>
-<label><input type="checkbox" name="global"> Use global tags in autocomplete?<label><br/>
+<textarea id="dropzone" name="text" rows="18" cols="60" placeholder="enter markdown text here">{{ tiddler.text }}</textarea><br/>
+<label><input type="checkbox" name="global"> Use global tags in autocomplete?</label><br/>
 <input placeholder="tags" name="tags" value="{{ tiddler.tags|join(', ') }}" size="60"><br/>
-{% if conflict %}
-<button type="submit">Clobber</button>
-{% else %}
-<button type="submit">Save</button>
-{% endif %}
-<button type="reset">Reset</button>
-<a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">Cancel</a>
 </form>
 </div>
 </main>
