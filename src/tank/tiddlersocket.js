@@ -38,6 +38,9 @@ var Tiddlers = (function($) {
                 dataType: 'json',
                 url: this.source,
                 success: function(tiddlers) {
+					if (tiddlers.length > 0) {
+						self.el.empty();
+					}
                     $.each(tiddlers, function(index, tiddler) {
                         self.push(tiddler, true);
                     });
