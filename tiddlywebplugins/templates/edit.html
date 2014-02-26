@@ -8,6 +8,7 @@
 {% block body %}
 <header>
     {% include 'logout.html' %}
+    <i title="{{ bag.type }}" class="wikititle fa {{ bag.icon }}"></i>
 	<a class="wikititle" href="/tanks/{{tiddler.bag|uri}}/RecentChanges">Changes</a>
     {% if tiddler.title != "index" %}
     <a class="wikititle" href="/tanks/{{ tiddler.bag|uri }}">TankTop</a>

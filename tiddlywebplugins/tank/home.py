@@ -87,7 +87,8 @@ def augment_bag(store, bag, username=None):
     """
     Augment a bag object with information about it's policy type.
     """
-    bag = store.get(bag)
+    if not bag.store:
+        bag = store.get(bag)
     if not username:
         username = bag.policy.owner
     policy_type = determine_tank_type(bag, username)

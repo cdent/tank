@@ -21,7 +21,7 @@ from tiddlyweb.wikitext import render_wikitext
 from tiddlywebplugins.utils import require_role
 from tiddlywebplugins.templates import get_template
 
-from .home import dash, gravatar
+from .home import dash, gravatar, augment_bag
 from .policy import WIKI_MODES
 from .search import full_search
 from .csrf import get_nonce
@@ -221,6 +221,7 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
         bag = Bag(bag_name)
         try:
             bag = store.get(bag)
+            bag = augment_bag(store, bag)
         except NoBagError:
             raise HTTP404('that tank does not exist')
 
@@ -246,6 +247,7 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
         'socket_link': config.get('socket.link'),
         'csrf_token': get_nonce(environ),
         'gravatar': gravatar(environ),
+        'bag': bag,
         'message': message,
         'user': usersign['name'],
         'tiddler': tiddler,
@@ -328,6 +330,7 @@ def wiki_page(environ, start_response):
 
     try:
         bag = store.get(Bag(tank_name))
+        bag = augment_bag(store, bag)
     except NoBagError:
         raise HTTP404('no tank found for %s' % tank_name)
 
