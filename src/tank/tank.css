@@ -10,6 +10,11 @@
     color: red;
 }
 
+.editor button a {
+    text-decoration: none;
+    color: inherit;
+}
+
 body {
     background-color: #efefef;
     margin: auto;
