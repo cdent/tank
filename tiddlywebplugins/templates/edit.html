@@ -38,10 +38,10 @@
 {% if conflict %}
 <button type="submit">Clobber</button>
 {% else %}
-<button accesskey="s" type="submit">Save</button>
+<button accesskey="s" type="submit">Save Tiddler</button>
 {% endif %}
-<button type="reset">Reset</button>
-<a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">Cancel</a>
+<button type="reset">Revert Changes</button>
+<button><a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">Cancel Edit</a></button>
 </span>
 </h1>
 {% if message == 'conflict' %}
