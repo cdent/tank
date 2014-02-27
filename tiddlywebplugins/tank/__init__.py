@@ -31,6 +31,7 @@ from .search import list_tags
 from .composition import comp
 from .auth import view_auth, make_key, destroy_key
 from .policymgr import policymgr
+from .httperror import PrettyError, raiser
 
 
 SUBSCRIBER = 'SUBSCRIBER'
@@ -43,10 +44,15 @@ def establish_web(config):
     logout_init(config)
     oauth_init(config)
 
+    selector = config['selector']
     if CSRFProtector not in config['server_request_filters']:
         config['server_request_filters'].append(CSRFProtector)
+    if PrettyError not in config['server_response_filters']:
+        config['server_response_filters'].insert(0, PrettyError)
 
-    selector = config['selector']
+    selector.status404 = raiser('404', 'path not found')
+    selector.status405 = raiser('405', 'method not allow')
+
     replace_handler(selector, '/', dict(GET=home))
     selector.add('/auth/{key_name:segment}', DELETE=destroy_key)
     selector.add('/auth', GET=view_auth, POST=make_key)

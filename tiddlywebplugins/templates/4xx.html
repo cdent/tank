@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{ error.status}} - {{ error.message }}{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/4xx.css">
+{% endblock %}
+{% block body %}
+<header>
+    <span class="wikititle">{{ error.status}}</span>
+</header>
+
+<main>
+<div class="output">
+    <div class="error">
+    {{error.message}}
+    </div>
+</div>
+</main>
+
+{% endblock %}

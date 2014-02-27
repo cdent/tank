@@ -1,0 +1,42 @@
+
+html, body, main {
+    height: 100%;
+}
+
+main {
+    background: url(/bags/tank/tiddlers/emptybowl.jpg) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.commands {
+    display: none;
+}
+
+.output {
+    max-width: 100%;
+}
+
+.error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -5em;
+    margin-left: -10em;
+    width: 20em;
+    height: 10em;
+    text-align: center;
+}
+
+body {
+    padding-bottom: 75px;
+}
+
+body main {
+    height: auto;
+    min-height: 100%;
+}
+
+footer {
+    position: relative;
+    margin-top: -75px;
+}
