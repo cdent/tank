@@ -5,13 +5,31 @@
 {% endblock %}
 {% block body %}
 <header>
+{% include 'logout.html' %}
     <span class="wikititle">{{ error.status}}</span>
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
 </header>
 
 <main>
 <div class="output">
     <div class="error">
+    <div class="message">
     {{error.message}}
+    </div>
+    <div class="extra">
+        {% if error.status.startswith('404') %}
+        Not found what you were looking for. Perhaps you'd like to
+        <form action="/search">
+            <input name="q" placeholder="search all of tank">
+        </form>
+        {% endif %}
+        {% if error.status.startswith('400') %}
+        You left something out of that request, perhaps go back and
+        try again.
+        {% endif %}
+        </div>
     </div>
 </div>
 </main>

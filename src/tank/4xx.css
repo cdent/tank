@@ -27,6 +27,17 @@ main {
     text-align: center;
 }
 
+.error .message {
+    color: inherit;
+    font-size: 125%;
+}
+
+
+.extra {
+    padding-top: .5em;
+    text-align: left;
+}
+
 body {
     padding-bottom: 75px;
 }

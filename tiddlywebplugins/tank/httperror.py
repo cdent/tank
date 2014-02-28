@@ -8,6 +8,8 @@ from httpexceptor import HTTPException, HTTP404
 
 from tiddlywebplugins.templates import get_template
 
+from .home import gravatar
+
 
 ERROR_TEMPLATE = '4xx.html'
 
@@ -31,6 +33,9 @@ class PrettyError(object):
 
 
 def send_error(environ, start_response, exc, allow=None):
+    config = environ.get('tiddlyweb.config', {})
+    usersign = environ.get('tiddlyweb.usersign')
+
     error = {
         'status': exc.status,
         'message': exc.message
@@ -43,7 +48,13 @@ def send_error(environ, start_response, exc, allow=None):
         headers.append(('Allow', allow))
     start_response(exc.status, headers)
 
-    data = {'error': error}
+    data = {
+        'error': error,
+        'socket_link': config.get('socket.link'),
+        'gravatar': gravatar(environ),
+        'user': usersign['name'],
+
+    }
     return template.generate(data)
 
 
