@@ -1,0 +1,61 @@
+modifier: cdent
+modified: 201402280000
+type: text/x-markdown
+
+_version: 1.0.0_
+
+At the time of writing (Feburary 2014), the Tank service is in a period
+of open beta testing. The scope and terms of service are subject to
+change during this period.
+
+# Scope of Service
+
+Tank is owned and operated by [Peermore Limited](http://peermore.com/).
+Limited</a>.
+
+Tank is a shared platform for managing and sharing content in a collection
+of wiki-like containers called tanks. Tanks may have one of three pre-defined
+access control policies or may be configured with a custom policy.
+
+Tank is designed for use with modern web browsers and modern HTTP
+libraries. If the site does not work on a well known browser, please
+report the problem as an issue. If fixing the problem does not contravene
+features for the majority of users reasonable effort will be made to fix
+it.
+
+# Rights and Constraints
+
+Content which you author remains yours.
+
+Content which you mark as private or restricted access will not be
+shared with other parties. Peermore can not be held responsible for
+third-party use of content which is shared publicly.
+
+You may export your data at any time using either the [[API]] or
+forthcoming tools.
+
+You may request to have your account closed at any time. When you do,
+data contained in tanks for which you are the owner will be destroyed,
+unless you request otherwise. Content which you have contributed to
+tanks owned by other parties will remain.
+
+Your data will be backed up regularly.
+
+If there is a significant outage of service, you will received a full
+explanation. While some outages are unavoidable, reasonable efforts
+will be made to avoid them where possible.
+
+# Responsibilities
+
+Posting content with the primary goal of directing traffic to outside
+sites, or increasing their search engine visibility, will be construed
+as spam and may result in account cancellation.
+
+You must not abuse the site by knowingly posting malicious code, or
+links to malicious sites, that could harm other users.
+
+You may not use the site to actively harass other users or or
+third parties.
+
+Peermore reserves the right to throttle or close accounts consuming
+an unreasonable proportion of site resources.

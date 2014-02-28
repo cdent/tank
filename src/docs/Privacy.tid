@@ -1,0 +1,23 @@
+modified: 201402280000
+modifier: cdent
+type: text/x-markdown
+
+_version: 1.0.0_
+
+Data you store on Tank remains your property and your responsibility.
+It will not be shared with third parties unless the data is made public
+by you.
+
+The Tank web service is only accessible over SSL. Authentication activities,
+provided by Github, Facebook and Google, are performed over SSL. Once
+authenticated, your session with Tank is managed by cookies which only
+traverse the network over SSL.
+
+**Data use and type is analyzed for performance monitoring and management
+of growth. Private content is never analyzed without explicit request
+from the author.**
+
+While every effort is made to ensure that private data will remain so,
+the web is a complex place. In the event of a privacy breach you will
+be informed as soon as possible. If you become aware of a privacy
+breach, please [[contact]] the site administrators.

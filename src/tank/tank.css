@@ -65,9 +65,18 @@ footer img {
 
 footer ul,
 footer li {
-    display: inline;
+    margin-top: 0;
+    margin-bottom: 0;
     padding-left: 0;
     padding-right: 1em;
+}
+
+footer li {
+    display: inline;
+}
+
+footer .subfooter {
+    font-size: 75%;
 }
 
 footer a {

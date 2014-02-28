@@ -1,10 +1,11 @@
 
 input, textarea {
-    max-width: 30em;
 }
 
 label, textarea {
     display: block;
+    max-width: 30em;
+    width: 100%;
 }
 
 label input {
