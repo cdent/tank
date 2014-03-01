@@ -13,16 +13,6 @@
     <a class="wikititle" href="/tanks/{{ bag.name|uri }}">TankTop</a>
     {% endif %}
     <a class="wikititle" href="RecentChanges">Changes</a>
-    {% if edit %}
-    <a accesskey="e" class="wikititle"
-        href="/edit?bag={{ bag.name|uri }};tiddler={{ tiddler.title|uri }}">Edit</a>
-    {% endif %}
-    {# temporarily disable while there is no delete
-    {% if delete %}
-    <a class="wikititle"
-        href="/delete?bag={{ bag.name|uri }};tiddler={{ tiddler.title|uri }}">Delete</a>
-    {% endif %}
-    #}
     {% if user != "GUEST" %}
     <a class="wikititle" href="/dash">Dash</a>
     {% endif %}
@@ -64,7 +54,16 @@
     </form>
 </div>
 <div class="output">
-    <h1 class="tiddlertitle"><span class="meta">
+    <h1 class="tiddlertitle">
+        {% if delete %}
+        <i class="control delete fa fa-trash-o"></i>
+        {% endif %}
+        {% if edit %}
+        <a accesskey="e"
+            href="/edit?bag={{ bag.name|uri }};tiddler={{ tiddler.title|uri }}">
+            <i class="control edit fa fa-pencil"></i></a>
+        {% endif %}
+        <span class="meta">
             <span class="modified" title="{{ tiddler.modified|rfc3339 }}">{{ tiddler.modified }}</span>
             <span class="modifier">{{ tiddler.modifier }}</span>
         </span>
@@ -90,6 +89,9 @@
 {% endif %}
 {% if edit and delete %}
 <script src="/bags/tank/tiddlers/mover.js"></script>
+{% endif %}
+{% if delete %}
+<script src="/bags/tank/tiddlers/pagedeleter.js"></script>
 {% endif %}
 {% if compable %}
 <script src="/bags/tank/tiddlers/compmaker.js"></script>
