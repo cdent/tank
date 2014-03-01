@@ -136,14 +136,16 @@ app.controller('TanksCtrl', function($scope, $rootScope, $filter, $http, tankSer
 		}
 	});
 
-	$scope.deleteTank = function(index) {
-		var name = $scope.tanks[index].name,
+	$scope.deleteTank = function(tank) {
+		var name = tank.name,
 			uri = '/bags/' + encodeURIComponent(name);
 		if (confirm('Are you certain you want to delete "' + name + '"? '
 					+ 'All tiddlers within will be removed!')) {
 			$http.delete(uri)
 				.success(function() {
-					$scope.tanks.splice(index, 1);
+					$scope.tanks = $scope.tanks.filter(function(item) {
+						return item.name !== name;
+					});
 					$rootScope.$broadcast('deletedTank', {name: name});
 				});
 		}
