@@ -57,9 +57,7 @@
     {% if edit %}
     <div id="dropzone">Drop binaries into your tank here.</div>
     {% endif %}
-    <form action="/search">
-        <input name="q" placeholder="Search all of tank">
-    </form>
+    {% include 'searchform.html' %}
     <form action="/edit">
         <input name="bag" value="{{ tiddler.bag }}" type="hidden">
         <input name="tiddler" placeholder="Create a new tiddler">
@@ -96,4 +94,5 @@
 {% if compable %}
 <script src="/bags/tank/tiddlers/compmaker.js"></script>
 {% endif %}
+<script src="/bags/tank/tiddlers/searchform.js"></script>
 {% endblock %}

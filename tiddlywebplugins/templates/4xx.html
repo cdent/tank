@@ -21,9 +21,7 @@
     <div class="extra">
         {% if error.status.startswith('404') %}
         Not found what you were looking for. Perhaps you'd like to
-        <form action="/search">
-            <input name="q" placeholder="search all of tank">
-        </form>
+        {% include 'searchform.html' %}
         {% endif %}
         {% if error.status.startswith('400') %}
         You left something out of that request, perhaps go back and
