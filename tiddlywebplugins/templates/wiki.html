@@ -48,10 +48,12 @@
     <div id="dropzone">Drop binaries into your tank here.</div>
     {% endif %}
     {% include 'searchform.html' %}
+    {% if create %}
     <form action="/edit">
         <input name="bag" value="{{ tiddler.bag }}" type="hidden">
         <input name="tiddler" placeholder="Create a new tiddler">
     </form>
+    {% endif %}
 </div>
 <div class="output">
     <h1 class="tiddlertitle">
