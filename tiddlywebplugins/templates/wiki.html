@@ -67,7 +67,9 @@
         {% endif %}
         <span class="meta">
             <span class="modified" title="{{ tiddler.modified|rfc3339 }}">{{ tiddler.modified }}</span>
-            <span class="modifier">{{ tiddler.modifier }}</span>
+            {% if tiddler.modifier %}
+            <span class="modifier"><a href="/tanks/{{ tiddler.modifier|uri}}">{{ tiddler.modifier }}</a></span>
+            {% endif %}
         </span>
         {{ tiddler.title }}</h1>
 {% if tiddler.tags %}

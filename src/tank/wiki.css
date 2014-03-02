@@ -56,6 +56,9 @@ ul.tags {
     text-align: right;
 }
 
+.meta span a {
+    color: black;
+}
 
 #mover form {
 	display: none;
