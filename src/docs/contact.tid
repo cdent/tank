@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402190000
+modified: 201403010000
 type: text/x-markdown
 
 Tank is currently undergoing active development and testing to determine
@@ -8,7 +8,7 @@ what it wants to be when it grows up.
 Development can be tracked on [GitHub](https://github.com/cdent/tank),
 by watching the
 [TiddlyWeb Google Group](http://groups.google.com/group/tiddlyweb), and
-keeping track of the @docs and @announce tanks.
+keeping track of the @docs tank.
 
 If you have a question or just want to say hi you can reach someone
-at <a href="mailto:tank@peermore.com">tank@peermore.com</a>.
+at <tank@peermore.com>.

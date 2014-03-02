@@ -1,0 +1,35 @@
+modifier: cdent
+modified: 201403010000
+type: text/x-markdown
+
+Tank is produced, created and maintained by
+[Peermore Limited](http://peermore.com) under the direction of Chris Dent.
+
+On the server it is mostly built with Python using
+[TiddlyWeb](http://tiddlyweb.com) as the core storage and web
+infrastructure. Additional functionality is provided by an extensive
+collection of Tiddlyweb plugins. All the code used is
+[open source](https://github.com/cdent/tank); if you'd like to work on
+Tank or run your own server, feel free.
+
+[nodejs](http://nodejs.org) is used to provide "real-time" notifications
+and do server-side rendering of TiddlyWiki formatted text into HTML.
+
+Full text indexing is provided by [Whoosh](http://pythonhosted.org/Whoosh/).
+
+TiddlyWeb has a flexible storage system that makes it easy to adapt
+solutions to current usage. While Tank is being developed a simple store
+which keeps individual entities as files on disk is used. As the service
+grows those entities will be migrated to more scalable storage, most
+likely using [PostgreSQL](http://www.postgresql.org/).
+
+All resources in Tank can be manipulated via the [[API]] that is built
+in to Tiddlyweb.
+
+On the client side, where possible, interaction uses simple HTML augmented
+with a bit of [jQuery](http://jquery.com) driven Javascript. In those
+areas where something a little more dynamic is desired (such as the
+[[Policy Manager]]) [AngularJS](http://angularjs.org/) is being used.
+
+The quality of the Tank service is entirely dependent on feedback
+from the people who use it. If you have comments please [[contact]] us.
