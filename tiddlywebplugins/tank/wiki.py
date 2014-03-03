@@ -9,7 +9,8 @@ from tiddlyweb.model.policy import Policy, PermissionsError
 from tiddlyweb.model.tiddler import Tiddler, current_timestring
 from tiddlyweb.store import NoBagError, NoTiddlerError
 from tiddlyweb.control import filter_tiddlers
-from tiddlyweb.web.handler.tiddler import get as tiddler_get
+from tiddlyweb.web.handler.tiddler import (get as tiddler_get,
+        validate_tiddler_headers)
 from tiddlyweb.web.util import (get_route_value, encode_name, server_base_url,
         tiddler_etag)
 from tiddlyweb.web.validator import (validate_bag, validate_tiddler,
@@ -379,9 +380,10 @@ def wiki_page(environ, start_response):
         compable = full_search(config, 'id:"%s:app"' % tank_name)
         html = render_wikitext(tiddler, environ)
         wiki_template = get_template(environ, WIKI_TEMPLATE)
+        last_modified, etag = validate_tiddler_headers(environ, tiddler)
         start_response('200 OK', [
             ('Content-Type', 'text/html; charset=UTF-8'),
-            ('Cache-Control', 'no-cache')])
+            ('Cache-Control', 'no-cache'), last_modified, etag])
         return wiki_template.generate({
             'socket_link': config.get('socket.link'),
             'csrf_token': get_nonce(environ),
