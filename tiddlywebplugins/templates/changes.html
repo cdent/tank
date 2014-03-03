@@ -14,10 +14,26 @@
 </header>
 
 <main>
+<div class="output">
 <h1>Changes in last {{ days }} days.</h1>
 <ul>
 {% for tiddler in tiddlers %}
-<li><a href="{{ tiddler.title|uri }}">{{ tiddler.title }}</a></li>
+<li><a href="{{ tiddler.title|uri }}">
+    {{ tiddler.title }}
+</a>
+<span class="meta">
+<span class="modified" title="{{ tiddler.modified|rfc3339 }}">
+    {{ tiddler.modified }}
+</span>
+{% if tiddler.modifier %}
+by
+<span class="modifier">
+    <a href="/tanks/{{ tiddler.modifier|uri }}">
+        {{ tiddler.modifier }}</a>
+</span>
+{% endif %}
+<span>
+</li>
 {% endfor %}
 </ul>
 <div>
@@ -26,6 +42,7 @@ Changes in last
 <a href="RecentChanges?d={{ day }}">{{ day }}</a>
 {% endfor %}
 days.
+</div>
 </div>
 </main>
 

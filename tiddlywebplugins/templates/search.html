@@ -33,7 +33,28 @@
 {% endif %}
 <ul>
 {% for tiddler in tiddlers %}
-<li><a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a></li>
+<li>
+<a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">
+    {{ tiddler.title }}
+</a>
+<span class="meta">
+<span class="modified" title="{{ tiddler.modified|rfc3339 }}">
+    {{ tiddler.modified }}
+</span>
+{% if tiddler.modifier %}
+by
+<span class="modifier">
+    <a href="/tanks/{{ tiddler.modifier|uri }}">
+        {{ tiddler.modifier }}</a>
+</span>
+{% endif %}
+in
+<span class="tank">
+    <a href="/tanks/{{ tiddler.bag|uri }}">
+        {{ tiddler.bag }}</a>
+</span>
+<span>
+</li>
 {% endfor %}
 </ul>
 </div>

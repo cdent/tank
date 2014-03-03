@@ -47,8 +47,9 @@ def recent_changes(environ, start_response):
     except NoBagError:
         raise HTTP404('no tank found for %s' % tank_name)
 
-    tiddlers = filter_tiddlers(store.list_bag_tiddlers(bag),
-        'select=modified:>%sd;sort=-modified' % days, environ)
+    tiddlers = (store.get(tiddler) for tiddler in 
+            filter_tiddlers(store.list_bag_tiddlers(bag),
+                'select=modified:>%sd;sort=-modified' % days, environ))
 
     changes_template = get_template(environ, CHANGES_TEMPLATE)
     start_response('200 OK', [
