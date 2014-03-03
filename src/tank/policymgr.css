@@ -10,3 +10,12 @@
 .member {
     padding-right: 1em;
 }
+
+.tanklist {
+    width: 15em;
+    border-bottom: thin solid lightgrey;
+}
+
+.deleter {
+    float: right;
+}

@@ -199,6 +199,10 @@ i[title]:hover {
     cursor: pointer;
 }
 
+form[name=search] .globalizer {
+    display: none;
+}
+
 @media screen and (max-width: 62em) {
     body {
         width: 100%;

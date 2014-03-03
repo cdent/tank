@@ -30,6 +30,22 @@ ul.tags {
     text-decoration: none;
 }
 
+.control {
+    float: right;
+    margin-left: .5em;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.delete {
+    display: none;
+}
+
+.delete.fa-cog {
+    padding: 0;
+}
+
 .meta {
     float: right;
     font-size: 45%;
@@ -40,6 +56,9 @@ ul.tags {
     text-align: right;
 }
 
+.meta span a {
+    color: black;
+}
 
 #mover form {
 	display: none;

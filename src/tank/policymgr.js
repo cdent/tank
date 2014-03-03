@@ -96,9 +96,15 @@ app.service('tankService', function($http, $q) {
 				var data = {};
 				res.forEach(function(res) {
 					var tankName = res.config.url
-						.replace(/\/bags\/([^\/]+)/, "$1");
+						.replace(/\/bags\/([^\/]+)/, "$1"),
+						deleter = false;
+					if (res.data.policy.manage.indexOf(
+							res.data.policy.owner) !== -1) {
+						deleter = true;
+					}
 					tankName = decodeURIComponent(tankName);
-					angular.extend(res.data, {name: tankName});
+					angular.extend(res.data, {name: tankName,
+						deleter: deleter});
 					data[tankName] = res.data;
 				});
 				return data;
@@ -107,13 +113,43 @@ app.service('tankService', function($http, $q) {
 	};
 });
 
-app.controller('TanksCtrl', function($scope, tankService) {
+app.controller('TanksCtrl', function($scope, $rootScope, $filter, $http, tankService) {
 	tankService.getTanks().then(function(data) {
 		$scope.tanks = [];
 		angular.forEach(data, function(value, key) {
 			$scope.tanks.push(value);
 		});
 	});
+
+	$scope.$on('finishEdit', function(ev, data) {
+		if (data) {
+			var found = $filter('filter')($scope.tanks,
+				{name: data.tank.name}, true);
+			if (found) {
+				var deleter = false;
+				if (data.tank.policy.manage.indexOf(
+					data.tank.policy.owner) !== -1) {
+						deleter = true;
+				}
+				found[0].deleter = deleter;
+			}
+		}
+	});
+
+	$scope.deleteTank = function(tank) {
+		var name = tank.name,
+			uri = '/bags/' + encodeURIComponent(name);
+		if (confirm('Are you certain you want to delete "' + name + '"? '
+					+ 'All tiddlers within will be removed!')) {
+			$http.delete(uri)
+				.success(function() {
+					$scope.tanks = $scope.tanks.filter(function(item) {
+						return item.name !== name;
+					});
+					$rootScope.$broadcast('deletedTank', {name: name});
+				});
+		}
+	}
 });
 
 app.controller('TankEditor', function($scope, $http, $rootScope, tankTypeIcon) {
@@ -128,6 +164,13 @@ app.controller('TankEditor', function($scope, $http, $rootScope, tankTypeIcon) {
 
 	$scope.$on('clearEdit', function() {
 		$scope.editTank = null;
+	});
+
+	$scope.$on('deletedTank', function(ev, data) {
+		var name = data.name;
+		if ($scope.editTank && $scope.editTank.name === name) {
+			$scope.editTank = null;
+		}
 	});
 
 	$scope.cancelEditor = function() {
@@ -161,8 +204,11 @@ app.controller('TankCtrl', function($scope, $location, $rootScope,
 	function setData(tankName) {
 		tankService.getTanks().then(function(data) {
 			$scope.tanks = data;
-			$scope.tank = angular.copy($scope.tanks[tankName]);
-			angular.extend($scope.tank, tankTypeIcon.get($scope.tank.policy));
+			if ($scope.tanks[tankName]) {
+				$scope.tank = angular.copy($scope.tanks[tankName]);
+				angular.extend($scope.tank,
+					tankTypeIcon.get($scope.tank.policy));
+			}
 		});
 	}
 
@@ -183,6 +229,13 @@ app.controller('TankCtrl', function($scope, $location, $rootScope,
 			$scope.tank = angular.copy(data.tank);
 			$scope.tanks[$scope.tank.name] = $scope.tank;
 			angular.extend($scope.tank, tankTypeIcon.get($scope.tank.policy));
+		}
+	});
+
+	$scope.$on('deletedTank', function(ev, data) {
+		var name = data.name;
+		if ($scope.tank && $scope.tank.name === name) {
+			$scope.tank = null;
 		}
 	});
 

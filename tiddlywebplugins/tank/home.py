@@ -47,6 +47,8 @@ def home(environ, start_response):
         ('Cache-Control', 'no-cache')])
     return frontpage_template.generate({
         'user': username,
+        'gravatar': gravatar(environ),
+        'csrf_token': get_nonce(environ),
         'socket_link': config.get('socket.link'),
     })
 

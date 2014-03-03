@@ -369,6 +369,8 @@ def wiki_page(environ, start_response):
         tiddler.text = '### This tiddler does not yet exist\n'
         if creatable:
             editable = True
+        else:
+            editable = False
         deletable = False
 
     if renderable(tiddler, environ):
@@ -388,6 +390,7 @@ def wiki_page(environ, start_response):
             'html': html,
             'bag': bag,
             'backlinks': backlinks,
+            'create': creatable,
             'edit': editable,
             'delete': deletable,
             'compable': compable,

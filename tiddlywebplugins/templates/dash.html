@@ -41,11 +41,9 @@
         <a href="/auth">Manage API keys</a>
     </div>
     <div class="command">
-        <a href="/policymgr">Manage Tank Policies</a>
+        <a href="/policymgr">Manage Tanks</a>
     </div>
-    <form action="/search">
-        <input name="q" placeholder="Search all of tank">
-    </form>
+    {% include 'searchform.html' %}
 </div>
 <div class="output">
 <ul class="anchornav">

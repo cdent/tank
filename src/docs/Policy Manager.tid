@@ -21,3 +21,6 @@ on the pencil icon will then reveal a form where values can be changed. In
 the policy constraints usernames are (for the time being) separated by
 commas. Clicking the X will cancel changes. Clicking the checkmark
 will save the changes.
+
+You may also delete any tank from the list which has an associated trash
+can. This will delete the tank **and all the tiddlers within.**

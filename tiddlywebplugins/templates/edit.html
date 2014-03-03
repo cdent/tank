@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="/bags/tank/tiddlers/wiki.css">
     <link rel="stylesheet" href="/bags/tank/tiddlers/edit.css">
     <link rel="stylesheet" href="/bags/tank/tiddlers/selectize.default.css">
+    <link rel="edit"
+	href="/bags/{{ tiddler.bag|uri }}/tiddlers/{{ tiddler.title|uri }}">
 {% endblock %}
 {% block body %}
 <header>
@@ -26,9 +28,7 @@
 <div class="commands">
     <div><a href="/tanks/docs/markdown">Markdown Help</a></div>
     <div id="dropzoneMessage"></div>
-    <form action="/search" target="_blank">
-        <input name="q" placeholder="Search (opens in new tab)">
-    </form>
+    {% include 'searchform.html' %}
 </div>
 <div class="output editor">
 <form action="/edit" method="POST">
@@ -68,4 +68,5 @@
 <script src="/bags/tank/tiddlers/selectize.js"></script>
 <script src="/bags/tank/tiddlers/tagger.js"></script>
 <script src="/bags/tank/tiddlers/filedrop.js"></script>
+<script src="/bags/tank/tiddlers/searchform.js"></script>
 {% endblock %}
