@@ -8,7 +8,6 @@ from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.policy import PermissionsError
 from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.store import NoBagError, NoTiddlerError
-from tiddlyweb.control import filter_tiddlers
 from tiddlyweb.web.handler.tiddler import (get as tiddler_get,
         validate_tiddler_headers)
 from tiddlyweb.web.util import get_route_value
@@ -21,11 +20,10 @@ from tiddlywebplugins.templates import get_template
 from .home import gravatar, augment_bag
 from .search import full_search
 from .csrf import get_nonce
-from .util import tank_page_uri
+from .util import tank_page_uri, get_backlinks, get_rellinks, INDEX_PAGE
 
 WIKI_TEMPLATE = 'wiki.html'
 CHANGES_TEMPLATE = 'changes.html'
-INDEX_PAGE = 'index'
 
 
 def recent_changes(environ, start_response):
@@ -66,69 +64,6 @@ def recent_changes(environ, start_response):
 SPECIAL_PAGES = {
     'RecentChanges': recent_changes
 }
-
-
-def get_rellinks(environ, tiddler):
-    """
-    Create a dict of rellinks for this tiddler in this tank.
-    """
-    store = environ['tiddlyweb.store']
-    bag_name = tiddler.bag
-    links = {'index': True}
-    if tiddler.title == INDEX_PAGE:
-        links['index'] = False
-
-    tiddlers = [ftiddler.title for ftiddler in
-            filter_tiddlers(store.list_bag_tiddlers(Bag(bag_name)),
-                'sort=modified', environ)]
-
-    try:
-        this_index = tiddlers.index(tiddler.title)
-        prev_index = this_index - 1
-        if prev_index >= 0:
-            prev_tiddler = tiddlers[prev_index]
-        else:
-            prev_tiddler = None
-        try:
-            next_tiddler = tiddlers[this_index + 1]
-        except IndexError:
-            next_tiddler = None
-
-        links['prev'] = prev_tiddler
-        links['next'] = next_tiddler
-    except ValueError:
-        pass
-
-    return links
-
-
-def get_backlinks(environ, tiddler):
-    """
-    Extract the current backlinks for this tiddler.
-    """
-    from tiddlywebplugins.links.linksmanager import LinksManager
-    store = environ['tiddlyweb.store']
-    usersign = environ['tiddlyweb.usersign']
-
-    links_manager = LinksManager(environ)
-    links = links_manager.read_backlinks(tiddler)
-    back_tiddlers = []
-
-    def _is_readable(tiddler):
-        try:
-            bag = store.get(Bag(tiddler.bag))
-            bag.policy.allows(usersign, 'read')
-            return True
-        except (NoBagError, PermissionsError):
-            return False
-
-    for link in links:
-        container, title = link.split(':', 1)
-        tiddler = Tiddler(title, container)
-        if _is_readable(tiddler):
-            back_tiddlers.append(tiddler)
-
-    return back_tiddlers
 
 
 def wiki_page(environ, start_response):
