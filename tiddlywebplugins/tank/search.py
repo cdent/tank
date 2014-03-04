@@ -12,6 +12,7 @@ from tiddlywebplugins.whoosher import get_searcher, query_parse
 
 QUERY_PARSE_RE = re.compile(r'(\w+):("[^"]+")\s*')
 
+
 def list_tags(environ, start_response):
     """
     Plain text list of tags in a certain context.

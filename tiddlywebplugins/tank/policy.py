@@ -1,6 +1,7 @@
 
 from tiddlyweb.model.policy import Policy
 
+
 def private_policy(username):
     return Policy(owner=username,
             read=[username],

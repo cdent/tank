@@ -15,6 +15,7 @@ from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.web.util import get_route_value
 from tiddlyweb.web.handler.tiddler import _send_tiddler
 
+
 def comp(environ, start_response):
     usersign = environ['tiddlyweb.usersign']
     store = environ['tiddlyweb.store']

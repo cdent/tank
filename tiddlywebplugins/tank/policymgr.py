@@ -9,6 +9,7 @@ from .home import gravatar
 
 POLICYMGR_TEMPLATE = 'policymgr.html'
 
+
 @require_any_user()
 def policymgr(environ, start_response):
     config = environ['tiddlyweb.config']

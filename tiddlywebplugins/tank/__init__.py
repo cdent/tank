@@ -21,6 +21,7 @@ from tiddlywebplugins.csrf import CSRFProtector
 
 from tiddlywebplugins.utils import replace_handler
 
+# Simply importing enables the necessary code
 import tiddlywebplugins.relativetime
 
 from .config import config as tank_config

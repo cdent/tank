@@ -56,9 +56,9 @@ def register(environ, start_response):
 
     announcements = query.get('announcements', [None])[0]
 
-    # Bail out if some corrupted the form input.
+    # Bail out if someone corrupted the form input.
     secret = config['secret']
-    name_sig = sha('%s%s' % (server_name, secret)).hexdigest() 
+    name_sig = sha('%s%s' % (server_name, secret)).hexdigest()
     login_sig = sha('%s%s' % (server_login, secret)).hexdigest()
     if name_sig != server_name_sig or login_sig != server_login_sig:
         raise HTTP400('Invalid request')

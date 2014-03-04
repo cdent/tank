@@ -2,9 +2,7 @@
 View and make Auth token keys.
 """
 
-import simplejson
-
-from httpexceptor import HTTP400, HTTP404, HTTP409
+from httpexceptor import HTTP404, HTTP409
 
 from tiddlywebplugins.oauth.provider import make_access_token
 from tiddlywebplugins.templates import get_template
@@ -14,6 +12,7 @@ from tiddlyweb.control import filter_tiddlers
 from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.serializer import Serializer
+from tiddlyweb.store import NoTiddlerError
 from tiddlyweb.web.util import get_route_value
 
 from .home import gravatar
@@ -35,7 +34,7 @@ def view_auth(environ, start_response):
     username = usersign['name']
     bag_name = config.get('oauth.tokens_bag', 'oauth_tokens')
 
-    our_tokens = [store.get(tiddler) for tiddler in 
+    our_tokens = [store.get(tiddler) for tiddler in
             filter_tiddlers(store.list_bag_tiddlers(Bag(bag_name)),
                 'select=modifier:%s' % username, environ)]
 

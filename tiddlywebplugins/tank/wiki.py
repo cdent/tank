@@ -5,7 +5,7 @@ Wiki things.
 from httpexceptor import HTTP404, HTTP302, HTTP400
 
 from tiddlyweb.model.bag import Bag
-from tiddlyweb.model.policy import Policy, PermissionsError
+from tiddlyweb.model.policy import PermissionsError
 from tiddlyweb.model.tiddler import Tiddler, current_timestring
 from tiddlyweb.store import NoBagError, NoTiddlerError
 from tiddlyweb.control import filter_tiddlers
@@ -49,7 +49,7 @@ def recent_changes(environ, start_response):
     except NoBagError:
         raise HTTP404('no tank found for %s' % tank_name)
 
-    tiddlers = (store.get(tiddler) for tiddler in 
+    tiddlers = (store.get(tiddler) for tiddler in
             filter_tiddlers(store.list_bag_tiddlers(bag),
                 'select=modified:>%sd;sort=-modified' % days, environ))
 
@@ -190,8 +190,7 @@ def edit(environ, start_response):
         validate_tiddler(tiddler, environ)
     except InvalidTiddlerError as exc:
         return editor(environ, start_response, tiddler,
-                message='Tiddler content is invalid: %s' % exc )
-
+                message='Tiddler content is invalid: %s' % exc)
 
     store.put(tiddler)
 

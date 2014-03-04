@@ -13,8 +13,6 @@ from tiddlyweb.store import StoreError
 from tiddlywebplugins.templates import get_template
 from tiddlywebplugins.utils import require_any_user
 
-from tiddlywebplugins.whoosher import query_parse, get_searcher
-
 from .policy import determine_tank_type, POLICY_ICONS
 from .search import get_comp_bags
 from .csrf import get_nonce
