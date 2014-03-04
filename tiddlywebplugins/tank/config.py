@@ -2,8 +2,7 @@
 Base config for tank.
 """
 
-from tiddlywebplugins.tank.wiki import (tank_uri, tank_tiddler_uri,
-        tank_tiddler_resolver)
+from .util import tank_uri, tank_tiddler_uri, tank_tiddler_resolver
 
 config = {
     'extractors': ['tiddlywebplugins.oauth.extractor',

@@ -27,7 +27,8 @@ import tiddlywebplugins.relativetime
 from .config import config as tank_config
 from .home import home, dash
 from .register import register
-from .wiki import wiki_page, editor, edit, forge
+from .wiki import wiki_page, forge
+from .edit import editor, edit
 from .search import list_tags
 from .composition import comp
 from .auth import view_auth, make_key, destroy_key
