@@ -9,9 +9,7 @@ from tiddlyweb.store import NoBagError, NoTiddlerError
 from tiddlyweb.web.util import tiddler_etag
 from tiddlyweb.web.validator import InvalidTiddlerError, validate_tiddler
 
-from .home import augment_bag
-from .csrf import get_nonce
-from .util import tank_page_uri
+from .util import tank_page_uri, augment_bag
 from .templates import send_template
 
 
@@ -94,7 +92,6 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
     store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
     query = environ['tiddlyweb.query']
-    config = environ['tiddlyweb.config']
 
     if extant_tiddler:
         tiddler = extant_tiddler

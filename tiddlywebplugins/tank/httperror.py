@@ -31,9 +31,9 @@ class PrettyError(object):
 
 
 def send_error(environ, start_response, exc, allow=None):
-    config = environ.get('tiddlyweb.config', {})
-    usersign = environ.get('tiddlyweb.usersign')
-
+    """
+    Send the error mesage out via template.
+    """
     error = {
         'status': exc.status,
         'message': exc.message

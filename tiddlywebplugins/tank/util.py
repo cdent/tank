@@ -5,13 +5,31 @@ Various utils that need a home.
 
 from tiddlyweb.control import filter_tiddlers
 from tiddlyweb.model.bag import Bag
+from tiddlyweb.model.policy import PermissionsError
 from tiddlyweb.model.tiddler import Tiddler
+from tiddlyweb.store import NoBagError
 from tiddlyweb.web.util import encode_name, server_base_url
 
 from tiddlywebplugins.links.linksmanager import LinksManager
 
+from .policy import determine_tank_type, POLICY_ICONS
+
 
 INDEX_PAGE = 'index'
+
+
+def augment_bag(store, bag, username=None):
+    """
+    Augment a bag object with information about it's policy type.
+    """
+    if not bag.store:
+        bag = store.get(bag)
+    if not username:
+        username = bag.policy.owner
+    policy_type = determine_tank_type(bag, username)
+    bag.icon = POLICY_ICONS[policy_type]
+    bag.type = policy_type
+    return bag
 
 
 def tank_uri(environ, tank_name, slash=False):

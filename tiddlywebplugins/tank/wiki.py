@@ -16,11 +16,11 @@ from tiddlyweb.util import renderable
 
 from tiddlyweb.wikitext import render_wikitext
 
-from .home import augment_bag
 from .search import full_search
-from .csrf import get_nonce
-from .util import tank_page_uri, get_backlinks, get_rellinks, INDEX_PAGE
-from .templates import send_template, gravatar
+from .util import (tank_page_uri, get_backlinks, get_rellinks, INDEX_PAGE,
+        augment_bag)
+from .templates import send_template
+
 
 WIKI_TEMPLATE = 'wiki.html'
 CHANGES_TEMPLATE = 'changes.html'
@@ -33,7 +33,6 @@ def recent_changes(environ, start_response):
     tank_name = get_route_value(environ, 'bag_name')
     store = environ['tiddlyweb.store']
     usersign = environ['tiddlyweb.usersign']
-    config = environ['tiddlyweb.config']
     days = environ['tiddlyweb.query'].get('d', [7])[0]
 
     try:

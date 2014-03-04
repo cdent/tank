@@ -10,9 +10,9 @@ from tiddlyweb.store import StoreError
 
 from tiddlywebplugins.utils import require_any_user
 
-from .policy import determine_tank_type, POLICY_ICONS
 from .search import get_comp_bags
 from .templates import send_template
+from .util import augment_bag
 
 
 DASH_TEMPLATE = 'dash.html'
@@ -49,27 +49,13 @@ def dash(environ, start_response, message=None):
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
-    return send_template(environ, DASH_TEMPLATE,  {
+    return send_template(environ, DASH_TEMPLATE, {
         'owned_bags': owned_bags,
         'friendly_bags': friendly_bags,
         'message': message,
         'comp_bags': comp_bags,
         'owned_comps': owned_comps,
     })
-
-
-def augment_bag(store, bag, username=None):
-    """
-    Augment a bag object with information about it's policy type.
-    """
-    if not bag.store:
-        bag = store.get(bag)
-    if not username:
-        username = bag.policy.owner
-    policy_type = determine_tank_type(bag, username)
-    bag.icon = POLICY_ICONS[policy_type]
-    bag.type = policy_type
-    return bag
 
 
 def load_and_test_entity(store, entity, username, negate_user=False):

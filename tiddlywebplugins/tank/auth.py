@@ -14,8 +14,7 @@ from tiddlyweb.serializer import Serializer
 from tiddlyweb.store import NoTiddlerError
 from tiddlyweb.web.util import get_route_value
 
-from .templates import send_template, gravatar
-from .csrf import get_nonce
+from .templates import send_template
 
 
 AUTH_TEMPLATE = 'auth.html'
@@ -40,7 +39,7 @@ def view_auth(environ, start_response):
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
-    return send_template(enivron, AUTH_TEMPLATE, {
+    return send_template(environ, AUTH_TEMPLATE, {
         'tokens': our_tokens,
     })
 
