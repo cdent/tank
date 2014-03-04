@@ -30,6 +30,7 @@ from .csrf import get_nonce
 WIKI_TEMPLATE = 'wiki.html'
 EDIT_TEMPLATE = 'edit.html'
 CHANGES_TEMPLATE = 'changes.html'
+INDEX_PAGE = 'index'
 
 
 def recent_changes(environ, start_response):
@@ -292,6 +293,40 @@ def tank_tiddler_resolver(environ, target, tiddler):
     tiddler.bag = target
 
 
+def get_rellinks(environ, tiddler):
+    """
+    Create a dict of rellinks for this tiddler in this tank.
+    """
+    store = environ['tiddlyweb.store']
+    bag_name = tiddler.bag
+    links = {'index': True}
+    if tiddler.title == INDEX_PAGE:
+        links['index'] = False
+
+    tiddlers = [ftiddler.title for ftiddler in
+            filter_tiddlers(store.list_bag_tiddlers(Bag(bag_name)),
+                'sort=modified', environ)]
+
+    try:
+        this_index = tiddlers.index(tiddler.title)
+        prev_index = this_index - 1
+        if prev_index >= 0:
+            prev_tiddler = tiddlers[prev_index]
+        else:
+            prev_tiddler = None
+        try:
+            next_tiddler = tiddlers[this_index + 1]
+        except IndexError:
+            next_tiddler = None
+
+        links['prev'] = prev_tiddler
+        links['next'] = next_tiddler
+    except ValueError:
+        pass
+
+    return links
+
+
 def get_backlinks(environ, tiddler):
     """
     Extract the current backlinks for this tiddler.
@@ -339,7 +374,7 @@ def wiki_page(environ, start_response):
     try:
         tiddler_name = get_route_value(environ, 'tiddler_name')
     except (KeyError, AttributeError):
-        raise HTTP302(tank_page_uri(environ, tank_name, 'index'))
+        raise HTTP302(tank_page_uri(environ, tank_name, INDEX_PAGE))
 
     if tiddler_name in SPECIAL_PAGES:
         return SPECIAL_PAGES[tiddler_name](environ, start_response)
@@ -377,6 +412,7 @@ def wiki_page(environ, start_response):
 
     if renderable(tiddler, environ):
         backlinks = get_backlinks(environ, tiddler)
+        rellinks = get_rellinks(environ, tiddler)
         compable = full_search(config, 'id:"%s:app"' % tank_name)
         html = render_wikitext(tiddler, environ)
         wiki_template = get_template(environ, WIKI_TEMPLATE)
@@ -397,6 +433,7 @@ def wiki_page(environ, start_response):
             'edit': editable,
             'delete': deletable,
             'compable': compable,
+            'links': rellinks,
         })
     else:
         return tiddler_get(environ, start_response)

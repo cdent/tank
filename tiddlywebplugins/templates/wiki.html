@@ -4,6 +4,17 @@
     <link rel="stylesheet" href="/bags/tank/tiddlers/wiki.css">
 	<link rel="edit"
 	href="/bags/{{ tiddler.bag|uri }}/tiddlers/{{ tiddler.title|uri }}">
+    {% if links %}
+    {% if links.index %}
+    <link rel="index" href="index">
+    {% endif %}
+    {% if links.prev %}
+    <link rel="prev" href="{{ links.prev|uri }}">
+    {% endif %}
+    {% if links.next %}
+    <link rel="next" href="{{ links.next|uri }}">
+    {% endif %}
+    {% endif %}
 {% endblock %}
 {% block body %}
 <header>
