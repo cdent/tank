@@ -86,7 +86,7 @@ def bag_quota(bag, environ):
 
     bag_count = len(list(_bags_for_user(store, username)))
 
-    if bag_count >= max_bags:
+    if bag_count > max_bags:
         raise InvalidBagError('bag limit reached')
 
 
