@@ -21,7 +21,7 @@ from tiddlyweb.web.util import make_cookie, server_base_url
 
 from tiddlywebplugins.utils import ensure_bag
 
-from .wiki import create_wiki
+from .forge import create_wiki
 
 
 DEFAULT_ROLE = 'MEMBER'

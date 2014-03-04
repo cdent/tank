@@ -46,6 +46,6 @@ class Extractor(ExtractorInterface):
                 environ['tank.user'] = user
                 environ['tank.user_info'] = simplejson.loads(user.note)
                 return {'name': username, 'roles': user.list_roles()}
-            except (StoreError, KeyError):
+            except (StoreError, KeyError) as exc:
                 pass
         return False
