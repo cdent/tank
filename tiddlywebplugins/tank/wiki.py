@@ -4,6 +4,7 @@ Wiki things.
 
 from httpexceptor import HTTP404, HTTP302
 
+from tiddlyweb.control import filter_tiddlers
 from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.policy import PermissionsError
 from tiddlyweb.model.tiddler import Tiddler
@@ -15,12 +16,11 @@ from tiddlyweb.util import renderable
 
 from tiddlyweb.wikitext import render_wikitext
 
-from tiddlywebplugins.templates import get_template
-
-from .home import gravatar, augment_bag
+from .home import augment_bag
 from .search import full_search
 from .csrf import get_nonce
 from .util import tank_page_uri, get_backlinks, get_rellinks, INDEX_PAGE
+from .templates import send_template, gravatar
 
 WIKI_TEMPLATE = 'wiki.html'
 CHANGES_TEMPLATE = 'changes.html'
@@ -46,18 +46,13 @@ def recent_changes(environ, start_response):
             filter_tiddlers(store.list_bag_tiddlers(bag),
                 'select=modified:>%sd;sort=-modified' % days, environ))
 
-    changes_template = get_template(environ, CHANGES_TEMPLATE)
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
-    return changes_template.generate({
-        'socket_link': config.get('socket.link'),
-        'csrf_token': get_nonce(environ),
+    return send_template(environ, CHANGES_TEMPLATE, {
         'days': days,
         'tiddlers': tiddlers,
         'bag': bag,
-        'gravatar': gravatar(environ),
-        'user': usersign['name'],
     })
 
 
@@ -125,16 +120,11 @@ def wiki_page(environ, start_response):
         rellinks = get_rellinks(environ, tiddler)
         compable = full_search(config, 'id:"%s:app"' % tank_name)
         html = render_wikitext(tiddler, environ)
-        wiki_template = get_template(environ, WIKI_TEMPLATE)
         last_modified, etag = validate_tiddler_headers(environ, tiddler)
         start_response('200 OK', [
             ('Content-Type', 'text/html; charset=UTF-8'),
             ('Cache-Control', 'no-cache'), last_modified, etag])
-        return wiki_template.generate({
-            'socket_link': config.get('socket.link'),
-            'csrf_token': get_nonce(environ),
-            'gravatar': gravatar(environ),
-            'user': usersign['name'],
+        return send_template(environ, WIKI_TEMPLATE, {
             'tiddler': tiddler,
             'html': html,
             'bag': bag,

@@ -9,11 +9,10 @@ from tiddlyweb.store import NoBagError, NoTiddlerError
 from tiddlyweb.web.util import tiddler_etag
 from tiddlyweb.web.validator import InvalidTiddlerError, validate_tiddler
 
-from tiddlywebplugins.templates import get_template
-
-from .home import augment_bag, gravatar
+from .home import augment_bag
 from .csrf import get_nonce
 from .util import tank_page_uri
+from .templates import send_template
 
 
 EDIT_TEMPLATE = 'edit.html'
@@ -130,17 +129,12 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
         else:
             bag.policy.allows(usersign, 'write')
 
-    edit_template = get_template(environ, EDIT_TEMPLATE)
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
-    return edit_template.generate({
-        'socket_link': config.get('socket.link'),
-        'csrf_token': get_nonce(environ),
-        'gravatar': gravatar(environ),
+    return send_template(environ, EDIT_TEMPLATE, {
         'bag': bag,
         'message': message,
-        'user': usersign['name'],
         'tiddler': tiddler,
         'etag': tiddler_etag(environ, tiddler).replace('"',
             '').split(':', 1)[0]

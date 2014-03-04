@@ -6,10 +6,9 @@ and links are to tiddlers in their tank, not in their bag.
 
 from tiddlywebplugins.atom.htmllinks import Serialization as HTMLSerialization
 
-from tiddlywebplugins.templates import get_template
-
 from .home import gravatar
 from .csrf import get_nonce
+from .templates import send_template
 
 
 SEARCH_TEMPLATE = 'search.html'
@@ -31,14 +30,9 @@ class Serialization(HTMLSerialization):
         else:
             global_query = ''
 
-        search_template = get_template(self.environ, SEARCH_TEMPLATE)
-        return search_template.generate({
-            'socket_link': config.get('socket.link'),
-            'gravatar': gravatar(self.environ),
-            'user': self.environ['tiddlyweb.usersign']['name'],
+        return send_template(environ, SEARCH_TEMPLATE, {
             'tiddlers': tiddlers,
             'global_query': global_query,
-            'csrf_token': get_nonce(self.environ),
         })
 
 

@@ -6,9 +6,7 @@ Based on https://github.com/FND/tiddlywebplugins.bfw/pull/6
 
 from httpexceptor import HTTPException, HTTP404
 
-from tiddlywebplugins.templates import get_template
-
-from .home import gravatar
+from .templates import send_template
 
 
 ERROR_TEMPLATE = '4xx.html'
@@ -41,21 +39,15 @@ def send_error(environ, start_response, exc, allow=None):
         'message': exc.message
     }
 
-    template = get_template(environ, ERROR_TEMPLATE)
-    headers = [
-            ('Content-type', 'text/html; charset=utf-8')]
+    headers = [('Content-type', 'text/html; charset=utf-8')]
     if allow:
         headers.append(('Allow', allow))
     start_response(exc.status, headers)
 
     data = {
         'error': error,
-        'socket_link': config.get('socket.link'),
-        'gravatar': gravatar(environ),
-        'user': usersign['name'],
-
     }
-    return template.generate(data)
+    return send_template(environ, ERROR_TEMPLATE, data)
 
 
 def method_not_allowed(environ, start_response, exc=None):

@@ -6,7 +6,7 @@ import logging
 
 from tiddlyweb.web.challengers import ChallengerInterface
 
-from tiddlywebplugins.templates import get_template
+from .templates import send_template
 
 
 LOGGER = logging.getLogger(__name__)
@@ -27,8 +27,10 @@ class Challenger(ChallengerInterface):
             redirect = environ['tiddlyweb.query']['tiddlyweb_redirect'][0]
         except KeyError:
             redirect = None
-        template = get_template(environ, 'challenger.html')
+
         start_response('200 OK', [('Content-Type',
             'text/html; charset=UTF-8')])
 
-        return template.generate({'redirect': redirect})
+        return send_template(environ, 'challenger.html', {
+            'redirect': redirect
+        })

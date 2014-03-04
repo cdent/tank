@@ -5,50 +5,30 @@ If GUEST, shiny make you want it.
 If logged in, your home page/dashboard.
 """
 
-from hashlib import md5
-
 from tiddlyweb.filters import recursive_filter, parse_for_filters
 from tiddlyweb.store import StoreError
 
-from tiddlywebplugins.templates import get_template
 from tiddlywebplugins.utils import require_any_user
 
 from .policy import determine_tank_type, POLICY_ICONS
 from .search import get_comp_bags
-from .csrf import get_nonce
+from .templates import send_template
 
 
-GRAVATAR = 'https://www.gravatar.com/avatar/%s'
 DASH_TEMPLATE = 'dash.html'
 FRONTPAGE_TEMPLATE = 'frontpage.html'
 #FRONTPAGE_CACHE_TIME = 300  # XXX caching a bit too aggressive
-
-
-def gravatar(environ):
-    """
-    Generate a gravatar link.
-    """
-    email = environ.get('tank.user_info', {}).get('email', '')
-    return GRAVATAR % md5(email.lower()).hexdigest()
 
 
 def home(environ, start_response):
     """
     Display a starting page.
     """
-    username = environ['tiddlyweb.usersign']['name']
-    config = environ['tiddlyweb.config']
-
-    frontpage_template = get_template(environ, FRONTPAGE_TEMPLATE)
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
-    return frontpage_template.generate({
-        'user': username,
-        'gravatar': gravatar(environ),
-        'csrf_token': get_nonce(environ),
-        'socket_link': config.get('socket.link'),
-    })
+
+    return send_template(environ, FRONTPAGE_TEMPLATE)
 
 
 @require_any_user()
@@ -66,20 +46,15 @@ def dash(environ, start_response, message=None):
     comp_bags = get_comp_bags(store, config, usersign)
     friendly_bags = get_friendly_bags(store, environ, username)
 
-    dash_template = get_template(environ, DASH_TEMPLATE)
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
-    return dash_template.generate({
-        'socket_link': config.get('socket.link'),
-        'gravatar': gravatar(environ),
-        'user': username,
+    return send_template(environ, DASH_TEMPLATE,  {
         'owned_bags': owned_bags,
         'friendly_bags': friendly_bags,
         'message': message,
         'comp_bags': comp_bags,
         'owned_comps': owned_comps,
-        'csrf_token': get_nonce(environ)
     })
 
 

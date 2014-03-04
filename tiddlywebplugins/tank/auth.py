@@ -5,7 +5,6 @@ View and make Auth token keys.
 from httpexceptor import HTTP404, HTTP409
 
 from tiddlywebplugins.oauth.provider import make_access_token
-from tiddlywebplugins.templates import get_template
 from tiddlywebplugins.utils import require_any_user
 
 from tiddlyweb.control import filter_tiddlers
@@ -15,7 +14,7 @@ from tiddlyweb.serializer import Serializer
 from tiddlyweb.store import NoTiddlerError
 from tiddlyweb.web.util import get_route_value
 
-from .home import gravatar
+from .templates import send_template, gravatar
 from .csrf import get_nonce
 
 
@@ -38,15 +37,10 @@ def view_auth(environ, start_response):
             filter_tiddlers(store.list_bag_tiddlers(Bag(bag_name)),
                 'select=modifier:%s' % username, environ)]
 
-    template = get_template(environ, AUTH_TEMPLATE)
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
-    return template.generate({
-        'socket_link': config.get('socket.link'),
-        'csrf_token': get_nonce(environ),
-        'gravatar': gravatar(environ),
-        'user': username,
+    return send_template(enivron, AUTH_TEMPLATE, {
         'tokens': our_tokens,
     })
 

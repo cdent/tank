@@ -2,10 +2,9 @@
 Present a SPA for managing policies on stuff.
 """
 
-from tiddlywebplugins.templates import get_template
 from tiddlywebplugins.utils import require_any_user
 
-from .home import gravatar
+from .templates import send_template
 
 POLICYMGR_TEMPLATE = 'policymgr.html'
 
@@ -17,8 +16,4 @@ def policymgr(environ, start_response):
     template = get_template(environ, POLICYMGR_TEMPLATE)
     start_response('200 OK', [
         ('Content-Type', 'text/html; charset=UTF-8')])
-    return template.generate({
-        'socket_link': config.get('socket.link'),
-        'gravatar': gravatar(environ),
-        'user': usersign['name'],
-    })
+    return send_template(environ, POLICYMGR_TEMPLATE)
