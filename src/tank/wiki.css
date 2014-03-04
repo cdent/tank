@@ -71,3 +71,20 @@ ul.tags {
 #compmaker input {
 	width: 100%;
 }
+
+.navigatorlinks {
+    padding-bottom: 1em;
+}
+
+.navigatorlinks a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.navigatorlinks .prev {
+    float: left;
+}
+
+.navigatorlinks .next {
+    float: right;
+}
