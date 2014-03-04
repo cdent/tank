@@ -84,9 +84,12 @@ def bag_quota(bag, environ):
     if SUBSCRIBER in user_roles:
         return
 
-    bag_count = len(list(_bags_for_user(store, username)))
+    bag_names = [stored_bag.name for stored_bag
+            in _bags_for_user(store, username)]
 
-    if bag_count > max_bags:
+    if bag.name in bag_names:
+        return
+    if len(bag_names) >= max_bags:
         raise InvalidBagError('bag limit reached')
 
 
