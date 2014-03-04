@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402190000
+modified: 201403040000
 type: text/x-markdown
 
 By default each [[tank]] can operate as a
@@ -17,7 +17,7 @@ wiki functionality:
 
 * flexible access control per [[tank]]
 * [[links|WikiLinks]]  between pages in different tanks
-  (by appending `@<spacename` to standard link syntax)
+  (by appending `@<spacename>` to standard link syntax)
 * [[transclusion]] of content inter- and intra-space
 * [[extraclusion]]
 * file [[drag and drop|Drag and Drop]]
