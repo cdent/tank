@@ -16,7 +16,6 @@ def list_tanks(environ, start_response):
     """
     Filter all the available bags for read, and show em.
     """
-    usersign = environ['tiddlyweb.usersign']
     store = environ['tiddlyweb.store']
 
     bags = get_readable_bags(store, environ)

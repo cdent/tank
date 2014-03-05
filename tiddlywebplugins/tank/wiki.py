@@ -9,8 +9,7 @@ from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.policy import PermissionsError
 from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.store import NoBagError, NoTiddlerError
-from tiddlyweb.web.handler.tiddler import (get as tiddler_get,
-        validate_tiddler_headers)
+from tiddlyweb.web.handler.tiddler import get as tiddler_get
 from tiddlyweb.web.util import get_route_value
 from tiddlyweb.util import renderable
 
