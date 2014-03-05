@@ -54,8 +54,6 @@ def closet(environ, start_response):
 
 class BinaryDisk(object):
 
-    Disk = 'closet'
-
     def __init__(self, environ, filething):
         self.environ = environ
         self.filename = filething.name
