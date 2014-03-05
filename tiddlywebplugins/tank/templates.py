@@ -31,7 +31,11 @@ def send_template(environ, template_name, template_data=None):
         template_data = {}
 
     config = environ.get('tiddlyweb.config', {})
-    usersign = environ['tiddlyweb.usersign']
+    try:
+        usersign = environ['tiddlyweb.usersign']
+    except KeyError:
+        usersign = {'name': 'GUEST', 'roles': []}
+        environ['tiddlyweb.usersign'] = usersign
 
     template = get_template(environ, template_name)
 

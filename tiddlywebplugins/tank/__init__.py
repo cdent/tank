@@ -25,6 +25,7 @@ from tiddlywebplugins.utils import replace_handler
 import tiddlywebplugins.relativetime
 
 from .config import config as tank_config
+from .closet import closet, closet_item
 from .home import home, dash
 from .tanks import list_tanks
 from .register import register
@@ -62,6 +63,8 @@ def establish_web(config):
     selector.add('/auth', GET=view_auth, POST=make_key)
     selector.add('/dash', GET=dash)
     selector.add('/register', POST=register)
+    selector.add('/closet/{bag_name:segment}', POST=closet)
+    selector.add('/closet/_/{file_name:segment}', GET=closet_item)
     selector.add('/tanks', GET=list_tanks)
     selector.add('/tanks/{bag_name:segment}[/{tiddler_name:segment}]',
             GET=wiki_page)
