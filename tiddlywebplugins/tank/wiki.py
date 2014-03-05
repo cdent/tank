@@ -119,10 +119,9 @@ def wiki_page(environ, start_response):
         rellinks = get_rellinks(environ, tiddler)
         compable = full_search(config, 'id:"%s:app"' % tank_name)
         html = render_wikitext(tiddler, environ)
-        last_modified, etag = validate_tiddler_headers(environ, tiddler)
         start_response('200 OK', [
             ('Content-Type', 'text/html; charset=UTF-8'),
-            ('Cache-Control', 'no-cache'), last_modified, etag])
+            ('Cache-Control', 'no-cache')])
         return send_template(environ, WIKI_TEMPLATE, {
             'tiddler': tiddler,
             'html': html,
