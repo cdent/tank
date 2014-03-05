@@ -8,6 +8,7 @@ from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.policy import PermissionsError
 from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.store import NoBagError
+from tiddlyweb.util import renderable
 from tiddlyweb.web.util import encode_name, server_base_url
 
 from tiddlywebplugins.links.linksmanager import LinksManager
@@ -106,7 +107,8 @@ def get_rellinks(environ, tiddler):
 
     tiddlers = [filtered_tiddler.title for filtered_tiddler in
             filter_tiddlers(store.list_bag_tiddlers(Bag(bag_name)),
-                'sort=modified', environ)]
+                'sort=modified', environ)
+            if renderable(store.get(filtered_tiddler), environ)]
 
     try:
         this_index = tiddlers.index(tiddler.title)
