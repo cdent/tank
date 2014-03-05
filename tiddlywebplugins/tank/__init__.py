@@ -26,6 +26,7 @@ import tiddlywebplugins.relativetime
 
 from .config import config as tank_config
 from .home import home, dash
+from .tanks import list_tanks
 from .register import register
 from .wiki import wiki_page
 from .forge import forge
@@ -61,6 +62,7 @@ def establish_web(config):
     selector.add('/auth', GET=view_auth, POST=make_key)
     selector.add('/dash', GET=dash)
     selector.add('/register', POST=register)
+    selector.add('/tanks', GET=list_tanks)
     selector.add('/tanks/{bag_name:segment}[/{tiddler_name:segment}]',
             GET=wiki_page)
     selector.add('/edit', GET=editor, POST=edit)

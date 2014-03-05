@@ -29,6 +29,10 @@ ul.radiogroup li:hover {
     padding-bottom: 1em;
 }
 
+.command a.clink {
+    display: block;
+}
+
 ul.anchornav {
     float: right;
     margin: 0;

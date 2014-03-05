@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Readable Tanks{% endblock %}
+{% block morehead %}
+    <link rel="stylesheet" href="/bags/tank/tiddlers/dash.css">
+{% endblock %}
+{% block body %}
+<header>
+{% include 'logout.html' %}
+    <span class="wikititle">Tanks</span>
+    {% if user != "GUEST" %}
+    <a class="wikititle" href="/dash">Dash</a>
+    {% endif %}
+</header>
+
+<main>
+<div class="output tanks">
+<ul>
+{% for bag in bags %}
+    <li><i title="{{ bag.type }}" class="fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
+    <span class="description">{{ bag.desc }}</span></li>
+{% endfor %}
+</ul>
+</div>
+</main>
+
+{% endblock %}
+{% block scripts %}
+{% endblock %}
