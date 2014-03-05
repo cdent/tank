@@ -46,11 +46,18 @@ def test_post_to_closet():
     data = {'csrf_token': csrf}
     files = {'file': ('heg3.gif', open('test/heg3.gif', 'rb'), 'image/gif')}
     headers = {'cookie': cookie}
-    response = requests.post(url, data=data, files=files, headers=headers)
+    response = requests.post(url, data=data, files=files, headers=headers,
+            allow_redirects=False)
 
+    assert response.status_code == 303
+    assert response.headers['location'] == 'http://tankt.peermore.com:8080/bags/newtank/tiddlers/heg3.gif'
+
+    response = requests.get(response.headers['location'], allow_redirects=False)
+    assert response.status_code == 302
+    assert response.headers['location'].startswith(
+            'https://tank-binaries.s3.amazonaws.com/')
+
+    requests_intercept.uninstall()
+    response = requests.get(response.headers['location'], allow_redirects=False)
     assert response.status_code == 200
-    assert response.history[0].status_code == 303
-    assert response.history[0].headers['location'] == 'http://tankt.peermore.com:8080/bags/newtank/tiddlers/heg3.gif'
-    assert response.history[1].status_code == 302
-    assert response.history[1].headers['location'].startswith(
-            'http://tankt.peermore.com:8080/closet/_/')
+    assert response.headers['content-type'] == 'image/gif'

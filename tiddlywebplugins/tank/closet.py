@@ -3,15 +3,15 @@ POST binaries to alternate storage, create a canonical uri tiddler
 pointing to that storage.
 """
 
-import os
-
-from httpexceptor import HTTP400, HTTP404
+from httpexceptor import HTTP400
 from uuid import uuid4
-from mimetypes import guess_extension, guess_type
+from mimetypes import guess_extension
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
 
 from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.tiddler import Tiddler
-from tiddlyweb.web.util import get_route_value, tiddler_url, server_base_url
+from tiddlyweb.web.util import get_route_value, tiddler_url
 from tiddlywebplugins.utils import require_role
 
 
@@ -46,28 +46,10 @@ def closet(environ, start_response):
         store.put(tiddler)
         tiddlers.append(tiddler)
 
+    print 'tiddlers', tiddlers
     start_response('303 See Other', [
         ('Location', tiddler_url(environ, tiddlers[-1]))])
     return []
-
-
-def closet_item(environ, start_response):
-    file_name = get_route_value(environ, 'file_name')
-
-    file_target = os.path.join(BinaryDisk.Disk, file_name)
-    mime_type = guess_type(file_name)[0] or 'application/octet-stream'
-
-    if not os.path.exists(file_target):
-        raise HTTP404('file not found')
-
-    start_response('200 OK', [
-        ('Content-Type', mime_type)])
-    content = open(file_target, 'rb')
-    if 'wsgi.file_wrapper' in environ:
-        print 'using wrapper'
-        return environ['wsgi.file_wrapper'](content)
-    else:
-        return iter(lambda: content.read(4096), '')
 
 
 class BinaryDisk(object):
@@ -78,18 +60,19 @@ class BinaryDisk(object):
         self.environ = environ
         self.filename = filething.name
         self.filehandle = filething.file
-        self.extension = guess_extension(filething.type) or ''
+        self.type = filething.type
+        self.extension = guess_extension(self.type) or ''
         self.targetname = uuid4().get_hex() + self.extension
 
-    def store(self):
-        with open(os.path.join(self.Disk, self.targetname),
-                'wb') as diskfile:
-            input_data = self.filehandle.read(4096)
-            while input_data:
-                diskfile.write(input_data)
-                input_data = self.filehandle.read(4096)
-            self.filehandle.close()
-        return self._url()
+        self.config = environ['tiddlyweb.config']
+        self.boto = S3Connection(self.config['closet.aws_access_key'],
+                self.config['closet.aws_secret_key'])
 
-    def _url(self):
-        return server_base_url(self.environ) + '/closet/_/%s' % self.targetname
+    def store(self):
+        bucket = self.boto.create_bucket(self.config['closet.bucket'])
+        key = Key(bucket)
+        key.key = self.targetname
+        key.set_metadata('Content-Type', self.type)
+        key.set_contents_from_file(self.filehandle)
+        url = key.generate_url(0, query_auth=False)
+        return url
