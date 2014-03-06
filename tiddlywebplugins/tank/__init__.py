@@ -121,13 +121,13 @@ def make_validators():
 
 def init(config):
     merge_config(config, tank_config, reconfig=True)
-    make_validators()
     whoosh_init(config)
     links_init(config)
     policy_init(config)
     dispatcher_init(config)
     listener_init(config)
     if 'selector' in config:
+        make_validators()
         establish_web(config)
     # second time to ensure serializers are correct
     merge_config(config, tank_config, reconfig=True)
