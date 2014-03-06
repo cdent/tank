@@ -3,8 +3,9 @@ Stubbing in the stubs.
 """
 
 from tiddlyweb.store import NoBagError
-from tiddlyweb.util import merge_config
-from tiddlyweb.web.validator import BAG_VALIDATORS, InvalidBagError
+from tiddlyweb.util import merge_config, binary_tiddler
+from tiddlyweb.web.validator import (BAG_VALIDATORS, TIDDLER_VALIDATORS,
+        InvalidBagError)
 
 from tiddlywebplugins.atom import init as atom_init
 from tiddlywebplugins.dispatcher import init as dispatcher_init
@@ -25,7 +26,7 @@ from tiddlywebplugins.utils import replace_handler
 import tiddlywebplugins.relativetime
 
 from .config import config as tank_config
-from .closet import closet
+from .closet import closet, closet_binary
 from .home import home, dash
 from .tanks import list_tanks
 from .register import register
@@ -108,8 +109,14 @@ def _bags_for_user(store, username):
     return (bag for bag in store.list_bags() if load_and_test_bag(bag))
 
 
+def binary_trap(tiddler, environ):
+    if binary_tiddler(tiddler):
+        tiddler = closet_binary(environ, tiddler)
+
+
 def make_validators():
     BAG_VALIDATORS.append(bag_quota)
+    TIDDLER_VALIDATORS.append(binary_trap)
 
 
 def init(config):
