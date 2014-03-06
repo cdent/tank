@@ -17,6 +17,17 @@ $(function() {
         ev.preventDefault();
     }
 
+	function getCSRFToken() {
+		var regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,
+			match = regex.exec(document.cookie),
+			csrf_token = null;
+		if (match && (match.length === 2)) {
+			csrf_token = match[1];
+		}
+
+		return csrf_token;
+	}
+
     function handleFile(file) {
         dropzoneMessage.text('Processing ' + file.name);
 
@@ -35,9 +46,14 @@ $(function() {
                 title: name,
                 type: file.type,
             };
+
+			data = new FormData();
+			data.append('file', file);
+			data.append('csrf_token', getCSRFToken());
+			data.append('name', name);
+
 			$.ajax({
-				url: '/bags/' + encodeURIComponent(tank) + '/tiddlers/'
-					+ encodeURIComponent(tiddler.title),
+				url: '/closet/' + encodeURIComponent(tank),
 				xhr: function() {
 					// get the native XmlHttpRequest object
 					var xhr = $.ajaxSettings.xhr();
@@ -49,13 +65,15 @@ $(function() {
 					// return the customized object
 					return xhr;
 				},
-				contentType: file.type,
-				type: 'PUT',
-				data: reader.result,
+				contentType: false,
+				mimeType: 'multipart/form-data',
+				type: 'POST',
+				data: data,
 				processData: false,
 				success: function() {
 					var a = $('<a>').text('Uploaded ' + name)
-						.attr('href', encodeURIComponent(name));
+						.attr('href', '/tanks/' + encodeURIComponent(tank)
+							+ '/' + encodeURIComponent(name));
 					dropzoneMessage.empty().append(a);
 					if (injectText) {
 						var cursorPosition = dropzone.prop('selectionEnd'),

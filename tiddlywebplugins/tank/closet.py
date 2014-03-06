@@ -26,6 +26,7 @@ def closet(environ, start_response):
     usersign = environ['tiddlyweb.usersign']
     bag_name = get_route_value(environ, 'bag_name')
     redir = environ['tiddlyweb.query'].get('redir', [False])[0]
+    target_name = environ['tiddlyweb.query']['name'][0]
 
     bag = store.get(Bag(bag_name))
 
@@ -40,9 +41,11 @@ def closet(environ, start_response):
     tiddlers = []
     for input_file in files:
         if pseudo_binary(input_file.type):
-            tiddler = _regular_tiddler(environ, bag_name, input_file)
+            tiddler = _regular_tiddler(environ, bag_name, input_file,
+                    target_name)
         else:
-            tiddler = _binary_tiddler(environ, bag_name, input_file)
+            tiddler = _binary_tiddler(environ, bag_name, input_file,
+                    target_name)
         tiddlers.append(tiddler)
 
     response_code = '303 See Other' if redir else '204 No Content'
@@ -79,14 +82,13 @@ def closet_binary(environ, tiddler):
     return tiddler
 
 
-def _regular_tiddler(environ, bag_name, input_file):
+def _regular_tiddler(environ, bag_name, input_file, target_name):
     store = environ['tiddlyweb.store']
     username = environ['tiddlyweb.usersign']['name']
 
-    filename = input_file.filename
     content = input_file.file.read()
 
-    tiddler = Tiddler(filename, bag_name)
+    tiddler = Tiddler(target_name, bag_name)
     tiddler.text = content.decode('utf-8')
     tiddler.modifier = username
     tiddler.type = input_file.type
@@ -95,15 +97,14 @@ def _regular_tiddler(environ, bag_name, input_file):
     return tiddler
 
 
-def _binary_tiddler(environ, bag_name, input_file):
+def _binary_tiddler(environ, bag_name, input_file, target_name):
     store = environ['tiddlyweb.store']
     username = environ['tiddlyweb.usersign']['name']
-    filename = input_file.filename
 
     binary_storage = BinaryDisk(environ, input_file)
     url = binary_storage.store()
 
-    tiddler = Tiddler(filename, bag_name)
+    tiddler = Tiddler(target_name, bag_name)
     tiddler.fields['_canonical_uri'] = url
     tiddler.modifier = username
     tiddler.type = input_file.type
