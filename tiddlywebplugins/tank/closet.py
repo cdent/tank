@@ -26,7 +26,7 @@ def closet(environ, start_response):
     usersign = environ['tiddlyweb.usersign']
     bag_name = get_route_value(environ, 'bag_name')
     redir = environ['tiddlyweb.query'].get('redir', [False])[0]
-    target_name = environ['tiddlyweb.query']['name'][0]
+    target_name = environ['tiddlyweb.query'].get('name', [None])[0]
 
     bag = store.get(Bag(bag_name))
 
@@ -40,6 +40,8 @@ def closet(environ, start_response):
 
     tiddlers = []
     for input_file in files:
+        if target_name is None:
+            target_name = input_file.filename
         if pseudo_binary(input_file.type):
             tiddler = _regular_tiddler(environ, bag_name, input_file,
                     target_name)
