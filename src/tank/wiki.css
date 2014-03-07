@@ -110,3 +110,12 @@ ul.tags {
 .navigatorlinks .next {
     float: right;
 }
+
+.commands i.fa-chevron-right,
+.commands i.fa-chevron-down {
+    padding-right: .25em;
+}
+
+.commands h3:hover {
+    cursor: pointer;
+}

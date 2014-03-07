@@ -108,9 +108,11 @@
 	var activator = container.find('h3'),
 		arrow = activator.find('i').first();
 	activator.one('click', function() {
-		form.css('display', 'block');
-		arrow.removeClass('fa-chevron-right').addClass('fa-chevron-down');
 		loadBags();
+	});
+	activator.on('click', function() {
+		form.toggle();
+		arrow.toggleClass('fa-chevron-right fa-chevron-down');
 	});
 
 }(jQuery));
