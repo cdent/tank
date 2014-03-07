@@ -8,6 +8,28 @@
     margin: 0;
 }
 
+.transclusion {
+    border-left: thin solid lightblue;
+    margin-left: -.5em;
+    padding-left: .5em;
+    position: relative;
+}
+
+.transicon {
+    position: absolute;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    color: lightblue;
+    right: 0;
+    top: -1em;
+    display: none;
+}
+
+.transclusion:hover > .transicon {
+    display: inline;
+}
+
 ul.tags {
     list-style: none;
     margin: 0;
