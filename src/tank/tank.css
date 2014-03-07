@@ -51,6 +51,7 @@ header {
     background-color: #222222;
     min-height: 50px;
     width: 100%;
+    position: relative;
 }
 
 footer {
@@ -106,8 +107,39 @@ footer a:hover {
     text-decoration: none;
 }
 
-a.wikititle:hover {
-    text-decoration: underline;
+.policyicon {
+    position: absolute;
+    top: .75em;
+    left: .5em;
+}
+
+.title {
+    display: inline-block;
+    max-width: 24em;
+    width: 100%;
+}
+
+.title a,
+.title span {
+    text-decoration: none;
+    color: white;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tanktitle {
+    float: right;
+    max-width: 5em;
+    text-align: right;
+    width: 100%;
+}
+
+.pagetitle {
+    max-width: 18em;
+    width: 100%;
+    padding-left: 1.5em;
 }
 
 .right {

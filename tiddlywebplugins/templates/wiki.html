@@ -19,11 +19,11 @@
 <header>
 {% include 'logout.html' %}
     <a class="right wikititle" title="Recent Changes" href="RecentChanges"><i class="fa fa-clock-o"></i></a>
-    {% if tiddler.title != "index" %}
-    <a class="right wikititle" title="Tank Home" href="/tanks/{{ bag.name|uri }}"><i class="fa fa-home"></i></a>
-    {% endif %}
-    <i title="{{ bag.type }}" class="wikititle fa {{ bag.icon }}"></i>
-    <span class="tiddlertitle wikititle">{{ tiddler.title }}</span>
+    <i title="{{ bag.type }}" class="policyicon wikititle fa {{ bag.icon }}"></i>
+    <span class="wikititle title">
+        <a class="tanktitle" title="Tank Home" href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
+        <span class="pagetitle">{{ tiddler.title }}</span>
+    </span>
 </header>
 
 <main>
