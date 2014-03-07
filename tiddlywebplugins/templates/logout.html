@@ -1,13 +1,13 @@
 {% if user != 'GUEST' %}
 <form class="right" method="POST" action="/logout">
-    <a href="/dash"><img class="sm-gravatar" src="{{ gravatar }}" alt="gravatar"></a>
+    <a title="Your Dashboard" href="/dash"><img class="sm-gravatar" src="{{ gravatar }}" alt="gravatar"></a>
     <button type="submit">Logout</button>
     <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     <input type="hidden" name="tiddlyweb_redirect" value="/">
 </form>
 {% endif %}
 {% if bag %}
-<a class="right wikititle" title="get a feed"
+<a class="right wikititle" title="Syndicate Tank"
     href="/bags/{{ bag.name|uri }}/tiddlers.atom">
     <i class="fa fa-rss"></i>
 </a>

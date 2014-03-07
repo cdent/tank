@@ -6,11 +6,8 @@
 {% block body %}
 <header>
 {% include 'logout.html' %}
+    <a class="right wikititle" title="Tank Home" href="/tanks/{{ bag.name|uri }}"><i class="fa fa-home"></i></a>
     <span class="wikititle">Recent Changes</span>
-    <a class="wikititle" href="/tanks/{{ bag.name|uri }}">TankTop</a>
-    {% if user != "GUEST" %}
-    <a class="wikititle" href="/dash">Dash</a>
-    {% endif %}
 </header>
 
 <main>

@@ -10,14 +10,12 @@
 {% block body %}
 <header>
     {% include 'logout.html' %}
-    <i title="{{ bag.type }}" class="wikititle fa {{ bag.icon }}"></i>
-	<a class="wikititle" href="/tanks/{{tiddler.bag|uri}}/RecentChanges">Changes</a>
+    <a class="right wikititle" title="Recent Changes" href="/tanks/{{ bag.name|uri }}/RecentChanges"><i class="fa fa-clock-o"></i></a>
     {% if tiddler.title != "index" %}
-    <a class="wikititle" href="/tanks/{{ tiddler.bag|uri }}">TankTop</a>
+    <a class="right wikititle" title="Tank Home" href="/tanks/{{ bag.name|uri }}"><i class="fa fa-home"></i></a>
     {% endif %}
-    {% if user != "GUEST" %}
-    <a class="wikititle" href="/dash">Dash</a>
-    {% endif %}
+    <i title="{{ bag.type }}" class="wikititle fa {{ bag.icon }}"></i>
+    <a class="wikititle" href="/tanks/{{tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a>
 </header>
 
 <main>
@@ -32,8 +30,6 @@
 </div>
 <div class="output editor">
 <form action="/edit" method="POST">
-<h1>
-<a href="/tanks/{{tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a>
 <span class="controls">
 {% if conflict %}
 <button type="submit">Clobber</button>
@@ -43,7 +39,6 @@
 <button type="reset">Revert Changes</button>
 <button><a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">Cancel Edit</a></button>
 </span>
-</h1>
 {% if message == 'conflict' %}
 <div class="message">Someone made a change while you were editing. Your
     text is below.

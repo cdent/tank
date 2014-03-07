@@ -4,10 +4,6 @@
     padding: .5em;
 }
 
-.tiddlertitle {
-    margin: 0;
-}
-
 .transclusion {
     border-left: thin solid lightblue;
     margin-left: -.5em;
@@ -118,4 +114,8 @@ ul.tags {
 
 .commands h3:hover {
     cursor: pointer;
+}
+
+header > i {
+    cursor: default !important; /* why? */
 }
