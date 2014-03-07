@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+.logout input {
+    display: none;
+}
+
+.logout:hover {
+    cursor: pointer;
+}
+
 .warning {
     font-weight: bold;
     color: red;
@@ -134,6 +142,7 @@ a.wikititle:hover {
 
 .sm-gravatar {
     width: 2em;
+    margin-right: 1em;
     display: inline;
     vertical-align: middle;
 }
