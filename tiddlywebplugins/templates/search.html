@@ -34,9 +34,6 @@
 <ul>
 {% for tiddler in tiddlers %}
 <li>
-<a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">
-    {{ tiddler.title }}
-</a>
 <span class="meta">
 <span class="modified" title="{{ tiddler.modified|rfc3339 }}">
     {{ tiddler.modified }}
@@ -53,7 +50,10 @@ in
     <a href="/tanks/{{ tiddler.bag|uri }}">
         {{ tiddler.bag }}</a>
 </span>
-<span>
+</span>
+<a href="/tanks/{{ tiddler.bag|uri }}/{{ tiddler.title|uri }}">
+    {{ tiddler.title }}
+</a>
 </li>
 {% endfor %}
 </ul>

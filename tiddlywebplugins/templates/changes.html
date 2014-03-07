@@ -18,9 +18,7 @@
 <h1>Changes in last {{ days }} days.</h1>
 <ul>
 {% for tiddler in tiddlers %}
-<li><a href="{{ tiddler.title|uri }}">
-    {{ tiddler.title }}
-</a>
+<li>
 <span class="meta">
 <span class="modified" title="{{ tiddler.modified|rfc3339 }}">
     {{ tiddler.modified }}
@@ -32,7 +30,10 @@ by
         {{ tiddler.modifier }}</a>
 </span>
 {% endif %}
-<span>
+</span>
+<a href="{{ tiddler.title|uri }}">
+    {{ tiddler.title }}
+</a>
 </li>
 {% endfor %}
 </ul>
