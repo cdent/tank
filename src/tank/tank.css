@@ -37,6 +37,7 @@ main, header, footer {
 main {
     position: relative;
     color: #222222;
+    padding-top: 0;
 }
 
 main pre {
