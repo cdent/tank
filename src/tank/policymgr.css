@@ -11,9 +11,18 @@
     padding-right: 1em;
 }
 
+.tanks > ul {
+	padding-left: 0;
+}
+
 .tanklist {
+	list-style: none;
     width: 15em;
     border-bottom: thin solid lightgrey;
+}
+
+.tanklist a {
+	padding-left: .5em;
 }
 
 .deleter {

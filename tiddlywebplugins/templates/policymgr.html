@@ -28,7 +28,7 @@
         ng-repeat="tank in tanks | filter:tankFilterText | orderBy:'name'">
         <i class='deleter fa fa-trash-o' ng-show='tank.deleter'
             ng-click='deleteTank(tank)'></i>
-        <a href="#/{{tank.name|escape}}">{{tank.name}}</a>
+		<i class="fa {{tank.icon}}"></i> <a href="#/{{tank.name|escape}}">{{tank.name}}</a>
         </li>
     </ul>
 </div>

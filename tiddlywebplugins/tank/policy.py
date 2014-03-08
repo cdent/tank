@@ -53,7 +53,7 @@ WIKI_MODES = {
 
 
 POLICY_ICONS = {
-    'private': 'fa-folder',
+    'private': 'fa-lock',
     'protected': 'fa-folder-o',
     'public': 'fa-folder-open-o',
     'custom': 'fa-wrench',

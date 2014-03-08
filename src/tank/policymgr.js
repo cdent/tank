@@ -2,7 +2,7 @@
 var app = angular.module('app', []);
 
 var POLICY_ICONS = {
-	private: 'fa-folder',
+	private: 'fa-lock',
 	protected: 'fa-folder-o',
 	public: 'fa-folder-open-o',
 	custom: 'fa-wrench'
@@ -113,10 +113,12 @@ app.service('tankService', function($http, $q) {
 	};
 });
 
-app.controller('TanksCtrl', function($scope, $rootScope, $filter, $http, tankService) {
+app.controller('TanksCtrl', function($scope, $rootScope, $filter, $http, tankService, tankTypeIcon) {
 	tankService.getTanks().then(function(data) {
+		console.log('calling gettanks');
 		$scope.tanks = [];
 		angular.forEach(data, function(value, key) {
+			angular.extend(value, tankTypeIcon.get(value.policy));
 			$scope.tanks.push(value);
 		});
 	});
@@ -132,6 +134,7 @@ app.controller('TanksCtrl', function($scope, $rootScope, $filter, $http, tankSer
 						deleter = true;
 				}
 				found[0].deleter = deleter;
+				found[0].icon = tankTypeIcon.get(data.tank.policy).icon;
 			}
 		}
 	});
@@ -158,8 +161,8 @@ app.controller('TankEditor', function($scope, $http, $rootScope, tankTypeIcon) {
 	$scope.$on('startEdit', function(ev, data) {
 		$scope.editTank = angular.copy(data.tank);
 		$scope.originalData = angular.copy(data.tank);
-		angular.extend($scope.editTank,
-			tankTypeIcon.get($scope.editTank.policy));
+		/* angular.extend($scope.editTank,
+			tankTypeIcon.get($scope.editTank.policy)); */
 	});
 
 	$scope.$on('clearEdit', function() {
