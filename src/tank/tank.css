@@ -274,4 +274,8 @@ header > i {
     input[type=checkbox]:checked ~ .commands {
         left: 1em;
     }
+
+    .wikititle {
+        padding-right: .5em;
+    }
 }
