@@ -53,15 +53,18 @@ header {
     min-height: 50px;
     width: 100%;
     position: relative;
+    margin-bottom: 1em;
 }
 
 footer {
+    font-size: .75em;
     color: #efefef;
     background-color: #222222;
-    min-height: 75px;
+    min-height: 54px;
     width: 100%;
     clear: both;
     bottom: 0;
+    position: relative;
 }
 
 footer .logo {
@@ -70,7 +73,10 @@ footer .logo {
 }
 
 footer img {
-    width: 48px;
+    position: absolute;
+    width: 54px;
+    top: 0;
+    right: 0;
 }
 
 footer ul,
@@ -86,7 +92,7 @@ footer li {
 }
 
 footer .subfooter {
-    font-size: 75%;
+    font-size: .75em;
 }
 
 footer a {
@@ -101,7 +107,6 @@ footer a:hover {
 
 
 .wikititle {
-    font-weight: bold;
     font-size: 150%;
     padding-right: 1em;
     color: #efefef;
@@ -118,13 +123,14 @@ footer a:hover {
     display: inline-block;
     max-width: 24em;
     width: 100%;
-    padding-left: 1.5em
+    padding-left: 1.5em;
+    margin-top: -.25em;
 }
 
 .title a,
 .title span {
     text-decoration: none;
-    color: white;
+    color: #efefef;
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -132,10 +138,12 @@ footer a:hover {
 }
 
 .tanktitle {
-    float: right;
-    max-width: 8em;
-    text-align: right;
-    padding-left: .5em;
+    font-size: 65%;
+}
+
+.pagetitle {
+    font-size: 85%;
+    padding-left: 1em;
 }
 
 .right {
@@ -192,7 +200,7 @@ footer a:hover {
     margin: 0;
     padding: .5em;
     list-style: none;
-    background: white;
+    background: #efefef;
     border: thin solid black;
 }
 
@@ -215,7 +223,7 @@ footer a:hover {
 }
 
 .socketinfo dd {
-    color: black;
+    color: #222222;
     margin-left: .5em;
 }
 
@@ -238,6 +246,10 @@ i[title]:hover {
 
 form[name=search] .globalizer {
     display: none;
+}
+
+header > i {
+    cursor: default !important; /* why? */
 }
 
 @media screen and (max-width: 62em) {

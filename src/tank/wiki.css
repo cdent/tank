@@ -44,7 +44,7 @@ ul.tags {
 }
 
 .tags a {
-    color: white;
+    color: #efefef;
     text-decoration: none;
 }
 
@@ -53,7 +53,7 @@ ul.tags {
     margin-left: .5em;
     cursor: pointer;
     text-decoration: none;
-    color: black;
+    color: #222222;
 }
 
 .delete {
@@ -75,7 +75,7 @@ ul.tags {
 }
 
 .meta span a {
-    color: black;
+    color: #222222;
 }
 
 #mover form {
@@ -116,6 +116,3 @@ ul.tags {
     cursor: pointer;
 }
 
-header > i {
-    cursor: default !important; /* why? */
-}
