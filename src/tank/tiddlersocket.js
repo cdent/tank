@@ -78,6 +78,10 @@ var Tiddlers = (function($) {
             var tiddler = this.queue.shift();
 			var item = this.generateItem(tiddler);
 
+			// we've got some stuff so kill off the no activity
+			// message.
+			$('.nilactivity').css('display', 'none');
+
 			if (! noTrigger) {
 				this.el.trigger('tiddlersUpdate', tiddler);
 			}

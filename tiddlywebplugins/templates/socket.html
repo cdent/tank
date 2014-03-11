@@ -2,7 +2,9 @@
     <i title="Global Activity" class="allicon fa fa-bell-o"></i>
     <div class="socketinfo">
         <a class="socketsearch"><i title="More Activity" class="fa fa-search"></i></a>
-        <dl><dt></dt><dd>No activity today, make something!</dd></dl>
+        <dl><dt class="nilactivity"></dt>
+			<dd class="nilactivity">No activity today, make something!</dd>
+		</dl>
     </div>
 </span>
 {% if user and user != 'GUEST' %}
@@ -10,7 +12,9 @@
     <i title="Recent Notifications" class="friendsicon fa fa-meh-o"></i>
     <div class="socketinfo">
         <a class="socketsearch"><i title="More Notifications" class="fa fa-search"></i></a>
-        <dl><dt></dt><dd>No notifications</dd></dl>
+        <dl><dt class="nilactivity"></dt>
+			<dd class="nilactivity">No notifications</dd>
+		</dl>
     </div>
 </span>
 {% endif %}
