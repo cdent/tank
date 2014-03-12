@@ -38,9 +38,6 @@ var Tiddlers = (function($) {
                 dataType: 'json',
                 url: this.source,
                 success: function(tiddlers) {
-					if (tiddlers.length > 0) {
-						self.el.empty();
-					}
                     $.each(tiddlers, function(index, tiddler) {
                         self.push(tiddler, true);
                     });
@@ -80,7 +77,7 @@ var Tiddlers = (function($) {
 
 			// we've got some stuff so kill off the no activity
 			// message.
-			$('.nilactivity').css('display', 'none');
+			this.el.find('.nilactivity').css('display', 'none');
 
 			if (! noTrigger) {
 				this.el.trigger('tiddlersUpdate', tiddler);
