@@ -4,16 +4,33 @@ var Tiddlers = (function($) {
 
     "use strict";
 
-    var Tiddlers = function(el, socketuri, sourceuri, updater, options) {
+    function friendlyURI(uri) {
+        return uri.replace(/\/bags\//, '/tanks/')
+            .replace(/tiddlers\//, '');
+    }
+
+    function dateString(date) {
+        return new Date(Date.UTC(
+            parseInt(date.substr(0, 4), 10),
+            parseInt(date.substr(4, 2), 10) - 1,
+            parseInt(date.substr(6, 2), 10),
+            parseInt(date.substr(8, 2), 10),
+            parseInt(date.substr(10, 2), 10),
+            parseInt(date.substr(12, 2) || "0", 10),
+            parseInt(date.substr(14, 3) || "0", 10)
+        )).toISOString();
+    }
+
+    var Tiddlers = function(el, socketuri, sourceuri, updater) {
         this.el = el.find('dl');
         this.source = sourceuri + ';sort=-modified;limit=5;sort=modified';
         this.updater = updater;
 
-		var searchURI = sourceuri + ';sort=-modified',
-			socketsearch = el.find('.socketsearch');
-		socketsearch.attr('href', searchURI);
+        var searchURI = sourceuri + ';sort=-modified',
+            socketsearch = el.find('.socketsearch');
+        socketsearch.attr('href', searchURI);
 
-        if (typeof(io) !== 'undefined') {
+        if (io !== 'undefined') {
             this.socket = io.connect(socketuri,
                     {'force new connection': true});
             var self = this;
@@ -50,21 +67,21 @@ var Tiddlers = (function($) {
             this.updateUI(noTrigger);
         },
 
-		sizer: function() {
-			return 10;
-		},
+        sizer: function() {
+            return 10;
+        },
 
         generateItem: function(tiddler) {
             var href = friendlyURI(tiddler.uri),
                 tiddlerDate = dateString(tiddler.modified),
-				tank = tiddler.bag;
+                tank = tiddler.bag;
 
             var link = $('<a>').attr({'href': href}).text(tiddler.title);
 
-			var dd = $('<dd>').text('in ' + tank);
-			var span = $('<span>').addClass('modified').attr('title',
-					tiddlerDate).text(tiddler.modified).timeago();
-			dd.prepend(span);
+            var dd = $('<dd>').text('in ' + tank);
+            var span = $('<span>').addClass('modified').attr('title',
+                    tiddlerDate).text(tiddler.modified).timeago();
+            dd.prepend(span);
 
             var dt = $('<dt>').append(link);
 
@@ -73,21 +90,21 @@ var Tiddlers = (function($) {
 
         updateUI: function(noTrigger) {
             var tiddler = this.queue.shift();
-			var item = this.generateItem(tiddler);
+            var item = this.generateItem(tiddler);
 
-			// we've got some stuff so kill off the no activity
-			// message.
-			this.el.find('.nilactivity').css('display', 'none');
+            // we've got some stuff so kill off the no activity
+            // message.
+            this.el.find('.nilactivity').css('display', 'none');
 
-			if (! noTrigger) {
-				this.el.trigger('tiddlersUpdate', tiddler);
-			}
-			this.el.prepend(item.dd);
-			this.el.prepend(item.dt);
-			while (this.el.children().length > this.sizer()) {
-				this.el.children().last().remove();
-				this.el.children().last().remove();
-			}
+            if (!noTrigger) {
+                this.el.trigger('tiddlersUpdate', tiddler);
+            }
+            this.el.prepend(item.dd);
+            this.el.prepend(item.dt);
+            while (this.el.children().length > this.sizer()) {
+                this.el.children().last().remove();
+                this.el.children().last().remove();
+            }
         },
 
         getTiddler: function(uri) {
@@ -102,23 +119,6 @@ var Tiddlers = (function($) {
         }
 
     });
-
-    function friendlyURI(uri) {
-		return uri.replace(/\/bags\//, '/tanks/')
-			.replace(/tiddlers\//, '');
-    }
-
-    function dateString(date) {
-        return new Date(Date.UTC(
-            parseInt(date.substr(0, 4), 10),
-            parseInt(date.substr(4, 2), 10) - 1,
-            parseInt(date.substr(6, 2), 10),
-            parseInt(date.substr(8, 2), 10),
-            parseInt(date.substr(10, 2), 10),
-            parseInt(date.substr(12, 2) || "0", 10),
-            parseInt(date.substr(14, 3) || "0", 10)
-            )).toISOString();
-    }
 
     return Tiddlers;
 
