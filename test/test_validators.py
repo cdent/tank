@@ -16,6 +16,7 @@ from tiddlywebplugins.tank import init, SUBSCRIBER
 
 def setup_module(module):
     try:
+        shutil.rmtree('indexdir')
         shutil.rmtree('store')
     except:
         pass

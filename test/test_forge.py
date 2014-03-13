@@ -6,6 +6,7 @@ import wsgi_intercept
 
 import httplib2
 import urllib
+import shutil
 
 
 from tiddlyweb.web.serve import load_app
@@ -21,6 +22,11 @@ from .fixtures import establish_user_auth
 
 
 def setup_module(module):
+    try:
+        shutil.rmtree('indexdir')
+        shutil.rmtree('store')
+    except:
+        pass
     app = load_app()
 
     def app_fn(): return app
@@ -31,12 +37,10 @@ def setup_module(module):
     store = get_store(config)
     test_bag1 = Bag('newtank')
 
-
     try:
         store.delete(test_bag1)
     except StoreError:
         pass
-
 
     module.environ = {'tiddlyweb.store': store, 'tiddlyweb.config': config}
     module.store = store

@@ -5,6 +5,7 @@ from wsgi_intercept import requests_intercept
 import wsgi_intercept
 
 import requests
+import shutil
 
 from tiddlyweb.web.serve import load_app
 from tiddlyweb.config import config
@@ -19,6 +20,11 @@ from .fixtures import establish_user_auth
 
 
 def setup_module(module):
+    try:
+        shutil.rmtree('indexdir')
+        shutil.rmtree('store')
+    except:
+        pass
     app = load_app()
 
     def app_fn(): return app

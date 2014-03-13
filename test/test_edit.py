@@ -7,6 +7,7 @@ Simple for now, ignoring auth.
 from wsgi_intercept import httplib2_intercept
 import wsgi_intercept
 
+import shutil
 import httplib2
 import urllib
 
@@ -20,6 +21,12 @@ from tiddlywebplugins.utils import get_store
 
 
 def setup_module(module):
+    try:
+        shutil.rmtree('indexdir')
+        shutil.rmtree('store')
+    except:
+        pass
+
     app = load_app()
 
     def app_fn(): return app
