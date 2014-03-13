@@ -64,7 +64,6 @@ def closet_binary(environ, tiddler):
     """
     # XXX: dupes with BinaryDisk
     config = environ['tiddlyweb.config']
-    store = environ['tiddlyweb.store']
 
     boto = S3Connection(config['closet.aws_access_key'],
         config['closet.aws_secret_key'])
