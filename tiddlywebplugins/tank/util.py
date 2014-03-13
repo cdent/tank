@@ -14,6 +14,7 @@ from tiddlyweb.web.util import encode_name, server_base_url
 from tiddlywebplugins.links.linksmanager import LinksManager
 
 from .policy import determine_tank_type, POLICY_ICONS
+from .search import get_tiddlers_from_search
 
 
 INDEX_PAGE = 'index'
@@ -67,6 +68,13 @@ def tank_tiddler_resolver(environ, target, tiddler):
     tiddler.bag = target
 
 
+def get_sisterlinks(environ, tiddler):
+    """
+    Find other tiddlers on the service with the title of this one.
+    """
+    return get_tiddlers_from_search(environ, 'title:%s' % tiddler.title)
+
+
 def get_backlinks(environ, tiddler):
     """
     Extract the current backlinks for this tiddler.
@@ -78,18 +86,10 @@ def get_backlinks(environ, tiddler):
     links = links_manager.read_backlinks(tiddler)
     back_tiddlers = []
 
-    def _is_readable(tiddler):
-        try:
-            bag = store.get(Bag(tiddler.bag))
-            bag.policy.allows(usersign, 'read')
-            return True
-        except (NoBagError, PermissionsError):
-            return False
-
     for link in links:
         container, title = link.split(':', 1)
         tiddler = Tiddler(title, container)
-        if _is_readable(tiddler):
+        if _is_readable(store, usersign, tiddler):
             back_tiddlers.append(tiddler)
 
     return back_tiddlers
@@ -128,3 +128,11 @@ def get_rellinks(environ, tiddler):
         pass
 
     return links
+
+def _is_readable(store, usersign, tiddler):
+    try:
+        bag = store.get(Bag(tiddler.bag))
+        bag.policy.allows(usersign, 'read')
+        return True
+    except (NoBagError, PermissionsError):
+        return False

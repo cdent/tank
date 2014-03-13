@@ -7,6 +7,7 @@ An experiment for now.
 import re
 
 from tiddlyweb.model.bag import Bag
+from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.model.policy import PermissionsError
 from tiddlywebplugins.whoosher import get_searcher, query_parse
 
@@ -63,6 +64,24 @@ def get_comp_bags(store, config, usersign):
         except PermissionsError:
             pass
     return comp_bags
+
+
+def get_tiddlers_from_search(environ, query):
+    """
+    Do a search and return a list of readable tiddlers.
+    """
+    store = environ['tiddlyweb.store']
+    config = environ['tiddlyweb.config']
+    usersign = environ['tiddlyweb.usersign']
+
+    for result in full_search(config, query):
+        bag, title = result['id'].split(':', 1)
+        bag = store.get(Bag(bag))
+        try:
+            bag.policy.allows(usersign, 'read')
+            yield Tiddler(title, bag.name)
+        except PermissionsError:
+            pass
 
 
 def full_search(config, query):

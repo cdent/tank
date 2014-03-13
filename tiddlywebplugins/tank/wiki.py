@@ -16,8 +16,8 @@ from tiddlyweb.util import renderable
 from tiddlyweb.wikitext import render_wikitext
 
 from .search import full_search
-from .util import (tank_page_uri, get_backlinks, get_rellinks, INDEX_PAGE,
-        augment_bag)
+from .util import (tank_page_uri, get_backlinks, get_rellinks, get_sisterlinks,
+        INDEX_PAGE, augment_bag)
 from .templates import send_template
 
 
@@ -112,6 +112,13 @@ def wiki_page(environ, start_response):
         else:
             editable = False
         deletable = False
+        if tiddler.title is not 'index':
+            sisterlinks = get_sisterlinks(environ, tiddler)
+            tiddler.text = (tiddler.text
+                    + '\n### Other tiddlers with the same name\n' + ''.join(
+                    ['* [[%s]]@%s @%s\n' % (tiddler.title, tiddler.bag,
+                        tiddler.bag) for tiddler in sisterlinks
+                        if ' ' not in tiddler.bag]))
 
     if renderable(tiddler, environ):
         backlinks = get_backlinks(environ, tiddler)
