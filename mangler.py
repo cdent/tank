@@ -6,7 +6,8 @@ This is required primarily for testing.
 
 import sys
 import os
-import pkg_resources
+
+import tiddlywebplugins.utils
 
 
 VIRTUAL_NAMESPACE = 'tiddlywebplugins'
