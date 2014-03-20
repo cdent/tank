@@ -24,9 +24,24 @@ documentation](http://tiddlyweb.tiddlyspace.com/HTTP%20API).
 ## Access Control
 
 Access to the API is controlled by auth tokens in the form of
-oAuth2 Bearer tokens. Tokens are created (or revoked) at [/auth](/auth).
+API Keys. Tokens are created (or revoked/deleted) at [/auth](/auth).
 
-Use them in each request you make by adding an authorization header:
+Use them in each request you make by adding an `X-Tank-Key` header:
+
+```
+X-Tank-Key: <your token>
+```
+
+An example using `curl`:
+
+```
+curl -v -H 'X-Tank-Key: 4cdff82f-2b8b-4a92-8c95-a7f2dfd95f7' \
+    -H 'Accept: text/plain' \
+	https://tank.peermore.com/bags/cdent-notebook/tiddlers/index
+```
+
+You can also use the API keys as oauth2 bearer tokens. Use them
+by adding an `Authorization` header:
 
 ```
 Authorization: Bearer <your token>

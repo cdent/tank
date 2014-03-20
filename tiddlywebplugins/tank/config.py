@@ -5,7 +5,8 @@ Base config for tank.
 from .util import tank_uri, tank_tiddler_uri, tank_tiddler_resolver
 
 config = {
-    'extractors': ['tiddlywebplugins.oauth.extractor',
+    'extractors': ['tiddlywebplugins.tank.keyextractor',
+        'tiddlywebplugins.oauth.extractor',
         'tiddlywebplugins.tank.extractor'],
     'auth_systems': ['tiddlywebplugins.tank.challenger'],
     'logged_in_redirect': '/dash',
