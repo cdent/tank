@@ -14,6 +14,5 @@ but if you can reach it and access it then you can make it knowlege.
 status
 ======
 
-This code is being used to develop the service at [Tank](https://peermore.com).
-I'm intentionally developing this with a lack of test discipline. I'll explain
-why eventually.
+This code is being used to develop the service at
+[Tank](https://tank.peermore.com).
