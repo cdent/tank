@@ -115,10 +115,10 @@ def wiki_page(environ, start_response):
         if tiddler.title is not 'index':
             sisterlinks = get_sisterlinks(environ, tiddler)
             tiddler.text = (tiddler.text
-                    + '\n### Other tiddlers with the same name\n' + ''.join(
-                    ['* [[%s]]@%s @%s\n' % (tiddler.title, tiddler.bag,
-                        tiddler.bag) for tiddler in sisterlinks
-                        if ' ' not in tiddler.bag]))
+                    + '\n### Other tiddlers with similar names\n' + ''.join(
+                    ['* [[%s]]@%s @%s\n' % (stiddler.title, stiddler.bag,
+                        stiddler.bag) for stiddler in sisterlinks
+                        if ' ' not in stiddler.bag]))
 
     if renderable(tiddler, environ):
         backlinks = get_backlinks(environ, tiddler)
