@@ -11,7 +11,7 @@ from tiddlyweb.model.tiddler import Tiddler
 from tiddlyweb.model.policy import PermissionsError
 from tiddlywebplugins.whoosher import get_searcher, query_parse
 
-QUERY_PARSE_RE = re.compile(r'(\w+):("[^"]+")\s*')
+QUERY_PARSE_RE = re.compile(r'(\w+):"([^"]+)"\s*')
 
 
 def list_tags(environ, start_response):
@@ -26,6 +26,17 @@ def list_tags(environ, start_response):
     config = environ['tiddlyweb.config']
     query = environ['tiddlyweb.query'].get('q', [None])[0]
 
+    tags = get_indexed_tags(config, query)
+    start_response('200 OK', [('Content-Type', 'text/plain; charset=UTF-8')])
+
+    return '\n'.join(tags)
+
+
+def get_indexed_tags(config, query):
+    """
+    Search the index for the set of tags matching query, or
+    all of them.
+    """
     searcher = get_searcher(config)
 
     if query:
@@ -44,9 +55,7 @@ def list_tags(environ, start_response):
     for stored_fields in documents:
         set_tags.update(stored_fields['tags'].split(','))
 
-    start_response('200 OK', [('Content-Type', 'text/plain; charset=UTF-8')])
-
-    return '\n'.join(set_tags)
+    return set_tags
 
 
 def get_comp_bags(store, config, usersign):
