@@ -39,6 +39,7 @@ setup(
         'tiddlywebplugins.jsondispatcher',
         'tiddlywebplugins.twikified',
         'tiddlywebplugins.extraclude',
+        'tiddlywebplugins.privateer',
         'markdown-checklist',
         'httpexceptor'
         ],

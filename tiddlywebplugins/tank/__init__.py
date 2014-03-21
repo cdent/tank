@@ -15,6 +15,7 @@ from tiddlywebplugins.links import init as links_init
 from tiddlywebplugins.logout import init as logout_init
 from tiddlywebplugins.oauth import init as oauth_init
 from tiddlywebplugins.policyfilter import init as policy_init
+from tiddlywebplugins.privateer import init as privateer_init
 from tiddlywebplugins.whoosher import init as whoosh_init
 from tiddlywebplugins.status import init as status_init
 
@@ -49,6 +50,7 @@ def establish_web(config):
     status_init(config)
     logout_init(config)
     oauth_init(config)
+    privateer_init(config)
 
     selector = config['selector']
     if CSRFProtector not in config['server_request_filters']:
