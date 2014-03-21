@@ -1,4 +1,60 @@
+.warning {
+    font-weight: normal;
+    color: red;
+}
 
+.hero {
+    background: white;
+    padding: 1em 2em 1em 2em;
+    border-radius: .5em;
+    font-size: 125%;
+    position: relative;
+}
+
+.fished {
+    background-image: url("/bags/tank/tiddlers/fish.png");
+    background-position: top -64px right -64px;
+    background-repeat: no-repeat;
+}
+
+.hero h1 {
+    padding-top: 0;
+    margin-top: 0;
+    text-align: center;
+}
+
+.regisign {
+    background: lightblue;
+    margin-top: 0;
+    width: 100%;
+    padding: 1em;
+    border-radius: .5em;
+}
+
+.regisign ul {
+    margin: 0;
+    padding: 0;
+}
+
+.regisign li {
+    list-style: none;
+}
+
+.regisign .fa {
+    font-size: 2em;
+    padding-right: 1em;
+}
+
+.regisign li a {
+    display: inline-block;
+    text-decoration: none;
+    color: black;
+    padding: .5em 1em 0 1em;
+}
+
+.regisign li a:hover {
+    background-color: #efefef;
+}
 
 @media screen and (max-width: 62em) {
     .commands {
@@ -6,5 +62,8 @@
         float: none;
         background: lightblue;
         padding: .5em 1em .5em 1em;
+    }
+    .info {
+        display: none;
     }
 }

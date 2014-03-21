@@ -10,33 +10,34 @@
 </header>
 
 <main>
-{% if user=='GUEST' %}
-<div class="commands regisign">
-    <i class="fa fa-github"></i> <a href="/_oauth/callback?server_name=github">Sign Up or In with GitHub</a><br/>
-    <i class="fa fa-google-plus"></i> <a href="/_oauth/callback?server_name=google">Sign Up or In with Google</a><br/>
-    <i class="fa fa-facebook"></i> <a href="/_oauth/callback?server_name=facebook">Sign Up or In with Facebook</a><br/>
-</div>
-{% else %}
 <div class="commands">
+<div class="regisign">
+{% if user=='GUEST' %}
+    Sign Up or In With
+    <ul>
+        <li><a href="/_oauth/callback?server_name=github">
+            <i class="fa fa-github"></i><span class="site">GitHub</span></a></li>
+        <li><a href="/_oauth/callback?server_name=google">
+            <i class="fa fa-google-plus"></i><span class="site">Google</span></a></li>
+        <li><a href="/_oauth/callback?server_name=facebook">
+            <i class="fa fa-facebook"></i><span class="site">Facebook</span></a></li>
+    </ul>
+{% else %}
     <p>Welcome Back {{user}}.</p>
     <p>Would you like to go to your <a
         href="/dash">dashboard</a>?</p>
-</div>
 {% endif %}
-<div class="output">
-<h2>For Your Tiddlers</h2>
-<p>An indexed store and <a href="/tanks/docs/API">API</a> for <em>your</em>
-bits of stuff on the web, hypertexted for your pleasure.</p>
-<p>We call them <a href="/tanks/docs/tiddler">tiddlers</a>, keep them
-in <a href="/tanks/docs/tank">tanks</a> and work with them in
-<a href="/tanks/docs/composition">compositions</a>.</p>
-<p>Do with your tiddlers what you will:
+</div>
+<div class="info">
+<p>Tank is an indexed store for your bits of stuff on the web, hypertexted
+for your pleasure. We call them <a href="/tanks/docs/tiddler">tiddlers</a>,
+keep them in <a href="/tanks/docs/tank">tanks</a> and work with them in
+<a href="/tanks/docs/composition">compositions</a>.
+Do with your tiddlers what you will:
 <a href="/tanks/docs/Using%20Wikis">Make a wiki</a>,
 keep your private or public notes, build
 <a href="/tanks/docs/Single%20Page%20Apps">single page applications</a>,
 manage data over the <a href="/tanks/docs/API">API</a>.</p>
-
-<p>See a list of current and planned <a href="/tanks/docs/Features">features</a>.</p>
 
 <p class="warning">Please note, for the time being Tank is in an
 open beta, free for anyone to try. At some point in the future it
@@ -44,6 +45,25 @@ will become a <a href="/tanks/docs/subscribe">subscription</a> service
 to ensure its continued support and maintenance.
 <a href="/tanks/docs/contact">Stay in touch</a> to learn more.
 </p>
+</div>
+</div>
+<div class="output">
+<div class="hero fished">
+<h1>For Your Tiddlers</h1>
+
+<p><strong>You</strong> already know that taking notes, making lists, keeping
+bookmarks and making links between things is a good idea. You just need the
+tools to get the job done.</p>
+
+<p><strong>We</strong> provide you with straightforward tools to create,
+maintain, share and publish or protect your content, building on the
+time-tested techniques of wikis paired with an innovative
+<a href="/tanks/docs/API">API</a>.
+
+<p>See a list of current and planned
+<a href="/tanks/docs/Features">features</a>.</p>
+</div>
+
 </div>
 </main>
 
