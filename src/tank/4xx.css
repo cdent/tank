@@ -3,13 +3,18 @@ html, body, main {
     height: 100%;
 }
 
-main {
-    background: url(/bags/tank/tiddlers/emptybowl.jpg) no-repeat center center fixed;
-    background-size: cover;
+header {
+    margin-bottom: 0;
 }
 
 .commands {
     display: none;
+}
+
+main {
+    background-image: url("/bags/tank/tiddlers/fish.png");
+    background-position: top -64px right -64px;
+    background-repeat: no-repeat;
 }
 
 .output {
