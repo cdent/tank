@@ -28,4 +28,9 @@ config = {
         'text/html': ['tiddlywebplugins.tank.htmlserialization',
             'text/html; charset=UTF-8']
     },
+    # cors
+    'cors.match_origin': True,
+    'cors.allow_creds': True,
+    'cors.enable_non_simple': True,
+    'cors.exposed_headers': ['X-Tank-Key'],
 }

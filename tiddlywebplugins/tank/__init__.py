@@ -8,6 +8,7 @@ from tiddlyweb.web.validator import (BAG_VALIDATORS, TIDDLER_VALIDATORS,
         InvalidBagError)
 
 from tiddlywebplugins.atom import init as atom_init
+from tiddlywebplugins.cors import init as cors_init
 from tiddlywebplugins.dispatcher import init as dispatcher_init
 from tiddlywebplugins.dispatcher.listener import init as listener_init
 from tiddlywebplugins.extraclude import init as extraclude_init
@@ -46,6 +47,7 @@ SUBSCRIBER = 'SUBSCRIBER'
 
 def establish_web(config):
     atom_init(config)
+    cors_init(config)
     extraclude_init(config)
     status_init(config)
     logout_init(config)

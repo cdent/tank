@@ -56,3 +56,5 @@ curl -v -H 'Authorization: bearer 4cdff82f-2b8b-4a92-8c95-a7f2dfd95f7' \
 ```
 
 Take care with your tokens to not expose them to prying eyes.
+
+Requests to the API respect [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing).

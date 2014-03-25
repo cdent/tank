@@ -40,6 +40,7 @@ setup(
         'tiddlywebplugins.twikified',
         'tiddlywebplugins.extraclude',
         'tiddlywebplugins.privateer',
+        'tiddlywebplugins.cors',
         'markdown-checklist',
         'httpexceptor'
         ],
