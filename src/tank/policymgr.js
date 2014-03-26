@@ -189,7 +189,7 @@ app.controller('TankEditor', function($scope, $http, $rootScope, tankTypeIcon) {
 	// XXX: move to service?
 	$scope.saveTank = function() {
 		var uri = '/bags/' + encodeURIComponent($scope.editTank.name);
-		$http.put(uri, $scope.editTank, {headers: {'Accept': 'application/json'}})
+		$http.put(uri, $scope.editTank, {headers: {'Content-Type': 'application/json'}})
 			.success(function() {
 				$rootScope.$broadcast('finishEdit', {
 					tank: angular.copy($scope.editTank)});
