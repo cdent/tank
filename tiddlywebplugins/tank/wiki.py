@@ -112,7 +112,7 @@ def wiki_page(environ, start_response):
         else:
             editable = False
         deletable = False
-        if tiddler.title is not 'index':
+        if tiddler.title != INDEX_PAGE:
             sisterlinks = get_sisterlinks(environ, tiddler)
             tiddler.text = (tiddler.text
                     + '\n### Other tiddlers with similar names\n' + ''.join(
