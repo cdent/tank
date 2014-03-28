@@ -22,6 +22,7 @@ var Tiddlers = (function($) {
     }
 
     var Tiddlers = function(el, socketuri, sourceuri, updater) {
+		this.io = typeof io != 'undefined' ? io : null;
         this.el = el.find('dl');
         this.source = sourceuri + ';sort=-modified;limit=5;sort=modified';
         this.updater = updater;
@@ -30,20 +31,21 @@ var Tiddlers = (function($) {
             socketsearch = el.find('.socketsearch');
         socketsearch.attr('href', searchURI);
 
-        if (io !== 'undefined') {
-            this.socket = io.connect(socketuri,
-                    {'force new connection': true});
-            var self = this;
-            this.socket.on('connect', function() {
-                $.each(self.updater, function(index, sub) {
-                    self.socket.emit('unsubscribe', sub);
-                    self.socket.emit('subscribe', sub);
-                });
-                self.socket.on('tiddler', function(data) {
-                    self.getTiddler(data);
-                });
-            });
-        }
+		if (!this.io) {
+			return null;
+		}
+		this.socket = this.io.connect(socketuri,
+				{'force new connection': true});
+		var self = this;
+		this.socket.on('connect', function() {
+			$.each(self.updater, function(index, sub) {
+				self.socket.emit('unsubscribe', sub);
+				self.socket.emit('subscribe', sub);
+			});
+			self.socket.on('tiddler', function(data) {
+				self.getTiddler(data);
+			});
+		});
     };
 
     $.extend(Tiddlers.prototype, {

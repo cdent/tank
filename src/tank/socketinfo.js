@@ -30,7 +30,13 @@
 			'/search?q=modified:' + timestampToday(),
 			['*'],
 			{});
-		allInfo.start();
+		if (allInfo.io) {
+			allInfo.start();
+		} else {
+			allsocketinfo.find('dd.nilactivity').text(
+					'No socket server. Click the icon to search.');
+		}
+
 
 		allsocket.on('click', function() {
 			allsocketinfo.toggle();
@@ -52,7 +58,13 @@
 			'/search?q=tag:"' + encodeURIComponent(currentUserTag) + '"',
 			['tags/' + currentUserTag],
 			{});
-		friendInfo.start();
+
+		if (friendInfo.io) {
+			friendInfo.start();
+		} else {
+			friendinfo.find('dd.nilactivity').text(
+					'No socket server. Click the icon to search.');
+		}
 
 		friendsocket.on('click', function() {
 			friendinfo.toggle();
