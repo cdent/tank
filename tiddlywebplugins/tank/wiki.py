@@ -116,9 +116,8 @@ def wiki_page(environ, start_response):
             sisterlinks = get_sisterlinks(environ, tiddler)
             tiddler.text = (tiddler.text
                     + '\n### Other tiddlers with similar names\n' + ''.join(
-                    ['* [[%s]]@%s @%s\n' % (stiddler.title, stiddler.bag,
-                        stiddler.bag) for stiddler in sisterlinks
-                        if ' ' not in stiddler.bag]))
+                    ['* [[%s]]@[[%s]] @%s\n' % (stiddler.title, stiddler.bag,
+                        stiddler.bag) for stiddler in sisterlinks]))
 
     if renderable(tiddler, environ):
         backlinks = get_backlinks(environ, tiddler)
