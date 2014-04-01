@@ -23,12 +23,12 @@
 <div class="tanks" ng-controller="TanksCtrl">
     <input type="text" ng-model="tankFilterText" size="30"
      placeholder="Filter Tanks">
-    <ul ng-cloak>
+    <ul class="fa-ul" ng-cloak>
         <li class="tanklist"
         ng-repeat="tank in tanks | filter:tankFilterText | orderBy:'name'">
-        <i class='deleter fa fa-trash-o' ng-show='tank.deleter'
+        <i class='deleter fa fa-fw fa-trash-o' ng-show='tank.deleter'
             ng-click='deleteTank(tank)'></i>
-		<i class="fa {{tank.icon}}"></i> <a href="#/{{tank.name|escape}}">{{tank.name}}</a>
+		<i class="fa fa-li {{tank.icon}}"></i> <a href="#/{{tank.name|escape}}">{{tank.name}}</a>
         </li>
     </ul>
 </div>

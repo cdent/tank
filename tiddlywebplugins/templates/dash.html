@@ -26,11 +26,11 @@
         <ul class="radiogroup">
             <li><input type="radio" name="policy_type" id="pt_prv" value="private"
         checked>
-        <label for="pt_prv"><i class="fa fa-lock"></i> Private</label></li>
+        <label for="pt_prv"><i class="fa fa-fw fa-lock"></i> Private</label></li>
         <li><input type="radio" name="policy_type" id="pt_pro" value="protected">
-        <label for="pt_pro"><i class="fa fa-folder-o"></i> Protected</label></li>
+        <label for="pt_pro"><i class="fa fa-fw fa-folder-o"></i> Protected</label></li>
         <li><input type="radio" name="policy_type" id="pt_pub" value="public">
-        <label for="pt_pub"><i class="fa fa-folder-open-o"></i> Public</label></li>
+        <label for="pt_pub"><i class="fa fa-fw fa-folder-open-o"></i> Public</label></li>
         </ul>
         <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
         <input name="desc" placeholder="optional description"><br/>
@@ -46,25 +46,25 @@
 </div>
 <div class="output">
 <ul class="anchornav">
-    <li><a title="Your tanks" href="#yours"><i class="fa fa-home"></i></a></li>
-    <li><a title="Friendly tanks" href="#friends"><i class="fa fa-smile-o"></i></a></li>
-    <li><a title="Your comps" href="#ycomps"><i class="fa fa-arrows-h"></i></a></li>
-    <li><a title="Available comps" href="#acomps"><i class="fa fa-arrows-alt"></i></a></li>
+    <li><a title="Your tanks" href="#yours"><i class="fa fa-fw fa-home"></i></a></li>
+    <li><a title="Friendly tanks" href="#friends"><i class="fa fa-fw fa-smile-o"></i></a></li>
+    <li><a title="Your comps" href="#ycomps"><i class="fa fa-fw fa-arrows-h"></i></a></li>
+    <li><a title="Available comps" href="#acomps"><i class="fa fa-fw fa-arrows-alt"></i></a></li>
 </ul>
 <h1 class="greeting">Hi {{user}}</h1>
 <div class="tanks">
     <h2 id="yours">Your tanks</h2>
-    <ul>
+    <ul class="fa-ul">
         {% for bag in owned_bags|sort(attribute='name') %}
-        <li><i title="{{ bag.type }}" class="fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
+        <li><i title="{{ bag.type }}" class="fa-li fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
         <span class="description">{{ bag.desc }}</span></li>
         {% endfor %}
     </ul>
     <h2 id="friends">Friendly tanks
         <i title="Tanks you can write in" class="fa fa-question-circle"></i></h2>
-    <ul>
+    <ul class="fa-ul">
         {% for bag in friendly_bags|sort(attribute='name') %}
-        <li><i title="{{ bag.type }}" class="fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
+        <li><i title="{{ bag.type }}" class="fa-li fa {{ bag.icon }}"></i> <a href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
         <span class="description">{{ bag.desc }}</span></li>
         {% endfor %}
     </ul>
