@@ -49,6 +49,9 @@
     </ul>
     </div>
     {% endif %}
+    {% if user != 'GUEST' and bag.name != user %}
+    {% include 'twinner.html' %}
+    {% endif %}
     {% if edit and delete %}
     {% include 'mover.html' %}
     {% endif %}
@@ -107,6 +110,9 @@
 {% endif %}
 {% if edit and delete %}
 <script src="/bags/tank/tiddlers/mover.js"></script>
+{% endif %}
+{% if user != 'GUEST' %}
+<script src="/bags/tank/tiddlers/twinner.js"></script>
 {% endif %}
 {% if delete %}
 <script src="/bags/tank/tiddlers/pagedeleter.js"></script>

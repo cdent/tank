@@ -78,6 +78,18 @@ ul.tags {
     color: #222222;
 }
 
+#twinner form {
+	display: none;
+}
+
+#twinner textarea {
+	width: 100%;
+}
+
+#twinner input {
+	display: block;
+}
+
 #mover form {
 	display: none;
 }

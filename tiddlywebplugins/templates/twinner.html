@@ -1,0 +1,12 @@
+<div id="twinner">
+    <h3><i class="fa fa-chevron-right"></i>Twin this tiddler
+        <a href="/tanks/docs/twinner"><i class="fa fa-question-circle"></i></a></h3>
+<form action="POST">
+<textarea disabled rows="15" name="text">
+_Twinned with [[{{ tiddler.title }}]]@[[{{ bag.name }}]]:_
+</textarea>
+    <input disabled name="tags" placeholder="tags" value="@{{ bag.name }}{%- if tiddler.modifier %}, @{{ tiddler.modifier }}{% endif -%}">
+    <input disabled name="confirm" type="submit" value="confirm">
+    <div class="message"></div>
+</form>
+</div>

@@ -1,0 +1,20 @@
+modifier: cdent
+modified: 201404010000
+type: text/x-markdown
+
+The twinner is a tool which makes it easy to create a [[tiddler]] in
+your home tank with the same name as the one you are currently reading.
+
+Your home space is the space named after your username.
+
+The interface is only presented when you are logged in and not in your
+home space.
+
+When clicked, an interface will be revealed presenting a textarea
+and a tag interface. If the target tiddler already exists, its text
+and tags will be shown available for editing. Otherwise the textarea shows
+a link back to the current tiddler and the tags are configured to notify
+the modifier of the current tiddler that you have made a twin.
+
+When confirm is clicked, the tiddler is saved and you will be redirected
+there.
