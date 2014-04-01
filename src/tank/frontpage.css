@@ -29,27 +29,12 @@
     width: 100%;
     padding: 1em;
     border-radius: .5em;
-}
-
-.regisign ul {
-    margin: 0;
-    padding: 0;
-}
-
-.regisign li {
-    list-style: none;
-}
-
-.regisign .fa {
-    font-size: 2em;
-    padding-right: 1em;
+    font-size: 1.25em;
 }
 
 .regisign li a {
-    display: inline-block;
     text-decoration: none;
     color: black;
-    padding: .5em 1em 0 1em;
 }
 
 .regisign li a:hover {

@@ -113,17 +113,12 @@ footer a:hover {
     text-decoration: none;
 }
 
-.policyicon {
-    position: absolute;
-    top: .75em;
-    left: .5em;
-}
 
 .title {
     display: inline-block;
     max-width: 24em;
     width: 100%;
-    padding-left: 1.5em;
+    padding-left: 1em;
     margin-top: -.25em;
 }
 
@@ -135,6 +130,18 @@ footer a:hover {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.twoicons i {
+    position: absolute;
+    bottom: .25em;
+    left: 0;
+    padding: 0;
+    cursor: auto !important;
+}
+
+.twoicons i:first-child {
+    top: .25em;
 }
 
 .tanktitle {

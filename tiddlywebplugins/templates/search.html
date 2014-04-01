@@ -10,7 +10,14 @@
         href="{{ tiddlers.link|replace('/search', '/search.atom') }}">
         <i class="fa fa-rss"></i>
     </a>
-    <i class="policyicon wikititle fa fa-search"></i>
+    <span class="twoicons">
+        <a class="wikititle" href="{%- if user != 'GUEST' %}
+            /tanks/{{ user|uri }}
+            {% else %}
+            /
+            {% endif -%}"><i title="Home" class="fa fa-fw fa-home"></i></a>
+    <i class="policyicon wikititle fa fa-fw fa-search"></i>
+    </span>
     <span class="wikititle title">
         <span class="tanktitle">&nbsp;</span>
         <span class="pagetitle">Search</span>

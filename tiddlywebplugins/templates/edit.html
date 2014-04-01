@@ -11,7 +11,14 @@
 <header>
     {% include 'logout.html' %}
     <a class="right wikititle" title="Recent Changes" href="/tanks/{{ bag.name|uri }}/RecentChanges"><i class="fa fa-clock-o"></i></a>
-    <i title="{{ bag.type }}" class="policyicon wikititle fa {{ bag.icon }}"></i>
+    <span class="twoicons">
+        <a class="wikititle" href="{%- if user != 'GUEST' %}
+            /tanks/{{ user|uri }}
+            {% else %}
+            /
+            {% endif -%}"><i title="Home" class="fa fa-fw fa-home"></i></a>
+    <i title="{{ bag.type }}" class="policyicon wikititle fa fa-fw {{ bag.icon }}"></i>
+    </span>
     <span class="wikititle title">
         <a class="tanktitle" title="Tank Home" href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
         <a class="pagetitle" href="/tanks/{{tiddler.bag|uri }}/{{ tiddler.title|uri }}">{{ tiddler.title }}</a>

@@ -6,7 +6,14 @@
 {% block body %}
 <header>
 {% include 'logout.html' %}
-    <i class="policyicon wikititle fa fa-clock-o"></i>
+    <span class="twoicons">
+        <a class="wikititle" href="{%- if user != 'GUEST' %}
+            /tanks/{{ user|uri }}
+            {% else %}
+            /
+            {% endif -%}"><i title="Home" class="fa fa-fw fa-home"></i></a>
+    <i class="policyicon wikititle fa fa-fw fa-clock-o"></i>
+    </span>
     <span class="wikititle title">
         <a class="tanktitle" title="Tank Home" href="/tanks/{{ bag.name|uri }}">{{ bag.name }}</a>
         <span class="pagetitle">Recent Changes</span>
