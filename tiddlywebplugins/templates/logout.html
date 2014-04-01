@@ -5,6 +5,8 @@
     <input type="hidden" name="tiddlyweb_redirect" value="/">
     <a title="Your Dashboard" href="/dash"><img class="sm-gravatar" src="{{ gravatar }}" alt="gravatar"></a>
 </form>
+{% else %}
+<a href="/challenge"><i title="Sign In" class="right wikititle fa fa-sign-in"></i></a>
 {% endif %}
 {% if bag %}
 <a class="right wikititle" title="Syndicate Tank"

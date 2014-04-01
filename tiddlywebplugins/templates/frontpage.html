@@ -13,15 +13,7 @@
 <div class="commands">
 <div class="regisign">
 {% if user=='GUEST' %}
-    Sign Up or In With
-    <ul>
-        <li><a href="/_oauth/callback?server_name=github">
-            <i class="fa fa-github"></i><span class="site">GitHub</span></a></li>
-        <li><a href="/_oauth/callback?server_name=google">
-            <i class="fa fa-google-plus"></i><span class="site">Google</span></a></li>
-        <li><a href="/_oauth/callback?server_name=facebook">
-            <i class="fa fa-facebook"></i><span class="site">Facebook</span></a></li>
-    </ul>
+{% include 'signin.html' %}
 {% else %}
     <p>Welcome Back {{user}}.</p>
     <p>Would you like to go to your <a

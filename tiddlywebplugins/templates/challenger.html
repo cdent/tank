@@ -9,7 +9,7 @@
 </header>
 
 <main>
-<p><a href="/_oauth/callback?server_name=github{% if redirect %}&tiddlyweb_redirect={{ redirect }}{% endif %}">Sign Up or In with GitHub</a></p>
+{% include 'signin.html' %}
 </main>
 
 {% endblock %}
