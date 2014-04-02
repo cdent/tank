@@ -259,9 +259,24 @@ header > i {
     cursor: default !important; /* why? */
 }
 
+.plink {
+    float: left;
+    margin-left: -32px;
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: small;
+    text-decoration: none;
+    color: #C8A8FF;  /* light purple */
+}
+
 @media screen and (max-width: 62em) {
     body {
         width: 100%;
+    }
+
+    .plink {
+        display: none;
     }
 
     .commandbox {

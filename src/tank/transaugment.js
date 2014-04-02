@@ -22,5 +22,13 @@
 		$(this).prepend(link);
 	});
 
+	$('.wikicontent *[id]').each(function(index) {
+		var id = $(this).attr('id'),
+			link = $('<a>')
+				.attr('href', '#' + id)
+				.addClass('plink')
+				.text('\u00B6');
+		$(this).prepend(link);
+	});
 
 })(jQuery);
