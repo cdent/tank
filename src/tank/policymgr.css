@@ -12,11 +12,11 @@
 }
 
 .tanks > ul {
-	padding-left: 0;
+    padding-left: 0;
 }
 
 .tanklist {
-	list-style: none;
+    list-style: none;
     width: 15em;
     border-bottom: thin solid lightgrey;
 }
@@ -28,3 +28,8 @@
 .deleter {
     float: right;
 }
+
+.deleter:hover {
+    cursor: pointer;
+}
+
