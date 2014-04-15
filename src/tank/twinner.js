@@ -16,6 +16,11 @@
 		}, 10000);
 	}
 
+    // return true only once for every member, even if dupes
+    function uniqueMember(member, index, members) {
+        return (members.indexOf(member, index + 1) == -1);
+    }
+
 	function submitForm(ev) {
 		var targetBag = encodeURIComponent(username),
 			targetTiddlerURI = currentTiddlerURI.replace(currentBag, targetBag),
@@ -51,9 +56,9 @@
 			dataType: 'json'
 		}).done(function(data) {
 			if (data.tags) {
-				// duplication of tags will be cleaned up?
-				// XXX but should be cleaned up here
-				tags.val(tags.val() + ', ' + data.tags.join(', '));
+                // de-dupe tags
+                tags.val(tags.val().split(/,\s*/).concat(data.tags)
+                    .filter(uniqueMember).sort());
 			}
 			if (data.text) {
 				text.val(data.text);
