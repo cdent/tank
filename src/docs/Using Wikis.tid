@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201403040000
+modified: 201404150000
 type: text/x-markdown
 
 By default each [[tank]] can operate as a
@@ -25,6 +25,8 @@ wiki functionality:
 * content can be manipulated using the API
 * [[comps|composition]] which provide applications to use with the
   tiddler content
+
+{{DocumentationConventions}}
 
 Comps are the mechanism through which [TiddlyWiki](http://tiddlywiki.com)
 ([[classic|TiddlyWiki Classic]] and [[five|TiddlyWiki Five]]) functionality

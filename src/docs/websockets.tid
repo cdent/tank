@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402190000
+modified: 201404150000
 type: text/x-markdown
 
 Tank has a websocket server that broadcasts messages about
@@ -22,6 +22,8 @@ is tagged `@<yourusername>`. This signals to you that someone has
 created a tiddler for which they'd like your attention. You can click
 on the face, open the dropdown and follow the link to see what they
 have to say.
+
+{{DocumentationConventions}}
 
 The websocket interface can also be used in custom code to get
 notifications of tiddlers. Look at the following to see how the features

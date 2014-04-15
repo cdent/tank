@@ -23,6 +23,8 @@ documentation](http://tiddlyweb.tiddlyspace.com/HTTP%20API).
 
 ## Access Control
 
+{{DocumentationConventions}}
+
 Access to the API is controlled by auth tokens in the form of
 API Keys. Tokens are created (or revoked/deleted) at [/auth](/auth).
 

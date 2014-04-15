@@ -1,5 +1,5 @@
 modifier: cdent
-modified: 201402200000
+modified: 201404150000
 type: text/x-markdown
 
 Tiddlers can use [transclusion](http://en.wikipedia.org/wiki/Transclusion).
@@ -13,6 +13,9 @@ syntax for markdown tiddlers is, _on a line by itself_:
 
 As with WikiLinks, an `@<name of tank>` can be appended (outside the `}}`)
 to transclude from a different [[tank]]. If the current user cannot read from
-the other tank the transclusion will not happen.
+the other tank the transclusion will not happen. If the tank name contains
+spaces surround the name with `[[` and `]]`.
+
+{{DocumentationConventions}}
 
 Transclusion is also possible in TiddlyWiki text, using macros.

@@ -1,0 +1,7 @@
+modifier: cdent
+modified: 201404150000
+type: text/x-markdown
+
+> _When instructions wrap a word or phrase in `<` and `>`, replace
+the entire phrase, including `<` and `>` with the chosen value. For example
+`@<my tank>` would become `@cdent`._
