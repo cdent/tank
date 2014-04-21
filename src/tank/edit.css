@@ -11,13 +11,35 @@
     float: right;
 }
 
-.editor textarea, 
-.editor input[name="tags"] {
+.editor textarea {
     width: 100%;
+    margin-bottom: .5em;
+}
+
+.tagger textarea {
+    width: 50%;
+}
+
+.radios {
+    margin: 0;
+    float: right;
+    width: 45%;
+}
+
+.radios p {
+    margin: 0;
+}
+
+.radios label {
+    display: block;
 }
 
 .info {
     float: right;
     width: 25%;
+}
+
+.selectize-control {
+    width: 45% !important;
 }
 

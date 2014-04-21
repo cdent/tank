@@ -9,7 +9,7 @@
 			selectizer.destroy();
 			tags = undefined;
 		}
-		var select = $('input[name=tags]').selectize({
+		var select = $('textarea[name=tags]').selectize({
 			delimeter: ',',
 			create: true,
 			preload: true,
@@ -26,7 +26,7 @@
 		}
 		var uri = '/tags',
 			query = window.location.search.replace(/^.*bag=([^;]*);.*$/, '$1');
-		if (! $('input[name=global]').is(':checked')) {
+		if ($('input[name=tagsource]:checked').val() === 'local') {
 			uri = uri + '?q=bag:"' + query + '"';
 		}
 		$.ajax({
@@ -44,7 +44,7 @@
 		});
 	}
 
-	$('input[name=global]').on('click', function(ev) {
+	$('input[name=tagsource]').on('click', function(ev) {
 		start();
 	});
 	start();

@@ -59,8 +59,16 @@
 <input type="hidden" name="type" value="{{ tiddler.type }}">
 <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
 <textarea id="dropzone" name="text" rows="18" cols="60" placeholder="enter markdown text here">{{ tiddler.text }}</textarea><br/>
-<label><input type="checkbox" name="global"> Use global tags in autocomplete?</label><br/>
-<input placeholder="tags" name="tags" value="{{ tiddler.tags|join(', ') }}" size="60"><br/>
+<div class="tagger">
+<div class="radios">
+    <p>Autocomplete tags from:</p>
+    <label><input type="radio" name="tagsource" value="global">
+        Global tags</label>
+    <label><input type="radio" checked name="tagsource" value="local">
+        Local tags</label>
+</div>
+<textarea name="tags" placeholder="tags" rows="3" cols="30">{{ tiddler.tags|join(', ') }}</textarea>
+</div>
 </form>
 </div>
 </main>
