@@ -7,12 +7,16 @@ keep it in one place.
 
 from hashlib import md5
 
+from tiddlyweb.web.util import encode_name
+
 from tiddlywebplugins.templates import get_template
 
 from .csrf import get_nonce
+from .util import tank_page_uri
 
 
-GRAVATAR = 'https://www.gravatar.com/avatar/%s'
+DEFAULT_GRAVATAR = 'whitefish.png'
+GRAVATAR = 'https://www.gravatar.com/avatar/%s?d=%s'
 
 
 def gravatar(environ):
@@ -20,7 +24,8 @@ def gravatar(environ):
     Generate a gravatar link.
     """
     email = environ.get('tank.user_info', {}).get('email', '')
-    return GRAVATAR % md5(email.lower()).hexdigest()
+    return GRAVATAR % (md5(email.lower()).hexdigest(),
+            encode_name(tank_page_uri(environ, 'tank', DEFAULT_GRAVATAR)))
 
 
 def send_template(environ, template_name, template_data=None):
