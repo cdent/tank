@@ -3,6 +3,10 @@
     display: none !important;
 }   
 
+.output {
+    max-width: 30%;
+}
+
 .editicon {
     cursor: pointer;
 }
@@ -25,11 +29,24 @@
 	padding-left: .5em;
 }
 
-.deleter {
+.commandicon {
     float: right;
+    padding-left: 2em;
 }
 
-.deleter:hover {
+.commandicon:hover {
     cursor: pointer;
 }
 
+.tiddlers {
+    width: 65%;
+    float: right;
+}
+
+.tiddlers h2 {
+    margin-top: 0;
+}
+
+abbr:hover {
+    cursor: help;
+}

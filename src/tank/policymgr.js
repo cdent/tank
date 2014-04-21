@@ -8,9 +8,33 @@ var POLICY_ICONS = {
 	custom: 'fa-wrench'
 };
 
-
 app.filter('escape', function() {
 	return window.encodeURIComponent;
+});
+
+app.filter('twstamp', function() {
+	return function(date) {
+		return new Date(Date.UTC(
+			parseInt(date.substr(0, 4), 10),
+			parseInt(date.substr(4, 2), 10) - 1,
+			parseInt(date.substr(6, 2), 10),
+			parseInt(date.substr(8, 2), 10),
+			parseInt(date.substr(10, 2), 10),
+			parseInt(date.substr(12, 2) || "0", 10),
+			parseInt(date.substr(14, 3) || "0", 10)
+		)).toISOString();
+	}
+});
+
+app.directive('timeago', function() {
+	return {
+		restrict:'A',
+		link: function(scope, element, attrs){
+			attrs.$observe("timeago", function(){
+				element.text(jQuery.timeago(attrs.timeago));
+			});
+		}
+	};
 });
 
 app.service('tankTypeIcon', function() {
@@ -76,6 +100,12 @@ app.service('tankTypeIcon', function() {
 	};
 });
 
+app.service('tiddlerService', function($http) {
+	this.getTiddlers = function(uri) {
+		return $http.get(uri);
+	}
+});
+
 app.service('tankService', function($http, $q) {
 	var tanks;
 	this.getTanks = function() {
@@ -104,7 +134,8 @@ app.service('tankService', function($http, $q) {
 					}
 					tankName = decodeURIComponent(tankName);
 					angular.extend(res.data, {name: tankName,
-						deleter: deleter});
+						deleter: deleter,
+					});
 					data[tankName] = res.data;
 				});
 				return data;
@@ -113,9 +144,23 @@ app.service('tankService', function($http, $q) {
 	};
 });
 
+app.controller('TiddlersCtrl', function($scope, $timeout, tiddlerService) {
+	$scope.$on('showTiddlers', function(ev, data) {
+		var name = data.name,
+			uri = '/bags/' + encodeURIComponent(name) + '/tiddlers.json';
+		$scope.tank = name;
+		tiddlerService.getTiddlers(uri).then(function(res) {
+			$scope.tiddlers = res.data;
+		});
+	});
+
+	$scope.$on('deletedTank', function(ev, data) {
+		$scope.tank = null;
+	});
+});
+
 app.controller('TanksCtrl', function($scope, $rootScope, $filter, $http, tankService, tankTypeIcon) {
 	tankService.getTanks().then(function(data) {
-		console.log('calling gettanks');
 		$scope.tanks = [];
 		angular.forEach(data, function(value, key) {
 			angular.extend(value, tankTypeIcon.get(value.policy));
@@ -138,6 +183,10 @@ app.controller('TanksCtrl', function($scope, $rootScope, $filter, $http, tankSer
 			}
 		}
 	});
+
+	$scope.showTiddlers = function(tank) {
+		$rootScope.$broadcast('showTiddlers', {name: tank.name});
+	};
 
 	$scope.deleteTank = function(tank) {
 		var name = tank.name,
@@ -221,6 +270,7 @@ app.controller('TankCtrl', function($scope, $location, $rootScope,
 				var tankName = path.split('/')[1];
 				if (tankName) {
 					$rootScope.$broadcast('clearEdit');
+					$rootScope.$broadcast('showTiddlers', {name: tankName});
 					setData(tankName);
 				}
 			}

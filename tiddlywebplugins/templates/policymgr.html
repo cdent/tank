@@ -12,12 +12,19 @@
 
 {% raw %}
 <main ng-cloak ng-app="app">
-<input type="checkbox" id="nav_more" role="button">
-<label class="commandbox" for="nav_more">
-    <i class="fa fa-align-justify"></i>
-</label>
-<div class="commands">
-    <p><a href="/tanks/docs/Policy%20Manager">Help with Policy Manager</a></p>
+<p><a href="/tanks/docs/Policy%20Manager">Help with Policy Manager</a></p>
+<div class="tiddlers" ng-controller="TiddlersCtrl" ng-show="tank">
+    <h2>Tiddlers in {{ tank }}</h2>
+    <input type="text" ng-model="tiddlersFilterText" size="30"
+     placeholder="Filter Tiddlers">
+    <ul>
+        <li ng-repeat="tiddler in tiddlers | filter:tiddlersFilterText | orderBy:'title'">
+        <a href="/tanks/{{tiddler.bag|escape}}/{{tiddler.title|escape}}">
+            {{tiddler.title}}</a>
+        <em>{{tiddler.type}}</em>
+        <abbr class="modified" title="{{ tiddler.modified | twstamp }}" timeago="{{ tiddler.modified | twstamp }}"></abbr>
+        </li>
+    </ul>
 </div>
 <div class="output">
 <div class="tanks" ng-controller="TanksCtrl">
@@ -26,7 +33,9 @@
     <ul class="fa-ul" ng-cloak>
         <li class="tanklist"
         ng-repeat="tank in tanks | filter:tankFilterText | orderBy:'name'">
-        <i class='deleter fa fa-fw fa-trash-o' ng-show='tank.deleter'
+        <i class='commandicon fa fa-fw fa-sitemap'
+            ng-click='showTiddlers(tank)'></i>
+        <i class='commandicon fa fa-fw fa-trash-o' ng-show='tank.deleter'
             ng-click='deleteTank(tank)'></i>
 		<i class="fa fa-li {{tank.icon}}"></i> <a href="#/{{tank.name|escape}}">{{tank.name}}</a>
         </li>
