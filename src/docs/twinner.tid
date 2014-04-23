@@ -5,10 +5,10 @@ type: text/x-markdown
 The twinner is a tool which makes it easy to create a [[tiddler]] in
 your home tank with the same name as the one you are currently reading.
 
-Your home space is the space named after your username.
+Your home [[tank]] is the tank named after your username.
 
 The interface is only presented when you are logged in and not in your
-home space.
+home tank.
 
 When clicked, an interface will be revealed presenting a textarea
 and a tag interface. If the target tiddler already exists, its text
