@@ -95,6 +95,7 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
 
     if extant_tiddler:
         tiddler = extant_tiddler
+        bag = _fill_bag(store, Bag(tiddler.bag))
     else:
         try:
             bag_name = query['bag'][0]
@@ -105,12 +106,7 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
         if not (bag_name and tiddler_title):
             raise HTTP400('bad query: bag and tiddler required')
 
-        bag = Bag(bag_name)
-        try:
-            bag = store.get(bag)
-            bag = augment_bag(store, bag)
-        except NoBagError:
-            raise HTTP404('that tank does not exist')
+        bag = _fill_bag(store, Bag(bag_name))
 
         tiddler = Tiddler(tiddler_title, bag_name)
         tiddler_new = False
@@ -136,3 +132,15 @@ def editor(environ, start_response, extant_tiddler=None, message=''):
         'etag': tiddler_etag(environ, tiddler).replace('"',
             '').split(':', 1)[0]
     })
+
+
+def _fill_bag(store, bag):
+    """
+    Get bag from store and add policy type and icon.
+    """
+    try:
+        bag = store.get(bag)
+        bag = augment_bag(store, bag)
+    except NoBagError:
+        raise HTTP404('that tank does not exist')
+    return bag
