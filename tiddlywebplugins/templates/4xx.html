@@ -17,12 +17,17 @@
     </div>
     <div class="extra">
         {% if error.status.startswith('404') %}
-        Not found what you were looking for. Perhaps you'd like to
+        Not found what you were looking for? Perhaps you'd like to
         {% include 'searchform.html' %}
         {% endif %}
         {% if error.status.startswith('400') %}
         You left something out of that request, perhaps go back and
         try again.
+        {% endif %}
+        {% if error.status.startswith('403') %}
+        You don't have permission to view this. Maybe you should
+        ask the owner for access or perhaps you are logged in as the
+        wrong user.
         {% endif %}
         </div>
     </div>

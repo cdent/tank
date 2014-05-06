@@ -6,6 +6,7 @@ from tiddlyweb.store import NoBagError
 from tiddlyweb.util import merge_config, binary_tiddler
 from tiddlyweb.web.validator import (BAG_VALIDATORS, TIDDLER_VALIDATORS,
         InvalidBagError)
+from tiddlyweb.web.wsgi import PermissionsExceptor
 
 from tiddlywebplugins.atom import init as atom_init
 from tiddlywebplugins.cors import init as cors_init
@@ -54,12 +55,17 @@ def establish_web(config):
     oauth_init(config)
     privateer_init(config)
 
-    selector = config['selector']
     if CSRFProtector not in config['server_request_filters']:
         config['server_request_filters'].append(CSRFProtector)
-    if PrettyError not in config['server_response_filters']:
-        config['server_response_filters'].insert(0, PrettyError)
 
+    response_filters = config['server_response_filters']
+
+    if PrettyError not in response_filters:
+        response_filters.insert(
+                response_filters.index(PermissionsExceptor) + 1,
+                PrettyError)
+
+    selector = config['selector']
     selector.status404 = raiser('404', 'path not found')
     selector.status405 = raiser('405', 'method not allow')
 
