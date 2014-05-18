@@ -28,7 +28,9 @@
 				.attr('href', '#' + id)
 				.addClass('plink')
 				.text('\u00B6');
-		$(this).prepend(link);
+		if (!$(this).attr('id').indexOf('fnref-') == 0) {
+			$(this).prepend(link);
+		}
 	});
 
 })(jQuery);
