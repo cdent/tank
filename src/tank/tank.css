@@ -132,16 +132,16 @@ footer a:hover {
     white-space: nowrap;
 }
 
-.twoicons i {
+.twoicons {
     position: absolute;
-    bottom: .25em;
-    left: 0;
+    top: .25em;
+    left: .25em;
     padding: 0;
-    cursor: auto !important;
 }
 
-.twoicons i:first-child {
-    top: .25em;
+.twoicons > * {
+    display: block;
+    padding: 0;
 }
 
 .tanktitle {
