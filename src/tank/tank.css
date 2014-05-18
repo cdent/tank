@@ -213,6 +213,7 @@ footer a:hover {
 
 .socketinfo dl {
     margin: 0;
+    overflow-x: hidden;
 }
 
 .socketsearch {
