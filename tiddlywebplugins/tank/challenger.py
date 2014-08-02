@@ -7,6 +7,7 @@ import logging
 from tiddlyweb.web.challengers import ChallengerInterface
 
 from .templates import send_template
+from .util import get_auth_server_info
 
 
 LOGGER = logging.getLogger(__name__)
@@ -28,9 +29,12 @@ class Challenger(ChallengerInterface):
         except KeyError:
             redirect = None
 
+        auth_server_info = get_auth_server_info(environ)
+
         start_response('200 OK', [('Content-Type',
             'text/html; charset=UTF-8')])
 
         return send_template(environ, 'challenger.html', {
-            'redirect': redirect
+            'redirect': redirect,
+            'auth_server_info': auth_server_info
         })

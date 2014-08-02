@@ -129,6 +129,22 @@ def get_rellinks(environ, tiddler):
 
     return links
 
+def get_auth_server_info(environ):
+    """
+    Return some info about the available auth servers.
+    """
+    auth_server_info = []
+    auth_servers = environ['tiddlyweb.config'].get('oauth.servers')
+    for server in auth_servers:
+        server_info = auth_servers[server]
+        auth_server_info.append({
+                'name': server,
+                'pretty_name': server_info.get('pretty_name', server),
+                'icon': server_info.get('icon', '')
+        })
+    return auth_server_info
+
+
 def _is_readable(store, usersign, tiddler):
     try:
         bag = store.get(Bag(tiddler.bag))

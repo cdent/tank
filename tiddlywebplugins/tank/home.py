@@ -12,7 +12,7 @@ from tiddlywebplugins.utils import require_any_user
 
 from .search import get_comp_bags
 from .templates import send_template
-from .util import augment_bag
+from .util import augment_bag, get_auth_server_info
 
 
 DASH_TEMPLATE = 'dash.html'
@@ -28,7 +28,10 @@ def home(environ, start_response):
         ('Content-Type', 'text/html; charset=UTF-8'),
         ('Cache-Control', 'no-cache')])
 
-    return send_template(environ, FRONTPAGE_TEMPLATE)
+    auth_server_info = get_auth_server_info(environ)
+    return send_template(environ, FRONTPAGE_TEMPLATE, {
+        'auth_server_info': auth_server_info
+    })
 
 
 @require_any_user()
