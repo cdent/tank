@@ -47,6 +47,11 @@ main pre {
 	white-space: pre;
 }
 
+td, th {
+    border: 1px solid #999;
+    padding: 0.5rem;
+}
+
 header {
     color: #efefef;
     background-color: #222222;
