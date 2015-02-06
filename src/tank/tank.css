@@ -24,7 +24,7 @@
 }
 
 body {
-    background-color: #efefef;
+    background-color: #fefeff;
     margin: auto;
     width: 90%;
     max-width: 1200px;
@@ -50,6 +50,12 @@ main pre {
 td, th {
     border: 1px solid #999;
     padding: 0.5rem;
+}
+
+header, footer {
+    background: #2F3F4F;
+    background: -webkit-linear-gradient(left, #2F3F4F, black);
+    background: linear-gradient(to right, #2F3F4F 25%, black 100%);
 }
 
 header {
@@ -163,7 +169,7 @@ footer a:hover {
 }
 
 .output {
-    max-width: 35em;
+    max-width: 45em;
 }
 
 
@@ -274,6 +280,36 @@ header > i {
     font-size: small;
     text-decoration: none;
     color: #C8A8FF;  /* light purple */
+}
+
+.wikicontent {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.2em 1em;
+    /* font-family: Palatino, Georgia, Times, "Times New Roman", serif; */
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    /* font-size: 20px; */
+    line-height: 160%;
+    text-align: justify;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+@media print {
+    body {
+        width: 100%;
+    }
+    .plink, .control, .twoicons, .wikititle, .commandbox, .commands, footer {
+        display: none;
+    }
+    .title {
+        display: block;
+    }
+
 }
 
 @media screen and (max-width: 62em) {
