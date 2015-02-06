@@ -14,6 +14,8 @@ the Markdown used also has support for some common extensions:
 * [foootnotes](http://pythonhosted.org/Markdown/extensions/footnotes.html)
 * [header
   ids](http://pythonhosted.org/Markdown/extensions/header_id.html)
+* [table of
+* content](https://pythonhosted.org/Markdown/extensions/toc.html)
 * [interactive checklists](https://github.com/FND/markdown-checklist)
 
 Tank also has its own custom markdown features:
