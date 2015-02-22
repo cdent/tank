@@ -5,6 +5,7 @@ Wiki things.
 from httpexceptor import HTTP404, HTTP302
 
 from tiddlyweb.control import filter_tiddlers
+from tiddlyweb.fixups import quote
 from tiddlyweb.model.bag import Bag
 from tiddlyweb.model.policy import PermissionsError
 from tiddlyweb.model.tiddler import Tiddler
@@ -23,6 +24,14 @@ from .templates import send_template
 
 WIKI_TEMPLATE = 'wiki.html'
 CHANGES_TEMPLATE = 'changes.html'
+
+
+def policy_mgr(environ, start_repsonse):
+    """
+    Redirect to the policy manager for this tank.
+    """
+    tank_name = get_route_value(environ, 'bag_name')
+    raise HTTP302('/policymgr#/%s' % quote(tank_name, safe=''))
 
 
 def recent_changes(environ, start_response):
@@ -55,7 +64,8 @@ def recent_changes(environ, start_response):
 
 
 SPECIAL_PAGES = {
-    'RecentChanges': recent_changes
+    'RecentChanges': recent_changes,
+    'PolicyMgr': policy_mgr
 }
 
 
