@@ -291,7 +291,7 @@ header > i {
     font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     /* font-size: 20px; */
     line-height: 160%;
-    text-align: justify;
+    /* text-align: justify; */
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     -moz-hyphens: auto;
