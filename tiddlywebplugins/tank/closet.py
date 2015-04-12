@@ -90,7 +90,10 @@ def _regular_tiddler(environ, bag_name, input_file, target_name):
     content = input_file.file.read()
 
     tiddler = Tiddler(target_name, bag_name)
-    tiddler.text = content.decode('utf-8')
+    try:
+        tiddler.text = content.decode('utf-8')
+    except UnicodeError as exc:
+        raise HTTP400('tiddler content should be utf-8 encode: %s' % exc)
     tiddler.modifier = username
     tiddler.type = input_file.type
     store.put(tiddler)

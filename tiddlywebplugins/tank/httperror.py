@@ -34,9 +34,17 @@ def send_error(environ, start_response, exc, allow=None):
     """
     Send the error mesage out via template.
     """
+
+    # Construct a message from the exception
+    if not hasattr(exc, 'args'):
+        exc.args = ('%s' % self,)
+    output = []
+    for arg in exc.args:
+        output.append('%s' % arg)
+
     error = {
         'status': exc.status,
-        'message': exc.message
+        'message': ' '.join(output)
     }
 
     headers = [('Content-type', 'text/html; charset=utf-8')]
