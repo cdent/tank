@@ -13,7 +13,6 @@ config = {
     'wikitext.default_renderer': 'tiddlywebplugins.markdown',
     'wikitext.type_render_map': {
         'text/x-markdown': 'tiddlywebplugins.markdown',
-        'text/x-tiddlywiki': 'tiddlywebplugins.twikified'
     },
     'use_dispatcher': True,
     'links.at_means_bag': True,
