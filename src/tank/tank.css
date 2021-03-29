@@ -170,6 +170,7 @@ footer a:hover {
 
 .output {
     max-width: 45em;
+    overflow: auto;
 }
 
 
